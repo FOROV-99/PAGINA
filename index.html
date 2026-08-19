@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ARQUIESCALA — Figuras para maquetas</title>
+<style>
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:#111827;background:#fff}
+.wrap{max-width:1100px;margin:auto;padding:0 24px}.nav{height:72px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e5e7eb}
+.brand{font-size:21px;font-weight:800}.brand span{font-weight:400;color:#64748b}.links{display:flex;gap:22px;font-size:14px;color:#475569}
+.cart{border:1px solid #cbd5e1;border-radius:10px;padding:9px 13px;background:#fff;font-weight:650}
+.hero{padding:58px 0 38px;display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:center}
+h1{font-size:48px;line-height:1.03;letter-spacing:-2px;margin:0 0 18px}.lead{font-size:17px;line-height:1.6;color:#64748b;max-width:490px}
+.cta{display:flex;gap:10px;margin-top:25px;flex-wrap:wrap}button{cursor:pointer}
+.primary{background:#111827;color:#fff;border:0;border-radius:10px;padding:13px 18px;font-weight:700}
+.secondary{background:#fff;color:#111827;border:1px solid #cbd5e1;border-radius:10px;padding:13px 18px;font-weight:700}
+.viewer{height:390px;border:1px solid #e2e8f0;border-radius:18px;background:#f8fafc;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.viewer small{position:absolute;top:15px;left:17px;color:#64748b;font-size:12px}.hint{position:absolute;bottom:14px;right:16px;color:#64748b;font-size:12px}
+.model{width:105px;height:245px;position:relative;cursor:grab;transform:rotateY(-18deg);touch-action:none}
+.head{width:63px;height:63px;border-radius:50%;background:#cbd5e1;position:absolute;top:0;left:21px}
+.body{width:76px;height:118px;border-radius:24px 24px 14px 14px;background:#94a3b8;position:absolute;top:59px;left:14px}
+.arm{width:18px;height:105px;background:#cbd5e1;border-radius:12px;position:absolute;top:66px}
+.a1{left:0;transform:rotate(19deg)}.a2{right:0;transform:rotate(-28deg)}
+.leg{width:22px;height:91px;background:#64748b;border-radius:12px;position:absolute;top:165px}.l1{left:27px;transform:rotate(8deg)}.l2{left:57px;transform:rotate(-10deg)}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:5px 0 55px}.feature{padding:18px;border:1px solid #e2e8f0;border-radius:12px}.feature b{display:block;margin-bottom:5px}.feature span{font-size:13px;color:#64748b}
+.section-title{display:flex;justify-content:space-between;align-items:end;margin-bottom:18px}.section-title h2{font-size:26px;margin:0}.muted{color:#64748b;font-size:14px}
+.cats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:48px}.cat{border:1px solid #e2e8f0;border-radius:12px;padding:16px 10px;text-align:center;font-size:13px}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding-bottom:60px}.product{border:1px solid #e2e8f0;border-radius:14px;overflow:hidden}.pimg{height:190px;background:#f8fafc;display:flex;align-items:center;justify-content:center;font-size:58px}.info{padding:14px}.info h3{font-size:15px;margin:0 0 5px}.price{font-weight:800;margin-bottom:10px}.add{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;font-weight:700}
+.order{background:#f1f5f9;border-radius:18px;padding:28px;display:grid;grid-template-columns:1.4fr 1fr;gap:30px;margin-bottom:45px}.order h2{margin:0 0 8px}.order p{color:#64748b;line-height:1.5}.order select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:9px;background:#fff;margin-bottom:10px}.total{font-size:22px;font-weight:800;margin:8px 0 14px}
+footer{border-top:1px solid #e5e7eb;padding:25px 0;color:#64748b;font-size:13px;display:flex;justify-content:space-between}
+@media(max-width:760px){.links{display:none}.hero{grid-template-columns:1fr;padding-top:35px}h1{font-size:38px}.features{grid-template-columns:1fr}.cats{grid-template-columns:repeat(3,1fr)}.products{grid-template-columns:repeat(2,1fr)}.order{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="nav">
+<div class="brand">ARQUIESCALA <span>maquetas</span></div>
+<nav class="links"><a href="#">Inicio</a><a href="#catalogo">Figuras</a><a href="#catalogo">Vegetación</a><a href="#catalogo">Mobiliario</a><a href="#catalogo">Vehículos</a></nav>
+<button class="cart" id="cart">Carrito (0)</button>
+</header>
+
+<section class="hero">
+<div>
+<div class="muted">Elementos para maquetas arquitectónicas</div>
+<h1>Da vida a tus proyectos.</h1>
+<p class="lead">Personas, vehículos, árboles, mobiliario y luminarias diseñados especialmente para maquetas arquitectónicas.</p>
+<div class="cta"><button class="primary" onclick="document.querySelector('#catalogo').scrollIntoView({behavior:'smooth'})">Ver catálogo</button><button class="secondary" onclick="document.querySelector('#entrega').scrollIntoView({behavior:'smooth'})">Entrega en escuela · GRATIS</button></div>
+</div>
+<div class="viewer" id="viewer">
+<small>VISTA PREVIA · PERSONA CAMINANDO</small>
+<div class="model" id="model"><div class="head"></div><div class="body"></div><div class="arm a1"></div><div class="arm a2"></div><div class="leg l1"></div><div class="leg l2"></div></div>
+<div class="hint">Arrastra para rotar · rueda para zoom</div>
+</div>
+</section>
+
+<section class="features">
+<div class="feature"><b>Escalas arquitectónicas</b><span>1:50 · 1:75 · 1:100 · 1:150 · 1:200</span></div>
+<div class="feature"><b>Entrega en tu escuela</b><span>Sin costo en puntos de entrega programados.</span></div>
+<div class="feature"><b>Envíos nacionales</b><span>Para pedidos fuera de tu zona.</span></div>
+</section>
+
+<section id="catalogo">
+<div class="section-title"><h2>Categorías</h2><span class="muted">Explora el catálogo</span></div>
+<div class="cats"><div class="cat">👤<br>Personas</div><div class="cat">🚗<br>Vehículos</div><div class="cat">🌳<br>Vegetación</div><div class="cat">🪑<br>Mobiliario</div><div class="cat">💡<br>Luminarias</div><div class="cat">🏗️<br>Arquitectura</div></div>
+<div class="section-title"><h2>Más vendidos</h2><span class="muted">Diseñados para maqueta</span></div>
+<div class="products">
+<article class="product"><div class="pimg">👤</div><div class="info"><h3>Persona caminando</h3><div class="price">$35 MXN</div><button class="add" data-price="35">Agregar</button></div></article>
+<article class="product"><div class="pimg">🌳</div><div class="info"><h3>Árbol urbano</h3><div class="price">$45 MXN</div><button class="add" data-price="45">Agregar</button></div></article>
+<article class="product"><div class="pimg">🚗</div><div class="info"><h3>Vehículo sedán</h3><div class="price">$45 MXN</div><button class="add" data-price="45">Agregar</button></div></article>
+<article class="product"><div class="pimg">💡</div><div class="info"><h3>Luminaria peatonal</h3><div class="price">$30 MXN</div><button class="add" data-price="30">Agregar</button></div></article>
+</div>
+</section>
+
+<section class="order" id="entrega">
+<div><h2>Entrega en tu escuela</h2><p>Selecciona esta opción al hacer tu pedido y coordinaremos una entrega en un punto y horario previamente publicados. Para otros destinos puedes solicitar envío nacional.</p></div>
+<div><label class="muted">Escala para tu pedido</label><select id="scale"><option>1:50</option><option>1:75</option><option>1:100</option><option>1:150</option><option>1:200</option></select><div class="total" id="total">Total: $0 MXN</div><button class="primary" style="width:100%" id="order">Hacer pedido</button></div>
+</section>
+
+<footer><span>© 2026 ARQUIESCALA</span><span>Aviso de privacidad · Términos · Envíos · Contacto</span></footer>
+</div>
+
+<script>
+let count=0,total=0,drag=false,lastX=0,rot=-18,zoom=1;
+const model=document.getElementById('model'),cart=document.getElementById('cart'),totalEl=document.getElementById('total');
+document.querySelectorAll('.add').forEach(b=>b.onclick=()=>{count++;total+=+b.dataset.price;cart.textContent=`Carrito (${count})`;totalEl.textContent=`Total: $${total} MXN`});
+model.onpointerdown=e=>{drag=true;lastX=e.clientX;model.setPointerCapture(e.pointerId)};
+model.onpointermove=e=>{if(!drag)return;rot+=(e.clientX-lastX)*.7;lastX=e.clientX;model.style.transform=`rotateY(${rot}deg) scale(${zoom})`};
+model.onpointerup=()=>drag=false;model.onpointercancel=()=>drag=false;
+document.getElementById('viewer').onwheel=e=>{e.preventDefault();zoom=Math.max(.75,Math.min(1.45,zoom+(e.deltaY<0?.06:-.06)));model.style.transform=`rotateY(${rot}deg) scale(${zoom})`};
+document.getElementById('order').onclick=()=>alert(count?`Pedido: ${count} piezas · ${document.getElementById('scale').value} · $${total} MXN`:'Agrega productos al carrito primero.');
+</script>
+</body>
+</html>
