@@ -1,532 +1,641 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Visor 3D · ARQUIESCALA</title>
-
-<style>
-
-*{
-box-sizing:border-box;
-}
-
-body{
-margin:0;
-font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-background:#f8fafc;
-color:#0f172a;
-}
-
-.page{
-width:100%;
-max-width:1500px;
-margin:0 auto;
-padding:34px 30px 28px;
-}
-
-.top-label{
-font-size:14px;
-color:#64748b;
-margin-bottom:8px;
-}
-
-h1{
-font-size:38px;
-line-height:1.1;
-margin:0 0 28px;
-font-weight:800;
-letter-spacing:-1.2px;
-}
-
-.viewer-wrap{
-width:100%;
-height:640px;
-background:#fff;
-border:1px solid #dbe3ec;
-border-radius:22px;
-overflow:hidden;
-position:relative;
-box-shadow:0 10px 30px rgba(15,23,42,.06);
-}
-
-model-viewer{
-width:100%;
-height:100%;
-display:block;
-
-background:
-radial-gradient(
-circle at 50% 45%,
-#ffffff 0%,
-#f8fafc 65%,
-#f1f5f9 100%
-);
-
---poster-color:#ffffff;
-
-touch-action:none;
-
-cursor:grab;
-}
-
-model-viewer:active{
-cursor:grabbing;
-}
-
-.viewer-label{
-position:absolute;
-top:16px;
-left:16px;
-
-background:rgba(255,255,255,.94);
-
-border:1px solid #e2e8f0;
-
-padding:9px 14px;
-
-border-radius:10px;
-
-font-size:13px;
-
-font-weight:700;
-
-color:#334155;
-
-z-index:5;
-
-box-shadow:0 4px 12px rgba(15,23,42,.08);
-}
-
-.hint{
-position:absolute;
-bottom:18px;
-left:50%;
-transform:translateX(-50%);
-
-background:rgba(255,255,255,.95);
-
-border:1px solid #e2e8f0;
-
-padding:10px 16px;
-
-border-radius:10px;
-
-font-size:13px;
-
-color:#64748b;
-
-z-index:5;
-
-white-space:nowrap;
-
-box-shadow:0 4px 12px rgba(15,23,42,.08);
-}
-
-.error{
-position:absolute;
-inset:0;
-
-display:none;
-
-align-items:center;
-justify-content:center;
-
-flex-direction:column;
-
-text-align:center;
-
-padding:30px;
-
-background:#f8fafc;
-
-z-index:10;
-}
-
-.error.show{
-display:flex;
-}
-
-.error h2{
-margin:0 0 10px;
-font-size:24px;
-}
-
-.error p{
-margin:0;
-color:#64748b;
-max-width:520px;
-line-height:1.6;
-}
-
-.bottom{
-display:flex;
-justify-content:space-between;
-align-items:center;
-
-gap:20px;
-
-margin-top:24px;
-}
-
-.description{
-font-size:15px;
-color:#64748b;
-}
-
-.back{
-border:0;
-
-background:#111827;
-
-color:#fff;
-
-padding:14px 22px;
-
-border-radius:11px;
-
-font-size:15px;
-
-font-weight:700;
-
-cursor:pointer;
-
-transition:.15s;
-}
-
-.back:hover{
-background:#1f2937;
-transform:translateY(-1px);
-}
-
-@media(max-width:800px){
-
-.page{
-padding:22px 16px;
-}
-
-h1{
-font-size:31px;
-}
-
-.viewer-wrap{
-height:520px;
-border-radius:16px;
-}
-
-.bottom{
-flex-direction:column;
-align-items:stretch;
-}
-
-.back{
-width:100%;
-}
-
-.hint{
-font-size:11px;
-padding:8px 11px;
-}
-
-}
-
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Visor 3D · ARQUIESCALA</title>
+
+  <script type="module"
+    src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f7f9fc;
+      color: #111827;
+    }
+
+    .contenedor {
+      width: calc(100% - 60px);
+      max-width: 1700px;
+      margin: 0 auto;
+      padding: 32px 0 30px;
+    }
+
+    .marca {
+      font-size: 15px;
+      color: #60738f;
+      margin-bottom: 10px;
+      letter-spacing: 0.3px;
+    }
+
+    h1 {
+      margin: 0 0 28px;
+      font-size: 38px;
+      line-height: 1.1;
+      font-weight: 800;
+      color: #111827;
+    }
+
+    .visor-contenedor {
+      position: relative;
+      width: 100%;
+      height: 570px;
+      background: #ffffff;
+      border: 1px solid #d8e0eb;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 12px 35px rgba(15, 23, 42, 0.05);
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: #ffffff;
+
+      --poster-color: #ffffff;
+
+      --progress-bar-color: #111827;
+      --progress-mask: #ffffff;
+
+      --interaction-prompt-color: #111827;
+    }
+
+    .cargando {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      background: #ffffff;
+      z-index: 5;
+      color: #111827;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .cargando small {
+      font-size: 14px;
+      font-weight: 400;
+      color: #60738f;
+    }
+
+    .error {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 30px;
+      background: #ffffff;
+      z-index: 6;
+    }
+
+    .error-titulo {
+      font-size: 23px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .error-texto {
+      max-width: 750px;
+      color: #60738f;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .informacion {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .descripcion {
+      color: #60738f;
+      font-size: 16px;
+    }
+
+    .boton-regresar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 180px;
+      height: 52px;
+      padding: 0 22px;
+      border-radius: 13px;
+      background: #111827;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      transition: 0.2s ease;
+    }
+
+    .boton-regresar:hover {
+      background: #1f2937;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 800px) {
+
+      .contenedor {
+        width: calc(100% - 30px);
+        padding-top: 22px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .visor-contenedor {
+        height: 480px;
+        border-radius: 18px;
+      }
+
+      .informacion {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .boton-regresar {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="page">
+  <main class="contenedor">
 
-<div class="top-label">
-VISOR 3D · ARQUIESCALA
-</div>
+    <div class="marca">
+      VISOR 3D · ARQUIESCALA
+    </div>
 
-<h1 id="title">
-Cargando modelo...
-</h1>
+    <h1 id="nombreModelo">
+      Modelo 3D
+    </h1>
 
-<div class="viewer-wrap">
+    <div class="visor-contenedor">
 
-<div class="viewer-label" id="viewerLabel">
-Vista 3D
-</div>
+      <div class="cargando" id="cargando">
+        Cargando modelo 3D...
+        <small>Espera un momento</small>
+      </div>
 
-<model-viewer
-id="modelViewer"
+      <div class="error" id="error">
 
-camera-controls
-touch-action="none"
+        <div class="error-titulo">
+          No se pudo cargar el modelo
+        </div>
 
-interaction-prompt="auto"
+        <div class="error-texto" id="mensajeError">
+          Verifica que el archivo GLB exista en el repositorio.
+        </div>
 
-shadow-intensity="0.8"
-shadow-softness="0.8"
+      </div>
 
-exposure="1"
+      <model-viewer
+        id="modelo3d"
 
-environment-image="neutral"
+        camera-controls
 
-camera-orbit="0deg 75deg auto"
+        interaction-prompt="auto"
 
-field-of-view="45deg"
+        shadow-intensity="0.8"
+        shadow-softness="1"
 
-min-field-of-view="25deg"
-max-field-of-view="60deg"
+        exposure="1"
 
-loading="eager"
-reveal="auto"
+        environment-image="neutral"
 
-alt="Modelo 3D de ARQUIESCALA">
-</model-viewer>
+        loading="eager"
 
-<div class="hint">
-🖱 Arrastra para rotar · rueda para zoom
-</div>
+        reveal="auto"
 
-<div class="error" id="error">
+        disable-pan
 
-<h2>No se pudo cargar el modelo</h2>
+        min-camera-orbit="auto auto 0.5m"
+        max-camera-orbit="auto auto 20m"
 
-<p id="errorText">
-Verifica que el archivo GLB exista en el repositorio.
-</p>
+        min-field-of-view="20deg"
+        max-field-of-view="70deg"
 
-</div>
+        camera-target="auto auto auto"
 
-</div>
+        alt="Modelo 3D">
+      </model-viewer>
 
-<div class="bottom">
+    </div>
 
-<div class="description">
-Modelo 3D interactivo para visualizar antes de realizar tu pedido.
-</div>
+    <div class="informacion">
 
-<button class="back" id="back">
-Volver al catálogo
-</button>
+      <div class="descripcion">
+        Modelo 3D interactivo para visualizar antes de realizar tu pedido.
+      </div>
 
-</div>
+      <a
+        class="boton-regresar"
+        id="volverCatalogo"
+        href="index.html">
+        Volver al catálogo
+      </a>
 
-</div>
+    </div>
 
+  </main>
 
-<script type="module"
-src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
-</script>
 
+  <script>
 
-<script>
+    /*
+      ==========================================================
+      ARQUIESCALA
+      VISOR 3D
+      ==========================================================
+    */
 
-(function(){
+    const parametros = new URLSearchParams(window.location.search);
 
-const params = new URLSearchParams(window.location.search);
+    const modeloParametro = parametros.get("modelo");
+    const nombreParametro = parametros.get("nombre");
 
-const modelParameter = params.get("modelo");
-const nameParameter = params.get("nombre");
 
-const viewer = document.getElementById("modelViewer");
-const title = document.getElementById("title");
-const viewerLabel = document.getElementById("viewerLabel");
+    /*
+      ----------------------------------------------------------
+      ELEMENTOS
+      ----------------------------------------------------------
+    */
 
-const error = document.getElementById("error");
-const errorText = document.getElementById("errorText");
+    const visor = document.getElementById("modelo3d");
 
-const back = document.getElementById("back");
+    const nombreModelo =
+      document.getElementById("nombreModelo");
 
+    const cargando =
+      document.getElementById("cargando");
 
-/* =========================================================
-   NOMBRE DEL PRODUCTO
-========================================================= */
+    const error =
+      document.getElementById("error");
 
-let productName = nameParameter || "Modelo 3D";
+    const mensajeError =
+      document.getElementById("mensajeError");
 
-try{
+    const volverCatalogo =
+      document.getElementById("volverCatalogo");
 
-if(productName){
-productName = decodeURIComponent(productName);
-}
 
-}catch(e){}
+    /*
+      ----------------------------------------------------------
+      NOMBRE DEL MODELO
+      ----------------------------------------------------------
+    */
 
+    if (nombreParametro) {
 
-/* =========================================================
-   MOSTRAR NOMBRE
-========================================================= */
+      nombreModelo.textContent =
+        decodeURIComponent(nombreParametro);
 
-title.textContent = productName;
+    }
 
-viewerLabel.textContent = productName + " · Vista 3D";
 
+    /*
+      ----------------------------------------------------------
+      MANTENER EL PEDIDO
+      ----------------------------------------------------------
+    */
 
-/* =========================================================
-   OBTENER URL DEL MODELO
-========================================================= */
+    volverCatalogo.addEventListener("click", function () {
 
-let modelURL = modelParameter;
+      /*
+        No eliminamos localStorage.
 
-try{
+        El pedido permanece guardado.
+      */
 
-if(modelURL){
-modelURL = decodeURIComponent(modelURL);
-}
+      sessionStorage.setItem(
+        "regresoDesdeVisor",
+        "true"
+      );
 
-}catch(e){}
+    });
 
 
-/* =========================================================
-   CONVERTIR URL SI ES NECESARIO
-========================================================= */
+    /*
+      ----------------------------------------------------------
+      CONVERTIR URL A FORMATO SEGURO
+      ----------------------------------------------------------
+    */
 
-if(modelURL){
+    function limpiarURL(url) {
 
-/*
-Si viene una URL de GitHub tipo:
+      if (!url) {
+        return "";
+      }
 
-https://github.com/USUARIO/REPO/blob/main/ARCHIVO.glb
+      let resultado = url.trim();
 
-la convertimos automáticamente a raw.githubusercontent.com
-*/
+      /*
+        En caso de que la URL haya quedado
+        codificada más de una vez.
+      */
 
-if(modelURL.includes("github.com") && modelURL.includes("/blob/")){
+      try {
 
-modelURL = modelURL
-.replace(
-"https://github.com/",
-"https://raw.githubusercontent.com/"
-)
-.replace("/blob/","/");
+        resultado =
+          decodeURIComponent(resultado);
 
-}
+      } catch (e) {
 
+        /*
+          Si ya estaba correctamente decodificada,
+          simplemente continuamos.
+        */
 
-/*
-Si viene desde jsDelivr la dejamos intacta.
-*/
+      }
 
-}
+      return resultado;
 
+    }
 
-/* =========================================================
-   CARGAR MODELO
-========================================================= */
 
-function loadModel(){
+    /*
+      ----------------------------------------------------------
+      GENERAR URLS ALTERNATIVAS
+      ----------------------------------------------------------
+    */
 
-if(!modelURL){
+    function obtenerURLs(modelo) {
 
-showError(
-"No se recibió ninguna dirección de modelo 3D."
-);
+      const urls = [];
 
-return;
+      const urlPrincipal =
+        limpiarURL(modelo);
 
-}
+      if (urlPrincipal) {
 
+        urls.push(urlPrincipal);
 
-/*
-IMPORTANTE:
+      }
 
-No usamos fetch().
-No hacemos ninguna comprobación previa.
 
-model-viewer carga directamente el GLB.
-*/
+      /*
+        --------------------------------------------------------
+        RESPALDO PARA ARCHIVOS DEL REPOSITORIO
+        --------------------------------------------------------
+      */
 
-viewer.setAttribute(
-"src",
-modelURL
-);
+      const nombre =
+        (nombreParametro || "").toLowerCase();
 
-}
 
+      /*
+        PERSONA
+      */
 
-/* =========================================================
-   MODELO CARGADO
-========================================================= */
+      if (
+        nombre.includes("persona") ||
+        urlPrincipal.toLowerCase().includes("persona.glb")
+      ) {
 
-viewer.addEventListener(
-"load",
-function(){
+        urls.push(
+          "https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/PERSONA.glb"
+        );
 
-error.classList.remove("show");
+        urls.push(
+          "https://raw.githubusercontent.com/FOROV-99/PAGINA/main/PERSONA.glb"
+        );
 
-/*
-Reencuadrar automáticamente el modelo
-*/
+      }
 
-try{
 
-viewer.cameraOrbit =
-"0deg 75deg auto";
+      /*
+        ARBOL
+      */
 
-}catch(e){}
+      if (
+        nombre.includes("árbol") ||
+        nombre.includes("arbol") ||
+        urlPrincipal.toLowerCase().includes("arbolito.glb")
+      ) {
 
-}
-);
+        urls.push(
+          "https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/ARBOLITO.glb"
+        );
 
+        urls.push(
+          "https://raw.githubusercontent.com/FOROV-99/PAGINA/main/ARBOLITO.glb"
+        );
 
-/* =========================================================
-   ERROR REAL DE CARGA
-========================================================= */
+      }
 
-viewer.addEventListener(
-"error",
-function(){
 
-showError(
-"No se pudo cargar el archivo GLB. Verifica que el nombre y la ubicación del archivo sean correctos."
-);
+      /*
+        ELIMINAR URLS REPETIDAS
+      */
 
-}
-);
+      return [...new Set(urls)];
 
+    }
 
-/* =========================================================
-   FUNCIÓN DE ERROR
-========================================================= */
 
-function showError(message){
+    /*
+      ----------------------------------------------------------
+      MOSTRAR ERROR
+      ----------------------------------------------------------
+    */
 
-errorText.textContent = message;
+    function mostrarError(urls) {
 
-error.classList.add("show");
+      cargando.style.display = "none";
 
-}
+      error.style.display = "flex";
 
+      mensajeError.innerHTML =
 
-/* =========================================================
-   VOLVER AL CATÁLOGO
-========================================================= */
+        "El visor intentó cargar el modelo pero el archivo " +
+        "no pudo ser obtenido.<br><br>" +
 
-back.addEventListener(
-"click",
-function(){
+        "<strong>Archivo solicitado:</strong><br>" +
 
-/*
-Volvemos al catálogo SIN borrar localStorage.
+        (urls[0] || "No se recibió ninguna URL.");
 
-El carrito queda guardado.
-*/
+    }
 
-window.location.href =
-"./index.html";
 
-}
-);
+    /*
+      ----------------------------------------------------------
+      CARGAR MODELO
+      ----------------------------------------------------------
+    */
 
+    async function cargarModelo() {
 
-/* =========================================================
-   INICIAR
-========================================================= */
+      const urls =
+        obtenerURLs(modeloParametro);
 
-loadModel();
 
+      /*
+        No llegó ningún modelo.
+      */
 
-})();
+      if (urls.length === 0) {
 
-</script>
+        mostrarError([
+          "No se recibió el parámetro modelo."
+        ]);
+
+        return;
+
+      }
+
+
+      /*
+        Esperar a que model-viewer esté disponible.
+      */
+
+      try {
+
+        await customElements.whenDefined(
+          "model-viewer"
+        );
+
+      } catch (e) {
+
+        mostrarError(urls);
+
+        return;
+
+      }
+
+
+      let indice = 0;
+
+
+      /*
+        --------------------------------------------------------
+        FUNCIÓN PARA INTENTAR URL
+        --------------------------------------------------------
+      */
+
+      function intentarURL() {
+
+        if (indice >= urls.length) {
+
+          mostrarError(urls);
+
+          return;
+
+        }
+
+
+        const urlActual =
+          urls[indice];
+
+        indice++;
+
+
+        cargando.style.display = "flex";
+
+        error.style.display = "none";
+
+
+        /*
+          Limpiar modelo anterior.
+        */
+
+        visor.removeAttribute("src");
+
+
+        /*
+          Pequeño retraso para permitir
+          que model-viewer limpie el anterior.
+        */
+
+        setTimeout(function () {
+
+          visor.src = urlActual;
+
+        }, 50);
+
+      }
+
+
+      /*
+        --------------------------------------------------------
+        MODELO CARGADO CORRECTAMENTE
+        --------------------------------------------------------
+      */
+
+      visor.addEventListener(
+        "load",
+        function () {
+
+          cargando.style.display =
+            "none";
+
+          error.style.display =
+            "none";
+
+        }
+      );
+
+
+      /*
+        --------------------------------------------------------
+        ERROR DE CARGA
+        --------------------------------------------------------
+      */
+
+      visor.addEventListener(
+        "error",
+        function () {
+
+          /*
+            Intentar la siguiente URL.
+          */
+
+          intentarURL();
+
+        }
+      );
+
+
+      /*
+        --------------------------------------------------------
+        INICIAR
+        --------------------------------------------------------
+      */
+
+      intentarURL();
+
+    }
+
+
+    /*
+      ----------------------------------------------------------
+      INICIAR VISOR
+      ----------------------------------------------------------
+    */
+
+    cargarModelo();
+
+
+  </script>
 
 </body>
 </html>
