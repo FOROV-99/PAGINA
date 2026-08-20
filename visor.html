@@ -1,200 +1,287 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
 <meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ARQUIESCALA · Visor 3D</title>
-
-<script
-type="module"
-src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
-</script>
+<title>Visor 3D · ARQUIESCALA</title>
 
 <style>
 
 *{
-box-sizing:border-box;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#f8fafc;
+    font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:#111827;
 }
 
 body{
-margin:0;
-background:#f8fafc;
-font-family:Inter,Arial,sans-serif;
-color:#111827;
+    display:flex;
+    flex-direction:column;
 }
 
-.page{
-min-height:100vh;
-display:flex;
-flex-direction:column;
-}
+/* ENCABEZADO */
 
 .header{
-height:72px;
-background:white;
-border-bottom:1px solid #e5e7eb;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 30px;
+    padding:28px 4vw 18px;
+    flex-shrink:0;
 }
 
-.logo{
-font-size:21px;
-font-weight:800;
-letter-spacing:-0.6px;
-}
-
-.logo span{
-font-weight:400;
-color:#64748b;
-}
-
-.back{
-text-decoration:none;
-color:#111827;
-border:1px solid #cbd5e1;
-border-radius:9px;
-padding:9px 14px;
-font-size:14px;
-font-weight:700;
-background:white;
-}
-
-.content{
-width:100%;
-max-width:1200px;
-margin:auto;
-padding:35px 25px 50px;
+.eyebrow{
+    font-size:14px;
+    color:#64748b;
+    margin-bottom:8px;
 }
 
 .title{
-margin-bottom:20px;
+    margin:0;
+    font-size:32px;
+    line-height:1.1;
+    font-weight:800;
+    letter-spacing:-1px;
 }
 
-.title small{
-color:#64748b;
-font-size:13px;
-}
-
-.title h1{
-margin:6px 0 0;
-font-size:32px;
-letter-spacing:-1px;
-}
+/* VISOR */
 
 .viewer-container{
-width:100%;
-height:650px;
-background:white;
-border:1px solid #e2e8f0;
-border-radius:18px;
-overflow:hidden;
-position:relative;
+    flex:1;
+    min-height:0;
+    padding:10px 4vw 20px;
+}
+
+.viewer{
+    position:relative;
+    width:100%;
+    height:100%;
+    min-height:300px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #ffffff 0%,
+            #f8fafc 70%,
+            #f1f5f9 100%
+        );
+
+    border:1px solid #dbe3ec;
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 8px 30px rgba(15,23,42,.06);
 }
 
 model-viewer{
-width:100%;
-height:100%;
-display:block;
-background:linear-gradient(
-145deg,
-#f8fafc,
-#ffffff
-);
+    width:100%;
+    height:100%;
+    display:block;
+
+    --poster-color:transparent;
 }
 
-.instructions{
-position:absolute;
-bottom:16px;
-left:50%;
-transform:translateX(-50%);
-background:rgba(255,255,255,.92);
-border:1px solid #e2e8f0;
-border-radius:9px;
-padding:9px 14px;
-font-size:12px;
-color:#64748b;
-pointer-events:none;
-white-space:nowrap;
+/* ETIQUETA */
+
+.model-label{
+    position:absolute;
+    top:16px;
+    left:16px;
+
+    z-index:10;
+
+    background:rgba(255,255,255,.94);
+
+    border:1px solid #e2e8f0;
+
+    border-radius:10px;
+
+    padding:9px 14px;
+
+    font-size:14px;
+    font-weight:700;
+
+    box-shadow:
+        0 4px 15px rgba(15,23,42,.08);
+
+    pointer-events:none;
 }
+
+/* INDICACIÓN */
+
+.hint{
+    position:absolute;
+
+    left:50%;
+    bottom:18px;
+
+    transform:translateX(-50%);
+
+    z-index:10;
+
+    background:rgba(255,255,255,.94);
+
+    border:1px solid #e2e8f0;
+
+    border-radius:10px;
+
+    padding:8px 13px;
+
+    color:#64748b;
+
+    font-size:13px;
+
+    white-space:nowrap;
+
+    box-shadow:
+        0 4px 15px rgba(15,23,42,.07);
+
+    pointer-events:none;
+}
+
+/* PIE */
+
+.footer{
+    flex-shrink:0;
+
+    padding:0 4vw 25px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    color:#64748b;
+
+    font-size:14px;
+}
+
+.back{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:12px 18px;
+
+    background:#111827;
+    color:white;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
+}
+
+.back:hover{
+    background:#1f2937;
+    transform:translateY(-1px);
+}
+
+/* CARGANDO */
 
 .loading{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-color:#64748b;
-font-size:14px;
-pointer-events:none;
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    z-index:5;
+
+    background:#f8fafc;
+
+    color:#64748b;
+
+    font-size:14px;
+
+    pointer-events:none;
+
+    transition:opacity .3s ease;
 }
+
+.loading.hidden{
+    opacity:0;
+}
+
+/* ERROR */
 
 .error{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-text-align:center;
-color:#dc2626;
-font-size:14px;
-display:none;
+    position:absolute;
+
+    inset:0;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    padding:30px;
+
+    z-index:20;
+
+    background:#f8fafc;
+
+    color:#475569;
 }
 
-.info{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-top:18px;
-gap:20px;
+.error strong{
+    display:block;
+
+    color:#111827;
+
+    font-size:20px;
+
+    margin-bottom:8px;
 }
 
-.info-text{
-color:#64748b;
-font-size:14px;
-line-height:1.5;
-}
+/* MÓVIL */
 
-.home{
-background:#111827;
-color:white;
-border:0;
-border-radius:9px;
-padding:12px 18px;
-font-weight:700;
-text-decoration:none;
-white-space:nowrap;
-}
+@media(max-width:760px){
 
-@media(max-width:700px){
+    .header{
+        padding:18px 18px 10px;
+    }
 
-.header{
-padding:0 18px;
-}
+    .title{
+        font-size:26px;
+    }
 
-.content{
-padding:25px 15px 40px;
-}
+    .viewer-container{
+        padding:8px 12px 12px;
+    }
 
-.title h1{
-font-size:26px;
-}
+    .viewer{
+        border-radius:14px;
+    }
 
-.viewer-container{
-height:500px;
-}
+    .footer{
+        padding:0 18px 15px;
+    }
 
-.instructions{
-font-size:11px;
-}
+    .footer span{
+        display:none;
+    }
 
-.info{
-flex-direction:column;
-align-items:flex-start;
-}
+    .hint{
+        font-size:11px;
+        padding:7px 10px;
+    }
 
 }
 
@@ -204,195 +291,344 @@ align-items:flex-start;
 
 <body>
 
-<div class="page">
-
 <header class="header">
 
-<div class="logo">
-ARQUIESCALA <span>maquetas</span>
-</div>
+    <div class="eyebrow">
+        VISOR 3D · ARQUIESCALA
+    </div>
 
-<a
-class="back"
-href="https://forov-99.github.io/PAGINA/">
-← Volver al catálogo
-</a>
+    <h1 class="title" id="model-name">
+        Modelo 3D
+    </h1>
 
 </header>
 
 
-<main class="content">
+<main class="viewer-container">
 
-<div class="title">
+    <div class="viewer">
 
-<small>
-VISOR 3D · ARQUIESCALA
-</small>
+        <div class="model-label" id="model-label">
+            Vista 3D
+        </div>
 
-<h1 id="model-name">
-Cargando modelo...
-</h1>
+        <div class="loading" id="loading">
+            Cargando modelo 3D...
+        </div>
 
-</div>
+        <div class="error" id="error">
+
+            <div>
+
+                <strong>No se pudo cargar el modelo</strong>
+
+                <span>
+                    Verifica que el archivo GLB exista en el repositorio.
+                </span>
+
+            </div>
+
+        </div>
+
+        <model-viewer
+            id="model"
+            camera-controls
+            disable-pan
+            touch-action="none"
+
+            interaction-prompt="auto"
+
+            shadow-intensity="0.8"
+            shadow-softness="1"
+
+            exposure="1"
+
+            camera-orbit="0deg 75deg auto"
+
+            field-of-view="35deg"
+
+            min-camera-orbit="auto auto 70%"
+            max-camera-orbit="auto auto 130%"
+
+            zoom-sensitivity="0.01"
+
+            interpolation-decay="100"
+
+            loading="eager"
+            reveal="auto"
+
+            bounds="tight"
+
+            alt="Modelo 3D para maqueta arquitectónica">
+
+        </model-viewer>
 
 
-<div class="viewer-container">
+        <div class="hint">
+            🖱️ Arrastra para rotar · rueda para zoom
+        </div>
 
-<div
-class="loading"
-id="loading">
-Cargando modelo 3D...
-</div>
-
-<div
-class="error"
-id="error">
-No se pudo cargar el modelo 3D.
-<br><br>
-Comprueba que el archivo GLB exista en GitHub.
-</div>
-
-
-<model-viewer
-id="model"
-camera-controls
-touch-action="pan-y"
-interaction-prompt="auto"
-shadow-intensity="0.8"
-exposure="1"
-camera-orbit="0deg 75deg 100%"
-field-of-view="35deg"
-min-camera-orbit="auto auto 60%"
-max-camera-orbit="auto auto 140%"
-zoom-sensitivity="0.25"
-loading="eager"
-reveal="auto"
-bounds="tight"
-alt="Modelo 3D para maqueta arquitectónica">
-</model-viewer>
-
-
-<div class="instructions">
-
-🖱️ Arrastra para rotar · rueda para zoom
-
-</div>
-
-</div>
-
-
-<div class="info">
-
-<div class="info-text">
-
-Modelo 3D interactivo para visualizar antes de realizar tu pedido.
-
-</div>
-
-<a
-class="home"
-href="https://forov-99.github.io/PAGINA/">
-Volver al catálogo
-</a>
-
-</div>
+    </div>
 
 </main>
 
-</div>
+
+<footer class="footer">
+
+    <span>
+        Modelo 3D interactivo para visualizar antes de realizar tu pedido.
+    </span>
+
+    <a
+        class="back"
+        href="index.html">
+        Volver al catálogo
+    </a>
+
+</footer>
+
+
+<script
+    type="module"
+    src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
+</script>
 
 
 <script>
 
-const params =
-new URLSearchParams(window.location.search);
+(() => {
+
+    const viewer = document.getElementById("model");
+
+    const nameElement = document.getElementById("model-name");
+
+    const labelElement = document.getElementById("model-label");
+
+    const loadingElement = document.getElementById("loading");
+
+    const errorElement = document.getElementById("error");
 
 
-const modelo =
-params.get("modelo");
+    /*
+        LEER LOS DATOS DE LA URL
+
+        Ejemplo:
+
+        visor.html?modelo=ARBOLITO.glb&nombre=Árbol%20urbano
+    */
+
+    const params = new URLSearchParams(window.location.search);
+
+    const modelo = params.get("modelo");
+
+    const nombre = params.get("nombre");
 
 
-const nombre =
-params.get("nombre");
+    /*
+        NOMBRE DEL PRODUCTO
+    */
+
+    const nombreFinal =
+        nombre && nombre.trim()
+        ? nombre
+        : "Modelo 3D";
 
 
-const viewer =
-document.getElementById("model");
+    nameElement.textContent = nombreFinal;
+
+    labelElement.textContent =
+        nombreFinal + " · Vista 3D";
 
 
-const titulo =
-document.getElementById("model-name");
+    /*
+        ARCHIVO GLB
+    */
+
+    if(!modelo){
+
+        loadingElement.classList.add("hidden");
+
+        errorElement.style.display = "flex";
+
+        return;
+    }
 
 
-const loading =
-document.getElementById("loading");
+    /*
+        CONSTRUIR URL DEL MODELO
+
+        Todos los modelos están en:
+
+        https://forov-99.github.io/PAGINA/
+    */
+
+    const modeloLimpio =
+        modelo.split("?")[0];
 
 
-const error =
-document.getElementById("error");
+    const modeloURL =
+        "https://forov-99.github.io/PAGINA/"
+        + modeloLimpio
+        + "?v=4";
 
 
-if(modelo){
-
-const url =
-"https://forov-99.github.io/PAGINA/"
-+
-modelo;
+    viewer.src = modeloURL;
 
 
-viewer.src = url;
+    /*
+        ZOOM SUAVE PERSONALIZADO
+
+        Desactivamos el comportamiento brusco
+        de la rueda y hacemos pequeños cambios
+        progresivos en la distancia de cámara.
+    */
+
+    viewer.addEventListener(
+        "wheel",
+        function(event){
+
+            event.preventDefault();
+
+            const orbit =
+                viewer.getCameraOrbit();
+
+            if(!orbit){
+                return;
+            }
 
 
-titulo.textContent =
-nombre || "Modelo 3D";
-
-}
-else{
-
-titulo.textContent =
-"Modelo 3D";
-
-loading.style.display =
-"none";
-
-error.style.display =
-"block";
-
-error.innerHTML =
-"No se especificó ningún modelo 3D.";
-
-}
+            let radius =
+                orbit.radius;
 
 
-viewer.addEventListener(
-"load",
-()=>{
+            /*
+                Factor muy pequeño.
 
-loading.style.display =
-"none";
+                Acercar:
+                0.96
 
-error.style.display =
-"none";
+                Alejar:
+                1.04
+            */
 
-}
-);
+            if(event.deltaY > 0){
+
+                radius *= 1.04;
+
+            }else{
+
+                radius *= 0.96;
+
+            }
 
 
-viewer.addEventListener(
-"error",
-()=>{
+            /*
+                LIMITES DEL ZOOM
 
-loading.style.display =
-"none";
+                Evita acercarse demasiado
+                y evita alejarse demasiado.
+            */
 
-error.style.display =
-"block";
+            const minRadius =
+                viewer.getCameraOrbit().radius * 0.45;
 
-}
-);
+            const maxRadius =
+                viewer.getCameraOrbit().radius * 2.2;
+
+
+            radius =
+                Math.max(
+                    minRadius,
+                    Math.min(
+                        maxRadius,
+                        radius
+                    )
+                );
+
+
+            viewer.cameraOrbit =
+                orbit.theta +
+                "rad " +
+
+                orbit.phi +
+                "rad " +
+
+                radius +
+                "m";
+
+        },
+        {
+            passive:false,
+            capture:true
+        }
+    );
+
+
+    /*
+        CUANDO EL MODELO TERMINA DE CARGAR
+    */
+
+    viewer.addEventListener(
+        "load",
+        () => {
+
+            loadingElement.classList.add("hidden");
+
+            errorElement.style.display = "none";
+
+
+            /*
+                Ajustar cámara al modelo.
+            */
+
+            setTimeout(() => {
+
+                viewer.cameraOrbit =
+                    "0deg 75deg auto";
+
+            },100);
+
+        }
+    );
+
+
+    /*
+        ERROR DE CARGA
+    */
+
+    viewer.addEventListener(
+        "error",
+        () => {
+
+            loadingElement.classList.add("hidden");
+
+            errorElement.style.display = "flex";
+
+        }
+    );
+
+
+    /*
+        OCULTAR CARGANDO DESPUÉS DE UN TIEMPO
+        SI EL NAVEGADOR YA TERMINÓ.
+    */
+
+    setTimeout(() => {
+
+        if(
+            viewer.loaded
+        ){
+
+            loadingElement.classList.add("hidden");
+
+        }
+
+    },5000);
+
+
+})();
 
 </script>
 
 </body>
-
 </html>
