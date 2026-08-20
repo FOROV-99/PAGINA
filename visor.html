@@ -1,296 +1,398 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta charset="UTF-8">
 
-    <title>Visor 3D</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script
-        type="module"
-        src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
-    </script>
+<title>ARQUIESCALA · Visor 3D</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<script
+type="module"
+src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
+</script>
 
-        html,
-        body {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-        }
+<style>
 
-        #visor {
-            width: 100%;
-            height: 100%;
-            display: block;
-            background: #f5f5f5;
-        }
+*{
+box-sizing:border-box;
+}
 
-        .titulo {
-            position: absolute;
-            top: 20px;
-            left: 25px;
+body{
+margin:0;
+background:#f8fafc;
+font-family:Inter,Arial,sans-serif;
+color:#111827;
+}
 
-            padding: 10px 18px;
+.page{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
 
-            background: white;
+.header{
+height:72px;
+background:white;
+border-bottom:1px solid #e5e7eb;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 30px;
+}
 
-            border-radius: 12px;
+.logo{
+font-size:21px;
+font-weight:800;
+letter-spacing:-0.6px;
+}
 
-            font-size: 16px;
-            font-weight: 600;
+.logo span{
+font-weight:400;
+color:#64748b;
+}
 
-            box-shadow:
-                0 4px 15px rgba(0, 0, 0, 0.08);
+.back{
+text-decoration:none;
+color:#111827;
+border:1px solid #cbd5e1;
+border-radius:9px;
+padding:9px 14px;
+font-size:14px;
+font-weight:700;
+background:white;
+}
 
-            z-index: 10;
-        }
+.content{
+width:100%;
+max-width:1200px;
+margin:auto;
+padding:35px 25px 50px;
+}
 
-        .instrucciones {
-            position: absolute;
+.title{
+margin-bottom:20px;
+}
 
-            bottom: 20px;
-            left: 50%;
+.title small{
+color:#64748b;
+font-size:13px;
+}
 
-            transform: translateX(-50%);
+.title h1{
+margin:6px 0 0;
+font-size:32px;
+letter-spacing:-1px;
+}
 
-            padding: 9px 16px;
+.viewer-container{
+width:100%;
+height:650px;
+background:white;
+border:1px solid #e2e8f0;
+border-radius:18px;
+overflow:hidden;
+position:relative;
+}
 
-            background: rgba(255, 255, 255, 0.95);
+model-viewer{
+width:100%;
+height:100%;
+display:block;
+background:linear-gradient(
+145deg,
+#f8fafc,
+#ffffff
+);
+}
 
-            border-radius: 10px;
+.instructions{
+position:absolute;
+bottom:16px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(255,255,255,.92);
+border:1px solid #e2e8f0;
+border-radius:9px;
+padding:9px 14px;
+font-size:12px;
+color:#64748b;
+pointer-events:none;
+white-space:nowrap;
+}
 
-            font-size: 13px;
+.loading{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+color:#64748b;
+font-size:14px;
+pointer-events:none;
+}
 
-            color: #777;
+.error{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
+color:#dc2626;
+font-size:14px;
+display:none;
+}
 
-            pointer-events: none;
+.info{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:18px;
+gap:20px;
+}
 
-            z-index: 10;
-        }
+.info-text{
+color:#64748b;
+font-size:14px;
+line-height:1.5;
+}
 
-        .error {
-            position: absolute;
+.home{
+background:#111827;
+color:white;
+border:0;
+border-radius:9px;
+padding:12px 18px;
+font-weight:700;
+text-decoration:none;
+white-space:nowrap;
+}
 
-            top: 50%;
-            left: 50%;
+@media(max-width:700px){
 
-            transform: translate(-50%, -50%);
+.header{
+padding:0 18px;
+}
 
-            text-align: center;
+.content{
+padding:25px 15px 40px;
+}
 
-            background: white;
+.title h1{
+font-size:26px;
+}
 
-            padding: 25px;
+.viewer-container{
+height:500px;
+}
 
-            border-radius: 12px;
+.instructions{
+font-size:11px;
+}
 
-            box-shadow:
-                0 5px 25px rgba(0, 0, 0, 0.1);
+.info{
+flex-direction:column;
+align-items:flex-start;
+}
 
-            display: none;
+}
 
-            z-index: 20;
-        }
+</style>
 
-        .error strong {
-            display: block;
-
-            margin-bottom: 8px;
-
-            font-size: 18px;
-        }
-    </style>
 </head>
 
 <body>
 
-    <!-- TÍTULO -->
-    <div class="titulo" id="titulo">
-        Visor 3D
-    </div>
+<div class="page">
+
+<header class="header">
+
+<div class="logo">
+ARQUIESCALA <span>maquetas</span>
+</div>
+
+<a
+class="back"
+href="https://forov-99.github.io/PAGINA/">
+← Volver al catálogo
+</a>
+
+</header>
 
 
-    <!-- VISOR -->
-    <model-viewer
-        id="visor"
-        camera-controls
-        touch-action="pan-y"
-        shadow-intensity="1"
-        exposure="1"
-        environment-image="neutral"
-        interaction-prompt="auto"
-        camera-orbit="0deg 75deg auto"
-        field-of-view="30deg"
-        min-camera-orbit="auto auto 0.1m"
-        max-camera-orbit="auto auto 100m"
-    >
-    </model-viewer>
+<main class="content">
+
+<div class="title">
+
+<small>
+VISOR 3D · ARQUIESCALA
+</small>
+
+<h1 id="model-name">
+Cargando modelo...
+</h1>
+
+</div>
 
 
-    <!-- INSTRUCCIONES -->
-    <div class="instrucciones">
-        Arrastra para rotar · rueda para zoom
-    </div>
+<div class="viewer-container">
+
+<div
+class="loading"
+id="loading">
+Cargando modelo 3D...
+</div>
+
+<div
+class="error"
+id="error">
+No se pudo cargar el modelo 3D.
+<br><br>
+Comprueba que el archivo GLB exista en GitHub.
+</div>
 
 
-    <!-- ERROR -->
-    <div class="error" id="error">
-        <strong>No se pudo cargar el modelo</strong>
-        <span id="errorTexto"></span>
-    </div>
+<model-viewer
+id="model"
+camera-controls
+touch-action="pan-y"
+interaction-prompt="auto"
+shadow-intensity="0.8"
+exposure="1"
+camera-orbit="0deg 75deg 100%"
+field-of-view="35deg"
+min-camera-orbit="auto auto 60%"
+max-camera-orbit="auto auto 140%"
+zoom-sensitivity="0.25"
+loading="eager"
+reveal="auto"
+bounds="tight"
+alt="Modelo 3D para maqueta arquitectónica">
+</model-viewer>
 
 
-    <script>
+<div class="instructions">
 
-        // ==========================================
-        // LEER PARÁMETROS DE LA URL
-        // ==========================================
+🖱️ Arrastra para rotar · rueda para zoom
 
-        const parametros = new URLSearchParams(
-            window.location.search
-        );
+</div>
+
+</div>
 
 
-        // Modelo que viene en la URL
-        const modeloParametro =
-            parametros.get("modelo");
+<div class="info">
+
+<div class="info-text">
+
+Modelo 3D interactivo para visualizar antes de realizar tu pedido.
+
+</div>
+
+<a
+class="home"
+href="https://forov-99.github.io/PAGINA/">
+Volver al catálogo
+</a>
+
+</div>
+
+</main>
+
+</div>
 
 
-        // Nombre que viene en la URL
-        const nombreParametro =
-            parametros.get("nombre");
+<script>
+
+const params =
+new URLSearchParams(window.location.search);
 
 
-        // ==========================================
-        // MODELO POR DEFECTO
-        // ==========================================
-
-        const modelo =
-            modeloParametro || "ARBOLITO.glb";
+const modelo =
+params.get("modelo");
 
 
-        // ==========================================
-        // NOMBRE DEL PRODUCTO
-        // ==========================================
-
-        let nombre =
-            nombreParametro;
+const nombre =
+params.get("nombre");
 
 
-        // Si no mandamos nombre,
-        // obtenemos el nombre del archivo.
-
-        if (!nombre) {
-
-            nombre = modelo
-                .replace(".glb", "")
-                .replace(".GLB", "")
-                .replace(/[-_]/g, " ");
-
-        }
+const viewer =
+document.getElementById("model");
 
 
-        // ==========================================
-        // REFERENCIAS
-        // ==========================================
-
-        const visor =
-            document.getElementById("visor");
-
-        const titulo =
-            document.getElementById("titulo");
-
-        const error =
-            document.getElementById("error");
-
-        const errorTexto =
-            document.getElementById("errorTexto");
+const titulo =
+document.getElementById("model-name");
 
 
-        // ==========================================
-        // MOSTRAR TÍTULO
-        // ==========================================
-
-        titulo.textContent =
-            nombre + " · Vista 3D";
+const loading =
+document.getElementById("loading");
 
 
-        // ==========================================
-        // RUTA DEL MODELO
-        // ==========================================
-
-        const rutaModelo =
-            "./" +
-            encodeURIComponent(modelo);
+const error =
+document.getElementById("error");
 
 
-        console.log("Modelo solicitado:");
-        console.log(modelo);
+if(modelo){
 
-        console.log("Ruta:");
-        console.log(rutaModelo);
-
-
-        // ==========================================
-        // CARGAR MODELO
-        // ==========================================
-
-        visor.src = rutaModelo;
+const url =
+"https://forov-99.github.io/PAGINA/"
++
+modelo;
 
 
-        // ==========================================
-        // CUANDO EL MODELO CARGA
-        // ==========================================
-
-        visor.addEventListener(
-            "load",
-            function () {
-
-                console.log(
-                    "Modelo cargado correctamente:",
-                    modelo
-                );
-
-            }
-        );
+viewer.src = url;
 
 
-        // ==========================================
-        // SI HAY ERROR
-        // ==========================================
+titulo.textContent =
+nombre || "Modelo 3D";
 
-        visor.addEventListener(
-            "error",
-            function () {
+}
+else{
 
-                error.style.display =
-                    "block";
+titulo.textContent =
+"Modelo 3D";
 
-                errorTexto.textContent =
-                    "No se encontró: " + modelo;
+loading.style.display =
+"none";
 
-                console.error(
-                    "No se pudo cargar:",
-                    modelo
-                );
+error.style.display =
+"block";
 
-            }
-        );
+error.innerHTML =
+"No se especificó ningún modelo 3D.";
 
-    </script>
+}
+
+
+viewer.addEventListener(
+"load",
+()=>{
+
+loading.style.display =
+"none";
+
+error.style.display =
+"none";
+
+}
+);
+
+
+viewer.addEventListener(
+"error",
+()=>{
+
+loading.style.display =
+"none";
+
+error.style.display =
+"block";
+
+}
+);
+
+</script>
 
 </body>
+
 </html>
