@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="es">
 
 <head>
@@ -7,10 +6,9 @@
 <meta charset="UTF-8">
 
 <meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
-
-
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>ARQUIESCALA — Tienda de maquetas</title>
 
@@ -536,6 +534,7 @@ footer{
 
 </head>
 
+
 <body>
 
 <div id="arquiescala">
@@ -548,25 +547,26 @@ footer{
 
 <header class="nav">
 
-<div class="brand">
-    ARQUIESCALA <span>maquetas</span>
-</div>
+    <div class="brand">
+        ARQUIESCALA <span>maquetas</span>
+    </div>
 
-<nav class="links">
+    <nav class="links">
 
-    <a>Inicio</a>
-    <a>Figuras</a>
-    <a>Vegetación</a>
-    <a>Mobiliario</a>
-    <a>Vehículos</a>
+        <a>Inicio</a>
+        <a>Figuras</a>
+        <a>Vegetación</a>
+        <a>Mobiliario</a>
+        <a>Vehículos</a>
 
-</nav>
+    </nav>
 
-<button class="cart" id="cart">
-    Carrito (0)
-</button>
+    <button class="cart" id="cart">
+        Carrito (0)
+    </button>
 
 </header>
+
 
 <!-- =========================================================
      HERO
@@ -574,72 +574,73 @@ footer{
 
 <section class="hero">
 
-<div>
+    <div>
 
-    <div class="muted">
-        Elementos para maquetas arquitectónicas
+        <div class="muted">
+            Elementos para maquetas arquitectónicas
+        </div>
+
+        <h1>
+            Da vida a tus proyectos.
+        </h1>
+
+        <p class="lead">
+
+            Personas, vehículos, árboles, mobiliario y luminarias
+            diseñados especialmente para maquetas arquitectónicas.
+            Elige tu escala y recibe tus piezas listas para usar.
+
+        </p>
+
+        <div class="cta">
+
+            <button class="primary" id="catalog">
+                Ver catálogo
+            </button>
+
+            <button class="secondary" id="school">
+                Entrega en escuela · GRATIS
+            </button>
+
+        </div>
+
     </div>
 
-    <h1>
-        Da vida a tus proyectos.
-    </h1>
 
-    <p class="lead">
+    <!-- =====================================================
+         MODELO PRINCIPAL
+    ====================================================== -->
 
-        Personas, vehículos, árboles, mobiliario y luminarias
-        diseñados especialmente para maquetas arquitectónicas.
-        Elige tu escala y recibe tus piezas listas para usar.
+    <div class="viewer">
 
-    </p>
+        <small>
+            VISTA PREVIA 3D · ÁRBOL URBANO
+        </small>
 
-    <div class="cta">
+        <model-viewer
+            src="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/ARBOLITO.glb"
+            camera-controls
+            touch-action="pan-y"
+            interaction-prompt="auto"
+            shadow-intensity="0.8"
+            exposure="1"
+            camera-orbit="0deg 75deg auto"
+            field-of-view="auto"
+            loading="eager"
+            reveal="auto"
+            bounds="tight"
+            crossorigin="anonymous"
+            alt="Árbol urbano">
+        </model-viewer>
 
-        <button class="primary" id="catalog">
-            Ver catálogo
-        </button>
-
-        <button class="secondary" id="school">
-            Entrega en escuela · GRATIS
-        </button>
+        <div class="hint">
+            Arrastra para rotar · rueda para zoom
+        </div>
 
     </div>
-
-</div>
-
-
-<!-- =====================================================
-     MODELO PRINCIPAL
-====================================================== -->
-
-<div class="viewer">
-
-    <small>
-        VISTA PREVIA 3D · ÁRBOL URBANO
-    </small>
-
-    <model-viewer
-        src="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/ARBOLITO.glb"
-        camera-controls
-        touch-action="pan-y"
-        interaction-prompt="auto"
-        shadow-intensity="0.8"
-        exposure="1"
-        camera-orbit="0deg 75deg auto"
-        field-of-view="auto"
-        loading="eager"
-        reveal="auto"
-        bounds="tight"
-        crossorigin="anonymous"
-        alt="Árbol urbano">
-    </model-viewer>
-
-    <div class="hint">
-        Arrastra para rotar · rueda para zoom
-    </div>
-
-</div>
 
 </section>
+
 
 <!-- =========================================================
      FEATURES
@@ -647,45 +648,46 @@ footer{
 
 <section class="features">
 
-<div class="feature">
+    <div class="feature">
 
-    <b>
-        Escalas arquitectónicas
-    </b>
+        <b>
+            Escalas arquitectónicas
+        </b>
 
-    <span>
-        1:50 · 1:75 · 1:100 · 1:150 · 1:200
-    </span>
+        <span>
+            1:50 · 1:75 · 1:100 · 1:150 · 1:200
+        </span>
 
-</div>
-
-
-<div class="feature">
-
-    <b>
-        Entrega en tu escuela
-    </b>
-
-    <span>
-        Sin costo en puntos de entrega programados.
-    </span>
-
-</div>
+    </div>
 
 
-<div class="feature">
+    <div class="feature">
 
-    <b>
-        Envíos nacionales
-    </b>
+        <b>
+            Entrega en tu escuela
+        </b>
 
-    <span>
-        Para pedidos fuera de tu zona.
-    </span>
+        <span>
+            Sin costo en puntos de entrega programados.
+        </span>
 
-</div>
+    </div>
+
+
+    <div class="feature">
+
+        <b>
+            Envíos nacionales
+        </b>
+
+        <span>
+            Para pedidos fuera de tu zona.
+        </span>
+
+    </div>
 
 </section>
+
 
 <!-- =========================================================
      CATEGORIAS
@@ -693,54 +695,55 @@ footer{
 
 <section>
 
-<div class="section-title">
+    <div class="section-title">
 
-    <h2>
-        Categorías
-    </h2>
+        <h2>
+            Categorías
+        </h2>
 
-    <span class="muted">
-        Explora el catálogo
-    </span>
+        <span class="muted">
+            Explora el catálogo
+        </span>
 
-</div>
-
-
-<div class="cats">
-
-    <div class="cat">
-        👤<br>
-        Personas
     </div>
 
-    <div class="cat">
-        🚗<br>
-        Vehículos
-    </div>
 
-    <div class="cat">
-        🌳<br>
-        Vegetación
-    </div>
+    <div class="cats">
 
-    <div class="cat">
-        🪑<br>
-        Mobiliario
-    </div>
+        <div class="cat">
+            👤<br>
+            Personas
+        </div>
 
-    <div class="cat">
-        💡<br>
-        Luminarias
-    </div>
+        <div class="cat">
+            🚗<br>
+            Vehículos
+        </div>
 
-    <div class="cat">
-        🏗️<br>
-        Arquitectura
-    </div>
+        <div class="cat">
+            🌳<br>
+            Vegetación
+        </div>
 
-</div>
+        <div class="cat">
+            🪑<br>
+            Mobiliario
+        </div>
+
+        <div class="cat">
+            💡<br>
+            Luminarias
+        </div>
+
+        <div class="cat">
+            🏗️<br>
+            Arquitectura
+        </div>
+
+    </div>
 
 </section>
+
 
 <!-- =========================================================
      PRODUCTOS
@@ -748,470 +751,470 @@ footer{
 
 <section>
 
-<div class="section-title">
+    <div class="section-title">
 
-    <h2>
-        Más vendidos
-    </h2>
+        <h2>
+            Más vendidos
+        </h2>
 
-    <span class="muted">
-        Diseñados para maqueta
-    </span>
+        <span class="muted">
+            Diseñados para maqueta
+        </span>
 
-</div>
-
-
-<div class="products">
+    </div>
 
 
-    <!-- =================================================
-         PERSONA
-    ================================================== -->
-
-    <article
-        class="product"
-        data-id="persona"
-        data-name="Persona caminando"
-        data-stock="30"
-        data-model="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/PERSONA.glb"
-        data-prices='{
-            "1:50":35,
-            "1:75":32,
-            "1:100":29,
-            "1:150":25,
-            "1:200":22
-        }">
-
-        <div class="pimg model-loading">
-
-            <model-viewer
-                src="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/PERSONA.glb"
-                camera-orbit="0deg 75deg auto"
-                camera-target="auto auto auto"
-                field-of-view="auto"
-                interaction-prompt="none"
-                disable-zoom
-                disable-pan
-                shadow-intensity="0.7"
-                exposure="1"
-                loading="eager"
-                reveal="auto"
-                bounds="tight"
-                alt="Persona caminando">
-            </model-viewer>
-
-        </div>
+    <div class="products">
 
 
-        <div class="info">
+        <!-- =================================================
+             PERSONA
+        ================================================== -->
 
-            <h3>
-                Persona caminando
-            </h3>
+        <article
+            class="product"
+            data-id="persona"
+            data-name="Persona caminando"
+            data-stock="30"
+            data-model="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/PERSONA.glb"
+            data-prices='{
+                "1:50":35,
+                "1:75":32,
+                "1:100":29,
+                "1:150":25,
+                "1:200":22
+            }">
 
-            <div class="price">
-                $35 MXN
-            </div>
+            <div class="pimg model-loading">
 
-            <button
-                class="model-btn"
-                data-model-button="persona">
+                <model-viewer
+                    src="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/PERSONA.glb"
+                    camera-orbit="0deg 75deg auto"
+                    camera-target="auto auto auto"
+                    field-of-view="auto"
+                    interaction-prompt="none"
+                    disable-zoom
+                    disable-pan
+                    shadow-intensity="0.7"
+                    exposure="1"
+                    loading="eager"
+                    reveal="auto"
+                    bounds="tight"
+                    alt="Persona caminando">
+                </model-viewer>
 
-                Ver modelo 3D
-
-            </button>
-
-
-            <label class="scale-label">
-                Escala
-            </label>
-
-            <select class="scale">
-
-                <option value="1:50">
-                    1:50
-                </option>
-
-                <option value="1:75">
-                    1:75
-                </option>
-
-                <option value="1:100">
-                    1:100
-                </option>
-
-                <option value="1:150">
-                    1:150
-                </option>
-
-                <option value="1:200">
-                    1:200
-                </option>
-
-            </select>
-
-
-            <div class="stock">
-                30 piezas disponibles
             </div>
 
 
-            <div class="quantity">
+            <div class="info">
 
-                <button class="minus">
-                    −
+                <h3>
+                    Persona caminando
+                </h3>
+
+                <div class="price">
+                    $35 MXN
+                </div>
+
+                <button
+                    class="model-btn"
+                    data-model-button="persona">
+
+                    Ver modelo 3D
+
                 </button>
 
-                <span>
-                    1
-                </span>
 
-                <button class="plus">
-                    +
-                </button>
+                <label class="scale-label">
+                    Escala
+                </label>
 
-            </div>
+                <select class="scale">
 
+                    <option value="1:50">
+                        1:50
+                    </option>
 
-            <button class="add">
-                Agregar
-            </button>
+                    <option value="1:75">
+                        1:75
+                    </option>
 
-        </div>
+                    <option value="1:100">
+                        1:100
+                    </option>
 
-    </article>
+                    <option value="1:150">
+                        1:150
+                    </option>
 
+                    <option value="1:200">
+                        1:200
+                    </option>
 
-
-    <!-- =================================================
-         ARBOL
-    ================================================== -->
-
-    <article
-        class="product"
-        data-id="arbol"
-        data-name="Árbol urbano"
-        data-stock="25"
-        data-model="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/ARBOLITO.glb"
-        data-prices='{
-            "1:50":45,
-            "1:75":42,
-            "1:100":38,
-            "1:150":34,
-            "1:200":30
-        }'>
-
-        <div class="pimg model-loading">
-
-            <model-viewer
-                src="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/ARBOLITO.glb"
-                camera-orbit="0deg 75deg auto"
-                camera-target="auto auto auto"
-                field-of-view="auto"
-                interaction-prompt="none"
-                disable-zoom
-                disable-pan
-                shadow-intensity="0.7"
-                exposure="1"
-                loading="eager"
-                reveal="auto"
-                bounds="tight"
-                alt="Árbol urbano">
-            </model-viewer>
-
-        </div>
+                </select>
 
 
-        <div class="info">
-
-            <h3>
-                Árbol urbano
-            </h3>
-
-            <div class="price">
-                $45 MXN
-            </div>
-
-            <button
-                class="model-btn"
-                data-model-button="arbol">
-
-                Ver modelo 3D
-
-            </button>
+                <div class="stock">
+                    30 piezas disponibles
+                </div>
 
 
-            <label class="scale-label">
-                Escala
-            </label>
+                <div class="quantity">
 
-            <select class="scale">
+                    <button class="minus">
+                        −
+                    </button>
 
-                <option value="1:50">
-                    1:50
-                </option>
+                    <span>
+                        1
+                    </span>
 
-                <option value="1:75">
-                    1:75
-                </option>
+                    <button class="plus">
+                        +
+                    </button>
 
-                <option value="1:100">
-                    1:100
-                </option>
-
-                <option value="1:150">
-                    1:150
-                </option>
-
-                <option value="1:200">
-                    1:200
-                </option>
-
-            </select>
+                </div>
 
 
-            <div class="stock">
-                25 piezas disponibles
-            </div>
-
-
-            <div class="quantity">
-
-                <button class="minus">
-                    −
-                </button>
-
-                <span>
-                    1
-                </span>
-
-                <button class="plus">
-                    +
+                <button class="add">
+                    Agregar
                 </button>
 
             </div>
 
-
-            <button class="add">
-                Agregar
-            </button>
-
-        </div>
-
-    </article>
+        </article>
 
 
 
-    <!-- =================================================
-         VEHICULO
-    ================================================== -->
+        <!-- =================================================
+             ARBOL
+        ================================================== -->
 
-    <article
-        class="product"
-        data-id="vehiculo"
-        data-name="Vehículo sedán"
-        data-stock="20"
-        data-model=""
-        data-prices='{
-            "1:50":45,
-            "1:75":42,
-            "1:100":38,
-            "1:150":34,
-            "1:200":30
-        }'>
+        <article
+            class="product"
+            data-id="arbol"
+            data-name="Árbol urbano"
+            data-stock="25"
+            data-model="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/ARBOLITO.glb"
+            data-prices='{
+                "1:50":45,
+                "1:75":42,
+                "1:100":38,
+                "1:150":34,
+                "1:200":30
+            }'>
 
-        <div class="pimg">
+            <div class="pimg model-loading">
 
-            🚗
+                <model-viewer
+                    src="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/ARBOLITO.glb"
+                    camera-orbit="0deg 75deg auto"
+                    camera-target="auto auto auto"
+                    field-of-view="auto"
+                    interaction-prompt="none"
+                    disable-zoom
+                    disable-pan
+                    shadow-intensity="0.7"
+                    exposure="1"
+                    loading="eager"
+                    reveal="auto"
+                    bounds="tight"
+                    alt="Árbol urbano">
+                </model-viewer>
 
-        </div>
-
-
-        <div class="info">
-
-            <h3>
-                Vehículo sedán
-            </h3>
-
-            <div class="price">
-                $45 MXN
-            </div>
-
-            <button
-                class="model-btn"
-                data-model-button="vehiculo">
-
-                Ver modelo 3D
-
-            </button>
-
-
-            <label class="scale-label">
-                Escala
-            </label>
-
-            <select class="scale">
-
-                <option value="1:50">
-                    1:50
-                </option>
-
-                <option value="1:75">
-                    1:75
-                </option>
-
-                <option value="1:100">
-                    1:100
-                </option>
-
-                <option value="1:150">
-                    1:150
-                </option>
-
-                <option value="1:200">
-                    1:200
-                </option>
-
-            </select>
-
-
-            <div class="stock">
-                20 piezas disponibles
             </div>
 
 
-            <div class="quantity">
+            <div class="info">
 
-                <button class="minus">
-                    −
+                <h3>
+                    Árbol urbano
+                </h3>
+
+                <div class="price">
+                    $45 MXN
+                </div>
+
+                <button
+                    class="model-btn"
+                    data-model-button="arbol">
+
+                    Ver modelo 3D
+
                 </button>
 
-                <span>
-                    1
-                </span>
 
-                <button class="plus">
-                    +
-                </button>
+                <label class="scale-label">
+                    Escala
+                </label>
 
-            </div>
+                <select class="scale">
 
+                    <option value="1:50">
+                        1:50
+                    </option>
 
-            <button class="add">
-                Agregar
-            </button>
+                    <option value="1:75">
+                        1:75
+                    </option>
 
-        </div>
+                    <option value="1:100">
+                        1:100
+                    </option>
 
-    </article>
+                    <option value="1:150">
+                        1:150
+                    </option>
 
+                    <option value="1:200">
+                        1:200
+                    </option>
 
-
-    <!-- =================================================
-         LUMINARIA
-    ================================================== -->
-
-    <article
-        class="product"
-        data-id="luminaria"
-        data-name="Luminaria peatonal"
-        data-stock="40"
-        data-model=""
-        data-prices='{
-            "1:50":30,
-            "1:75":28,
-            "1:100":25,
-            "1:150":23,
-            "1:200":20
-        }'>
-
-        <div class="pimg">
-
-            💡
-
-        </div>
+                </select>
 
 
-        <div class="info">
-
-            <h3>
-                Luminaria peatonal
-            </h3>
-
-            <div class="price">
-                $30 MXN
-            </div>
-
-            <button
-                class="model-btn"
-                data-model-button="luminaria">
-
-                Ver modelo 3D
-
-            </button>
+                <div class="stock">
+                    25 piezas disponibles
+                </div>
 
 
-            <label class="scale-label">
-                Escala
-            </label>
+                <div class="quantity">
 
-            <select class="scale">
+                    <button class="minus">
+                        −
+                    </button>
 
-                <option value="1:50">
-                    1:50
-                </option>
+                    <span>
+                        1
+                    </span>
 
-                <option value="1:75">
-                    1:75
-                </option>
+                    <button class="plus">
+                        +
+                    </button>
 
-                <option value="1:100">
-                    1:100
-                </option>
-
-                <option value="1:150">
-                    1:150
-                </option>
-
-                <option value="1:200">
-                    1:200
-                </option>
-
-            </select>
+                </div>
 
 
-            <div class="stock">
-                40 piezas disponibles
-            </div>
-
-
-            <div class="quantity">
-
-                <button class="minus">
-                    −
-                </button>
-
-                <span>
-                    1
-                </span>
-
-                <button class="plus">
-                    +
+                <button class="add">
+                    Agregar
                 </button>
 
             </div>
 
-
-            <button class="add">
-                Agregar
-            </button>
-
-        </div>
-
-    </article>
+        </article>
 
 
-</div>
+
+        <!-- =================================================
+             VEHICULO
+        ================================================== -->
+
+        <article
+            class="product"
+            data-id="vehiculo"
+            data-name="Vehículo sedán"
+            data-stock="20"
+            data-model=""
+            data-prices='{
+                "1:50":45,
+                "1:75":42,
+                "1:100":38,
+                "1:150":34,
+                "1:200":30
+            }'>
+
+            <div class="pimg">
+
+                🚗
+
+            </div>
+
+
+            <div class="info">
+
+                <h3>
+                    Vehículo sedán
+                </h3>
+
+                <div class="price">
+                    $45 MXN
+                </div>
+
+                <button
+                    class="model-btn"
+                    data-model-button="vehiculo">
+
+                    Ver modelo 3D
+
+                </button>
+
+
+                <label class="scale-label">
+                    Escala
+                </label>
+
+                <select class="scale">
+
+                    <option value="1:50">
+                        1:50
+                    </option>
+
+                    <option value="1:75">
+                        1:75
+                    </option>
+
+                    <option value="1:100">
+                        1:100
+                    </option>
+
+                    <option value="1:150">
+                        1:150
+                    </option>
+
+                    <option value="1:200">
+                        1:200
+                    </option>
+
+                </select>
+
+
+                <div class="stock">
+                    20 piezas disponibles
+                </div>
+
+
+                <div class="quantity">
+
+                    <button class="minus">
+                        −
+                    </button>
+
+                    <span>
+                        1
+                    </span>
+
+                    <button class="plus">
+                        +
+                    </button>
+
+                </div>
+
+
+                <button class="add">
+                    Agregar
+                </button>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             LUMINARIA
+        ================================================== -->
+
+        <article
+            class="product"
+            data-id="luminaria"
+            data-name="Luminaria peatonal"
+            data-stock="40"
+            data-model=""
+            data-prices='{
+                "1:50":30,
+                "1:75":28,
+                "1:100":25,
+                "1:150":23,
+                "1:200":20
+            }'>
+
+            <div class="pimg">
+
+                💡
+
+            </div>
+
+
+            <div class="info">
+
+                <h3>
+                    Luminaria peatonal
+                </h3>
+
+                <div class="price">
+                    $30 MXN
+                </div>
+
+                <button
+                    class="model-btn"
+                    data-model-button="luminaria">
+
+                    Ver modelo 3D
+
+                </button>
+
+
+                <label class="scale-label">
+                    Escala
+                </label>
+
+                <select class="scale">
+
+                    <option value="1:50">
+                        1:50
+                    </option>
+
+                    <option value="1:75">
+                        1:75
+                    </option>
+
+                    <option value="1:100">
+                        1:100
+                    </option>
+
+                    <option value="1:150">
+                        1:150
+                    </option>
+
+                    <option value="1:200">
+                        1:200
+                    </option>
+
+                </select>
+
+
+                <div class="stock">
+                    40 piezas disponibles
+                </div>
+
+
+                <div class="quantity">
+
+                    <button class="minus">
+                        −
+                    </button>
+
+                    <span>
+                        1
+                    </span>
+
+                    <button class="plus">
+                        +
+                    </button>
+
+                </div>
+
+
+                <button class="add">
+                    Agregar
+                </button>
+
+            </div>
+
+        </article>
+
+
+    </div>
 
 </section>
 
@@ -1223,81 +1226,81 @@ footer{
 
 <section class="order">
 
-<div>
+    <div>
 
-    <h2>
-        Tu pedido
-    </h2>
+        <h2>
+            Tu pedido
+        </h2>
 
-    <p>
-        Selecciona la escala y cantidad de cada producto.
-        Al agregarlo, aparecerá aquí el detalle de tu pedido.
-    </p>
-
-
-    <div class="summary">
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>
-                        Artículo
-                    </th>
-
-                    <th>
-                        Escala
-                    </th>
-
-                    <th>
-                        Cant.
-                    </th>
-
-                    <th>
-                        Precio unidad
-                    </th>
-
-                    <th>
-                        Total
-                    </th>
-
-                </tr>
-
-            </thead>
+        <p>
+            Selecciona la escala y cantidad de cada producto.
+            Al agregarlo, aparecerá aquí el detalle de tu pedido.
+        </p>
 
 
-            <tbody id="summaryBody">
-            </tbody>
+        <div class="summary">
 
-        </table>
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Artículo
+                        </th>
+
+                        <th>
+                            Escala
+                        </th>
+
+                        <th>
+                            Cant.
+                        </th>
+
+                        <th>
+                            Precio unidad
+                        </th>
+
+                        <th>
+                            Total
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="summaryBody">
+                </tbody>
+
+            </table>
+
+        </div>
 
     </div>
 
-</div>
 
+    <div>
 
-<div>
+        <div class="muted">
+            RESUMEN DEL PEDIDO
+        </div>
 
-    <div class="muted">
-        RESUMEN DEL PEDIDO
+        <div class="total" id="total">
+            Total: $0 MXN
+        </div>
+
+        <button
+            class="primary"
+            style="width:100%"
+            id="order">
+
+            Hacer pedido
+
+        </button>
+
     </div>
-
-    <div class="total" id="total">
-        Total: $0 MXN
-    </div>
-
-    <button
-        class="primary"
-        style="width:100%"
-        id="order">
-
-        Hacer pedido
-
-    </button>
-
-</div>
 
 </section>
 
@@ -1309,15 +1312,16 @@ footer{
 
 <footer>
 
-<span>
-    © 2026 ARQUIESCALA
-</span>
+    <span>
+        © 2026 ARQUIESCALA
+    </span>
 
-<span>
-    Aviso de privacidad · Términos · Envíos · Contacto
-</span>
+    <span>
+        Aviso de privacidad · Términos · Envíos · Contacto
+    </span>
 
 </footer>
+
 
 </div>
 
@@ -2180,6 +2184,7 @@ footer{
 })();
 
 </script>
+
 
 </body>
 
