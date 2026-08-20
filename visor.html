@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Visor 3D · ARQUIESCALA</title>
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-<script type="module"
-src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js">
+<title>ARQUIESCALA — Modelo 3D</title>
+
+<script
+    type="module"
+    src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js">
 </script>
 
 <style>
@@ -18,57 +25,109 @@ src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.j
 
 body{
     margin:0;
-    background:#f7f9fc;
+    min-height:100vh;
+    background:#ffffff;
     color:#111827;
-    font-family:Arial,Helvetica,sans-serif;
+    font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
 .page{
-    width:100%;
     min-height:100vh;
-    padding:28px 3%;
+    display:flex;
+    flex-direction:column;
 }
 
 .header{
-    margin-bottom:24px;
+    height:72px;
+    padding:0 24px;
+    border-bottom:1px solid #e5e7eb;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
 .brand{
-    font-size:15px;
-    color:#607da3;
-    margin-bottom:4px;
-}
-
-h1{
-    margin:0;
-    font-size:38px;
-    line-height:1.15;
+    font-size:21px;
     font-weight:800;
 }
 
-.viewer-wrapper{
-    width:100%;
-    height:650px;
-    background:#ffffff;
-    border:1px solid #d7e0ec;
-    border-radius:24px;
-    overflow:hidden;
-    position:relative;
-    box-shadow:0 12px 35px rgba(30,50,80,.06);
+.brand span{
+    font-weight:400;
+    color:#64748b;
 }
 
-model-viewer{
+.back{
+    background:#fff;
+    border:1px solid #cbd5e1;
+    border-radius:9px;
+    padding:10px 15px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.back:hover{
+    background:#f8fafc;
+}
+
+.main{
+    flex:1;
+    width:min(1100px,100%);
+    margin:auto;
+    padding:30px 20px 50px;
+}
+
+.title{
+    margin-bottom:20px;
+}
+
+.title .muted{
+    color:#64748b;
+    font-size:13px;
+    margin-bottom:5px;
+}
+
+.title h1{
+    margin:0;
+    font-size:32px;
+    letter-spacing:-1px;
+}
+
+.viewer{
+    width:100%;
+    height:min(72vh,700px);
+    min-height:500px;
+    border:1px solid #e2e8f0;
+    border-radius:20px;
+    background:
+        linear-gradient(
+            145deg,
+            #f8fafc,
+            #ffffff
+        );
+    position:relative;
+    overflow:hidden;
+}
+
+.viewer model-viewer{
     width:100%;
     height:100%;
     display:block;
-    background:#ffffff;
 
-    --poster-color:#ffffff;
+    --poster-color:transparent;
+    --progress-bar-color:transparent;
+}
 
-    --progress-bar-color:#111827;
-    --progress-mask:#ffffff;
-
-    --interaction-prompt-display:none;
+.hint{
+    position:absolute;
+    bottom:15px;
+    right:18px;
+    padding:7px 10px;
+    border-radius:8px;
+    background:rgba(255,255,255,.88);
+    border:1px solid #e2e8f0;
+    color:#64748b;
+    font-size:12px;
+    pointer-events:none;
 }
 
 .loading{
@@ -77,577 +136,276 @@ model-viewer{
     display:flex;
     align-items:center;
     justify-content:center;
-    flex-direction:column;
-    gap:12px;
-    background:#ffffff;
-    z-index:5;
-    font-weight:700;
-    font-size:20px;
-}
-
-.loading small{
-    font-size:14px;
-    font-weight:400;
-    color:#607da3;
-}
-
-.spinner{
-    width:35px;
-    height:35px;
-    border:4px solid #e5e7eb;
-    border-top-color:#111827;
-    border-radius:50%;
-    animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-.error{
-    position:absolute;
-    inset:0;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    text-align:center;
-    padding:30px;
-    background:#ffffff;
-    z-index:6;
-}
-
-.error h2{
-    margin:0 0 10px;
-    font-size:24px;
-}
-
-.error p{
-    margin:0;
-    color:#607da3;
-    max-width:600px;
-    line-height:1.6;
-}
-
-.controls-help{
-    position:absolute;
-    bottom:18px;
-    left:50%;
-    transform:translateX(-50%);
-    background:rgba(255,255,255,.94);
-    border:1px solid #d7e0ec;
-    border-radius:10px;
-    padding:9px 15px;
+    color:#64748b;
     font-size:13px;
-    color:#607da3;
-    box-shadow:0 3px 12px rgba(0,0,0,.06);
     pointer-events:none;
-    z-index:4;
 }
 
-.bottom{
-    margin-top:20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:20px;
+.footer{
+    border-top:1px solid #e5e7eb;
+    padding:20px;
+    text-align:center;
+    color:#64748b;
+    font-size:12px;
 }
 
-.description{
-    color:#607da3;
-    font-size:16px;
-}
+@media(max-width:700px){
 
-.back-button{
-    border:0;
-    background:#111827;
-    color:white;
-    padding:16px 24px;
-    border-radius:13px;
-    font-size:16px;
-    font-weight:700;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.back-button:hover{
-    background:#1f2937;
-    transform:translateY(-1px);
-}
-
-@media(max-width:800px){
-
-    .page{
-        padding:20px 4%;
+    .header{
+        padding:0 15px;
     }
 
-    h1{
-        font-size:30px;
+    .main{
+        padding:20px 12px 35px;
     }
 
-    .viewer-wrapper{
-        height:500px;
-        border-radius:18px;
+    .title h1{
+        font-size:26px;
     }
 
-    .bottom{
-        flex-direction:column;
-        align-items:stretch;
-    }
-
-    .back-button{
-        width:100%;
+    .viewer{
+        min-height:450px;
+        height:65vh;
     }
 
 }
 
 </style>
+
 </head>
 
 <body>
 
 <div class="page">
 
-    <div class="header">
+<header class="header">
 
-        <div class="brand">
-            VISOR 3D · ARQUIESCALA
-        </div>
+<div class="brand">
+ARQUIESCALA <span>maquetas</span>
+</div>
 
-        <h1 id="modelName">
-            Modelo 3D
-        </h1>
+<button
+class="back"
+id="back">
 
-    </div>
+← Volver al catálogo
 
+</button>
 
-    <div class="viewer-wrapper">
-
-        <div class="loading" id="loading">
-
-            <div class="spinner"></div>
-
-            <div>
-                Cargando modelo 3D...
-            </div>
-
-            <small>
-                Preparando la vista
-            </small>
-
-        </div>
+</header>
 
 
-        <div class="error" id="error">
+<main class="main">
 
-            <h2>
-                No se pudo cargar el modelo
-            </h2>
+<div class="title">
 
-            <p id="errorText">
-                Verifica que el archivo GLB exista y que la URL sea correcta.
-            </p>
+<div class="muted">
+VISTA PREVIA 3D
+</div>
 
-        </div>
+<h1 id="model-name">
+Modelo 3D
+</h1>
 
-
-        <model-viewer
-            id="viewer"
-
-            camera-controls
-
-            disable-pan
-
-            interaction-prompt="none"
-
-            shadow-intensity="0.25"
-
-            exposure="1"
-
-            environment-image="neutral"
-
-            camera-orbit="0deg 75deg auto"
-
-            camera-target="auto auto auto"
-
-            field-of-view="30deg"
-
-            min-field-of-view="18deg"
-
-            max-field-of-view="45deg"
-
-            interpolation-decay="120"
-
-            loading="eager"
-
-            reveal="auto">
-
-        </model-viewer>
+</div>
 
 
-        <div class="controls-help">
-            🖱️ Arrastra para rotar · rueda para zoom
-        </div>
+<div class="viewer">
 
-    </div>
+<div
+class="loading"
+id="loading">
+
+Cargando modelo 3D...
+
+</div>
 
 
-    <div class="bottom">
+<model-viewer
+id="model"
+camera-controls
+touch-action="pan-y"
+interaction-prompt="auto"
+shadow-intensity="0.8"
+exposure="1"
+loading="eager"
+reveal="auto"
+bounds="tight"
+camera-orbit="0deg 75deg auto"
+camera-target="auto auto auto"
+field-of-view="35deg"
+min-camera-orbit="auto auto 60%"
+max-camera-orbit="auto auto 140%"
+zoom-sensitivity="0.18"
+alt="Modelo 3D">
+</model-viewer>
 
-        <div class="description">
-            Modelo 3D interactivo para visualizar antes de realizar tu pedido.
-        </div>
 
-        <button
-            class="back-button"
-            id="backButton">
-            Volver al catálogo
-        </button>
+<div class="hint">
+Arrastra para rotar · rueda para zoom
+</div>
 
-    </div>
+</div>
+
+</main>
+
+
+<footer class="footer">
+
+© 2026 ARQUIESCALA · Modelos 3D para maquetas arquitectónicas
+
+</footer>
 
 </div>
 
 
 <script>
 
-const viewer = document.getElementById("viewer");
-const loading = document.getElementById("loading");
-const errorBox = document.getElementById("error");
-const errorText = document.getElementById("errorText");
-const modelName = document.getElementById("modelName");
-const backButton = document.getElementById("backButton");
+const params =
+new URLSearchParams(
+window.location.search
+);
 
 
-// ============================================================
-// OBTENER INFORMACIÓN DE LA URL
-// ============================================================
-
-const params = new URLSearchParams(window.location.search);
-
-const modelURL = params.get("modelo");
-const nameURL = params.get("nombre");
+const modelURL =
+params.get("modelo");
 
 
-// ============================================================
-// NOMBRE DEL MODELO
-// ============================================================
+const modelName =
+params.get("nombre");
 
-if(nameURL){
 
-    modelName.textContent = nameURL;
+const model =
+document.getElementById(
+"model"
+);
 
-    document.title =
-        nameURL + " · Visor 3D · ARQUIESCALA";
+
+const nameElement =
+document.getElementById(
+"model-name"
+);
+
+
+const loading =
+document.getElementById(
+"loading"
+);
+
+
+if(modelName){
+
+nameElement.textContent =
+modelName;
 
 }
 
 
-// ============================================================
-// VERIFICAR URL
-// ============================================================
+if(modelURL){
 
-if(!modelURL){
-
-    loading.style.display = "none";
-
-    errorBox.style.display = "flex";
-
-    errorText.textContent =
-        "No se recibió ninguna dirección de modelo 3D.";
+model.src =
+modelURL;
 
 }else{
 
-    try{
-
-        const decodedURL = decodeURIComponent(modelURL);
-
-        viewer.src = decodedURL;
-
-    }catch(error){
-
-        viewer.src = modelURL;
-
-    }
+loading.textContent =
+"No se encontró el modelo 3D.";
 
 }
 
 
-// ============================================================
-// CARGA CORRECTA
-// ============================================================
+function frameModel(){
 
-viewer.addEventListener("load",()=>{
+if(!model.loaded){
+return;
+}
 
-    loading.style.display = "none";
+try{
 
-    errorBox.style.display = "none";
+const dimensions =
+model.getDimensions();
 
-    /*
-        IMPORTANTE:
-
-        model-viewer calcula automáticamente el encuadre
-        del modelo.
-
-        Después de cargar esperamos un poco para asegurarnos
-        de que el modelo quede correctamente centrado.
-    */
-
-    setTimeout(()=>{
-
-        try{
-
-            viewer.jumpCameraToGoal();
-
-        }catch(e){
-
-            console.log(
-                "Encuadre automático aplicado."
-            );
-
-        }
-
-    },300);
-
-});
+const center =
+model.getBoundingBoxCenter();
 
 
-// ============================================================
-// ERROR
-// ============================================================
-
-viewer.addEventListener("error",(event)=>{
-
-    console.error(
-        "Error cargando modelo:",
-        event
-    );
-
-    loading.style.display = "none";
-
-    errorBox.style.display = "flex";
-
-    errorText.textContent =
-        "No se pudo cargar el archivo GLB. Verifica que la URL del modelo sea correcta y que el archivo exista en GitHub.";
-
-});
-
-
-// ============================================================
-// ZOOM SUAVE
-// ============================================================
-
-let zoomTarget = 0;
-
-let zoomCurrent = 0;
-
-let zoomAnimation = null;
-
-
-// Cuando el usuario mueve la rueda,
-// NO dejamos que model-viewer haga su zoom normal.
-// Nosotros controlamos el zoom manualmente.
-
-viewer.addEventListener(
-    "wheel",
-    function(event){
-
-        event.preventDefault();
-
-        /*
-            Delta muy pequeño.
-
-            Antes teníamos pasos demasiado grandes.
-            Ahora cada movimiento de rueda modifica
-            muy poco el zoom.
-        */
-
-        const delta =
-            event.deltaY * 0.00045;
-
-        zoomTarget += delta;
-
-
-        /*
-            Limitar zoom.
-
-            Evita:
-
-            - acercarse demasiado
-            - alejarse demasiado
-        */
-
-        zoomTarget =
-            Math.max(
-                -0.12,
-                Math.min(
-                    0.12,
-                    zoomTarget
-                )
-            );
-
-
-        startZoomAnimation();
-
-    },
-    {
-        passive:false
-    }
+const largestDimension =
+Math.max(
+dimensions.x,
+dimensions.y,
+dimensions.z
 );
 
 
-// ============================================================
-// ANIMACIÓN DEL ZOOM
-// ============================================================
-
-function startZoomAnimation(){
-
-    if(zoomAnimation){
-        return;
-    }
-
-    function animate(){
-
-        /*
-            Interpolación.
-
-            El valor 0.055 hace que el movimiento
-            sea MUY suave.
-        */
-
-        zoomCurrent +=
-            (zoomTarget - zoomCurrent) * 0.055;
+const fov =
+35 * Math.PI / 180;
 
 
-        /*
-            Cambiamos el FIELD OF VIEW.
-
-            Menor FOV =
-            más cerca.
-
-            Mayor FOV =
-            más lejos.
-        */
-
-        const baseFOV = 30;
-
-        const newFOV =
-            baseFOV +
-            (zoomCurrent * 100);
+const distance =
+(
+largestDimension /
+(
+2 *
+Math.tan(fov / 2)
+)
+) * 1.20;
 
 
-        const limitedFOV =
-            Math.max(
-                18,
-                Math.min(
-                    42,
-                    newFOV
-                )
-            );
+model.cameraTarget =
+`${center.x}m ${center.y}m ${center.z}m`;
 
 
-        viewer.fieldOfView =
-            limitedFOV + "deg";
+model.cameraOrbit =
+`0deg 75deg ${Math.max(distance,.01)}m`;
 
 
-        /*
-            Mientras todavía exista diferencia
-            continuamos animando.
-        */
-
-        if(
-            Math.abs(
-                zoomTarget - zoomCurrent
-            ) > 0.0005
-        ){
-
-            zoomAnimation =
-                requestAnimationFrame(animate);
-
-        }else{
-
-            zoomAnimation = null;
-
-        }
-
-    }
+model.fieldOfView =
+"35deg";
 
 
-    zoomAnimation =
-        requestAnimationFrame(animate);
+model.jumpCameraToGoal();
+
+
+}catch(error){
+
+console.log(
+"Error ajustando cámara:",
+error
+);
+
+}
 
 }
 
 
-// ============================================================
-// DOBLE CLICK = REENCUADRAR MODELO
-// ============================================================
+model.addEventListener(
+"load",
+() => {
 
-viewer.addEventListener(
-    "dblclick",
-    function(){
+loading.style.display =
+"none";
 
-        try{
+frameModel();
 
-            viewer.jumpCameraToGoal();
-
-            zoomTarget = 0;
-            zoomCurrent = 0;
-
-            viewer.fieldOfView =
-                "30deg";
-
-        }catch(e){
-
-            console.log(
-                "No fue posible reenfocar."
-            );
-
-        }
-
-    }
+}
 );
 
 
-// ============================================================
-// VOLVER AL CATÁLOGO
-// ============================================================
+document
+.getElementById("back")
+.addEventListener(
+"click",
+() => {
 
-backButton.addEventListener(
-    "click",
-    function(){
+window.location.href =
+"index.html";
 
-        /*
-            IMPORTANTE:
-
-            NO usamos window.location.replace()
-            ni borramos localStorage.
-
-            Simplemente regresamos al catálogo.
-        */
-
-        if(
-            document.referrer &&
-            document.referrer.includes(
-                "github.io"
-            )
-        ){
-
-            history.back();
-
-        }else{
-
-            window.location.href =
-                "index.html";
-
-        }
-
-    }
+}
 );
+
 
 </script>
 
 </body>
+
 </html>
