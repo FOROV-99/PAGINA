@@ -1,15 +1,39 @@
-<div id="arquiescala" class="min-h-full bg-white text-slate-900">
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ARQUIESCALA · Maquetas</title>
 
 <style>
 
+*{
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+margin:0;
+background:#fff;
+color:#111827;
+font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
 #arquiescala{
-font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
+min-height:100vh;
 }
 
 #arquiescala .wrap{
 max-width:1100px;
 margin:auto;
-padding:0 24px
+padding:0 24px;
 }
 
 #arquiescala .nav{
@@ -17,25 +41,31 @@ height:72px;
 display:flex;
 align-items:center;
 justify-content:space-between;
-border-bottom:1px solid #e5e7eb
+border-bottom:1px solid #e5e7eb;
 }
 
 #arquiescala .brand{
 font-size:21px;
 font-weight:800;
-letter-spacing:-.6px
+letter-spacing:-.6px;
 }
 
 #arquiescala .brand span{
 font-weight:400;
-color:#64748b
+color:#64748b;
 }
 
 #arquiescala .links{
 display:flex;
 gap:24px;
 font-size:14px;
-color:#475569
+color:#475569;
+}
+
+#arquiescala .links a{
+text-decoration:none;
+color:inherit;
+cursor:pointer;
 }
 
 #arquiescala .cart{
@@ -43,7 +73,8 @@ border:1px solid #cbd5e1;
 border-radius:10px;
 padding:9px 13px;
 background:#fff;
-font-weight:650
+font-weight:650;
+cursor:pointer;
 }
 
 #arquiescala .hero{
@@ -51,32 +82,38 @@ padding:58px 0 38px;
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:45px;
-align-items:center
+align-items:center;
 }
 
 #arquiescala h1{
 font-size:48px;
 line-height:1.03;
 letter-spacing:-2px;
-margin:0 0 18px
+margin:0 0 18px;
 }
 
 #arquiescala .lead{
 font-size:17px;
 line-height:1.6;
 color:#64748b;
-max-width:490px
+max-width:490px;
+}
+
+#arquiescala .muted{
+color:#64748b;
+font-size:14px;
 }
 
 #arquiescala .cta{
 display:flex;
 gap:10px;
 margin-top:25px;
-flex-wrap:wrap
+flex-wrap:wrap;
 }
 
 #arquiescala button{
-cursor:pointer
+cursor:pointer;
+font-family:inherit;
 }
 
 #arquiescala .primary{
@@ -85,7 +122,7 @@ color:#fff;
 border:0;
 border-radius:10px;
 padding:13px 18px;
-font-weight:700
+font-weight:700;
 }
 
 #arquiescala .secondary{
@@ -94,7 +131,7 @@ color:#111827;
 border:1px solid #cbd5e1;
 border-radius:10px;
 padding:13px 18px;
-font-weight:700
+font-weight:700;
 }
 
 #arquiescala .viewer{
@@ -106,13 +143,13 @@ position:relative;
 overflow:hidden;
 display:flex;
 align-items:center;
-justify-content:center
+justify-content:center;
 }
 
 #arquiescala .viewer model-viewer{
 width:100%;
 height:100%;
-display:block
+display:block;
 }
 
 #arquiescala .viewer small{
@@ -121,7 +158,8 @@ top:15px;
 left:17px;
 color:#64748b;
 font-size:12px;
-z-index:2
+z-index:2;
+pointer-events:none;
 }
 
 #arquiescala .hint{
@@ -130,54 +168,50 @@ bottom:14px;
 right:16px;
 color:#64748b;
 font-size:12px;
-z-index:2
+z-index:2;
+pointer-events:none;
 }
 
 #arquiescala .features{
 display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:12px;
-margin:5px 0 55px
+margin:5px 0 55px;
 }
 
 #arquiescala .feature{
 padding:18px;
 border:1px solid #e2e8f0;
-border-radius:12px
+border-radius:12px;
 }
 
 #arquiescala .feature b{
 display:block;
-margin-bottom:5px
+margin-bottom:5px;
 }
 
 #arquiescala .feature span{
 font-size:13px;
-color:#64748b
+color:#64748b;
 }
 
 #arquiescala .section-title{
 display:flex;
 justify-content:space-between;
 align-items:end;
-margin-bottom:18px
+margin-bottom:18px;
 }
 
 #arquiescala .section-title h2{
 font-size:26px;
-margin:0
-}
-
-#arquiescala .muted{
-color:#64748b;
-font-size:14px
+margin:0;
 }
 
 #arquiescala .cats{
 display:grid;
 grid-template-columns:repeat(6,1fr);
 gap:10px;
-margin-bottom:48px
+margin-bottom:48px;
 }
 
 #arquiescala .cat{
@@ -187,31 +221,39 @@ padding:16px 10px;
 text-align:center;
 font-size:13px;
 background:#fff;
-font-family:inherit
+color:#111827;
 }
 
 #arquiescala .cat:hover{
-border-color:#94a3b8
+border-color:#94a3b8;
 }
 
 #arquiescala .cat.active{
 background:#111827;
 color:#fff;
-border-color:#111827
+border-color:#111827;
 }
 
 #arquiescala .products{
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:16px;
-padding-bottom:60px
+padding-bottom:60px;
 }
 
 #arquiescala .product{
 border:1px solid #e2e8f0;
 border-radius:14px;
 overflow:hidden;
-background:#fff
+background:#fff;
+transition:
+transform .2s ease,
+box-shadow .2s ease;
+}
+
+#arquiescala .product:hover{
+transform:translateY(-3px);
+box-shadow:0 10px 25px rgba(15,23,42,.07);
 }
 
 #arquiescala .pimg{
@@ -220,33 +262,37 @@ background:#f8fafc;
 display:flex;
 align-items:center;
 justify-content:center;
-position:relative
+position:relative;
 }
 
 #arquiescala .pimg model-viewer{
 width:100%;
 height:100%;
-display:block
+display:block;
+}
+
+#arquiescala .emoji-model{
+font-size:70px;
 }
 
 #arquiescala .info{
-padding:14px
+padding:14px;
 }
 
 #arquiescala .info h3{
 font-size:15px;
-margin:0 0 5px
+margin:0 0 5px;
 }
 
 #arquiescala .price{
 font-weight:800;
-margin-bottom:10px
+margin-bottom:10px;
 }
 
 #arquiescala .view-model{
 width:100%;
 padding:10px;
-margin-bottom:8px
+margin-bottom:8px;
 }
 
 #arquiescala .add{
@@ -255,11 +301,11 @@ padding:10px;
 border:1px solid #cbd5e1;
 border-radius:8px;
 background:#fff;
-font-weight:700
+font-weight:700;
 }
 
 #arquiescala .add:hover{
-background:#f8fafc
+background:#f8fafc;
 }
 
 #arquiescala .order{
@@ -269,16 +315,16 @@ padding:28px;
 display:grid;
 grid-template-columns:1.4fr 1fr;
 gap:30px;
-margin-bottom:45px
+margin-bottom:45px;
 }
 
 #arquiescala .order h2{
-margin:0 0 8px
+margin:0 0 8px;
 }
 
 #arquiescala .order p{
 color:#64748b;
-line-height:1.5
+line-height:1.5;
 }
 
 #arquiescala .order select{
@@ -287,13 +333,13 @@ padding:12px;
 border:1px solid #cbd5e1;
 border-radius:9px;
 background:#fff;
-margin-bottom:10px
+margin-bottom:10px;
 }
 
-#arquiescala .order .total{
+#arquiescala .total{
 font-size:22px;
 font-weight:800;
-margin:8px 0 14px
+margin:8px 0 14px;
 }
 
 #arquiescala footer{
@@ -302,43 +348,51 @@ padding:25px 0;
 color:#64748b;
 font-size:13px;
 display:flex;
-justify-content:space-between
+justify-content:space-between;
 }
 
 @media(max-width:760px){
 
 #arquiescala .links{
-display:none
+display:none;
 }
 
 #arquiescala .hero{
 grid-template-columns:1fr;
-padding-top:35px
+padding-top:35px;
 }
 
 #arquiescala h1{
-font-size:38px
+font-size:38px;
 }
 
 #arquiescala .features{
-grid-template-columns:1fr!important
+grid-template-columns:1fr;
 }
 
 #arquiescala .cats{
-grid-template-columns:repeat(3,1fr)!important
+grid-template-columns:repeat(3,1fr);
 }
 
 #arquiescala .products{
-grid-template-columns:repeat(2,1fr)!important
+grid-template-columns:repeat(2,1fr);
 }
 
 #arquiescala .order{
-grid-template-columns:1fr!important
+grid-template-columns:1fr;
 }
 
 }
 
 </style>
+
+</head>
+
+
+<body>
+
+
+<div id="arquiescala">
 
 
 <div class="wrap">
@@ -346,25 +400,45 @@ grid-template-columns:1fr!important
 
 <header class="nav">
 
+
 <div class="brand">
+
 ARQUIESCALA <span>maquetas</span>
+
 </div>
 
 
 <nav class="links">
 
-<a>Inicio</a>
-<a>Figuras</a>
-<a>Vegetación</a>
-<a>Mobiliario</a>
-<a>Vehículos</a>
+<a id="navInicio">
+Inicio
+</a>
+
+<a id="navFiguras">
+Figuras
+</a>
+
+<a id="navVegetacion">
+Vegetación
+</a>
+
+<a id="navMobiliario">
+Mobiliario
+</a>
+
+<a id="navVehiculos">
+Vehículos
+</a>
 
 </nav>
 
 
 <button class="cart" id="cart">
+
 Carrito (0)
+
 </button>
+
 
 </header>
 
@@ -375,35 +449,49 @@ Carrito (0)
 
 <div>
 
+
 <div class="muted">
+
 Elementos para maquetas arquitectónicas
+
 </div>
 
 
 <h1>
+
 Da vida a tus proyectos.
+
 </h1>
 
 
 <p class="lead">
 
-Personas, vehículos, árboles, mobiliario y luminarias diseñados especialmente para maquetas arquitectónicas. Elige tu escala y recibe tus piezas listas para usar.
+Personas, vehículos, árboles, mobiliario y luminarias diseñados especialmente para maquetas arquitectónicas.
+
+Elige tu escala y recibe tus piezas listas para usar.
 
 </p>
 
 
 <div class="cta">
 
+
 <button class="primary" id="catalog">
+
 Ver catálogo
+
 </button>
 
 
 <button class="secondary" id="school">
+
 Entrega en escuela · GRATIS
+
 </button>
 
+
 </div>
+
 
 </div>
 
@@ -413,13 +501,13 @@ Entrega en escuela · GRATIS
 
 
 <small>
+
 VISTA PREVIA 3D · ÁRBOL URBANO
+
 </small>
 
 
 <model-viewer
-
-id="real-model"
 
 src="https://forov-99.github.io/PAGINA/ARBOLITO.glb"
 
@@ -433,7 +521,7 @@ shadow-intensity="0.8"
 
 exposure="1"
 
-camera-orbit="0deg 75deg 100%"
+camera-orbit="0deg 75deg auto"
 
 field-of-view="35deg"
 
@@ -441,7 +529,7 @@ min-camera-orbit="auto auto 60%"
 
 max-camera-orbit="auto auto 140%"
 
-zoom-sensitivity="0.25"
+zoom-sensitivity="0.05"
 
 loading="eager"
 
@@ -454,14 +542,19 @@ crossorigin="anonymous"
 alt="Árbol urbano para maqueta"
 
 >
+
 </model-viewer>
 
 
 <div class="hint">
+
 Arrastra para rotar · rueda para zoom
-</div>
 
 </div>
+
+
+</div>
+
 
 </section>
 
@@ -508,11 +601,12 @@ Para pedidos fuera de tu zona.
 
 </div>
 
+
 </section>
 
 
 
-<section>
+<section id="catalogo">
 
 
 <div class="section-title">
@@ -528,46 +622,66 @@ Explora el catálogo
 </div>
 
 
+
 <div class="cats">
 
 
-<button class="cat active" data-filter="todos">
+<button
+class="cat active"
+data-filter="todos"
+>
 ◉<br>
 Todos
 </button>
 
 
-<button class="cat" data-filter="personas">
+<button
+class="cat"
+data-filter="personas"
+>
 👤<br>
 Personas
 </button>
 
 
-<button class="cat" data-filter="vehiculos">
+<button
+class="cat"
+data-filter="vehiculos"
+>
 🚗<br>
 Vehículos
 </button>
 
 
-<button class="cat" data-filter="vegetacion">
+<button
+class="cat"
+data-filter="vegetacion"
+>
 🌳<br>
 Vegetación
 </button>
 
 
-<button class="cat" data-filter="mobiliario">
+<button
+class="cat"
+data-filter="mobiliario"
+>
 🪑<br>
 Mobiliario
 </button>
 
 
-<button class="cat" data-filter="luminarias">
+<button
+class="cat"
+data-filter="luminarias"
+>
 💡<br>
 Luminarias
 </button>
 
 
 </div>
+
 
 </section>
 
@@ -589,16 +703,20 @@ Diseñados para maqueta
 </div>
 
 
+
 <div class="products">
 
 
 
-<!-- PERSONA -->
+<!-- =========================
+     PERSONA
+========================= -->
 
 <article
 class="product"
 data-category="personas"
 >
+
 
 <div class="pimg">
 
@@ -617,7 +735,7 @@ shadow-intensity="0.8"
 
 exposure="1"
 
-camera-orbit="0deg 75deg 100%"
+camera-orbit="0deg 75deg auto"
 
 field-of-view="35deg"
 
@@ -625,7 +743,7 @@ min-camera-orbit="auto auto 60%"
 
 max-camera-orbit="auto auto 140%"
 
-zoom-sensitivity="0.25"
+zoom-sensitivity="0.05"
 
 loading="lazy"
 
@@ -635,9 +753,10 @@ bounds="tight"
 
 crossorigin="anonymous"
 
-alt="Persona para maqueta"
+alt="Persona caminando para maqueta"
 
 >
+
 </model-viewer>
 
 
@@ -685,16 +804,20 @@ Agregar
 
 </div>
 
+
 </article>
 
 
 
-<!-- ARBOL -->
+<!-- =========================
+     ARBOL
+========================= -->
 
 <article
 class="product"
 data-category="vegetacion"
 >
+
 
 <div class="pimg">
 
@@ -713,7 +836,7 @@ shadow-intensity="0.8"
 
 exposure="1"
 
-camera-orbit="0deg 75deg 100%"
+camera-orbit="0deg 75deg auto"
 
 field-of-view="35deg"
 
@@ -721,7 +844,7 @@ min-camera-orbit="auto auto 60%"
 
 max-camera-orbit="auto auto 140%"
 
-zoom-sensitivity="0.25"
+zoom-sensitivity="0.05"
 
 loading="lazy"
 
@@ -731,9 +854,10 @@ bounds="tight"
 
 crossorigin="anonymous"
 
-alt="Árbol urbano"
+alt="Árbol urbano para maqueta"
 
 >
+
 </model-viewer>
 
 
@@ -781,20 +905,26 @@ Agregar
 
 </div>
 
+
 </article>
 
 
 
-<!-- VEHICULO -->
+<!-- =========================
+     VEHICULO
+========================= -->
 
 <article
 class="product"
 data-category="vehiculos"
 >
 
+
 <div class="pimg">
 
+<div class="emoji-model">
 🚗
+</div>
 
 </div>
 
@@ -840,20 +970,29 @@ Agregar
 
 </div>
 
+
 </article>
 
 
 
-<!-- LUMINARIA -->
+<!-- =========================
+     LUMINARIA
+========================= -->
 
 <article
+
 class="product"
+
 data-category="luminarias"
+
 >
+
 
 <div class="pimg">
 
+<div class="emoji-model">
 💡
+</div>
 
 </div>
 
@@ -899,11 +1038,13 @@ Agregar
 
 </div>
 
+
 </article>
 
 
 
 </div>
+
 
 </section>
 
@@ -922,7 +1063,9 @@ Entrega en tu escuela
 
 <p>
 
-Selecciona esta opción al hacer tu pedido y coordinaremos una entrega en un punto y horario previamente publicados. Para otros destinos puedes solicitar envío nacional.
+Selecciona esta opción al hacer tu pedido y coordinaremos una entrega en un punto y horario previamente publicados.
+
+Para otros destinos puedes solicitar envío nacional.
 
 </p>
 
@@ -986,24 +1129,25 @@ Hacer pedido
 
 </div>
 
+
 </section>
 
 
 
 <footer>
 
-
 <span>
 © 2026 ARQUIESCALA
 </span>
-
 
 <span>
 Aviso de privacidad · Términos · Envíos · Contacto
 </span>
 
-
 </footer>
+
+
+</div>
 
 
 </div>
@@ -1019,11 +1163,11 @@ src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.j
 
 <script>
 
-(()=>{
+(() => {
 
 
 const root =
-document.getElementById('arquiescala');
+document.getElementById("arquiescala");
 
 
 let count = 0;
@@ -1032,26 +1176,28 @@ let total = 0;
 
 
 const cart =
-root.querySelector('#cart');
-
+root.querySelector("#cart");
 
 const totalEl =
-root.querySelector('#total');
+root.querySelector("#total");
 
 
 
-/* ============================
-   AGREGAR AL CARRITO
-============================ */
+/* ==========================
+   CARRITO
+========================== */
 
-root.querySelectorAll('.add').forEach(button=>{
+root
+.querySelectorAll(".add")
+.forEach(button => {
 
 
-button.addEventListener('click',()=>{
+button.addEventListener(
+"click",
+() => {
 
 
 count++;
-
 
 total +=
 Number(button.dataset.price);
@@ -1071,19 +1217,21 @@ totalEl.textContent =
 
 
 
-/* ============================
+/* ==========================
    VER CATÁLOGO
-============================ */
+========================== */
 
-root.querySelector('#catalog')
-.addEventListener('click',()=>{
+root
+.querySelector("#catalog")
+.addEventListener(
+"click",
+() => {
 
 
-root.querySelector('.products')
+root
+.querySelector("#catalogo")
 .scrollIntoView({
-
-behavior:'smooth'
-
+behavior:"smooth"
 });
 
 
@@ -1091,19 +1239,21 @@ behavior:'smooth'
 
 
 
-/* ============================
+/* ==========================
    ENTREGA EN ESCUELA
-============================ */
+========================== */
 
-root.querySelector('#school')
-.addEventListener('click',()=>{
+root
+.querySelector("#school")
+.addEventListener(
+"click",
+() => {
 
 
-root.querySelector('.order')
+root
+.querySelector(".order")
 .scrollIntoView({
-
-behavior:'smooth'
-
+behavior:"smooth"
 });
 
 
@@ -1111,104 +1261,77 @@ behavior:'smooth'
 
 
 
-/* ============================
-   FILTROS
-============================ */
+/* ==========================
+   CATEGORÍAS
+========================== */
 
-root.querySelectorAll('.cat')
-.forEach(category=>{
-
-
-category.addEventListener('click',()=>{
+root
+.querySelectorAll(".cat")
+.forEach(category => {
 
 
-root.querySelectorAll('.cat')
-.forEach(c=>{
+category.addEventListener(
+"click",
+() => {
 
-c.classList.remove('active');
+
+root
+.querySelectorAll(".cat")
+.forEach(cat => {
+
+cat.classList.remove("active");
 
 });
 
 
-category.classList.add('active');
+category.classList.add("active");
 
 
 const filter =
 category.dataset.filter;
 
 
-root.querySelectorAll('.product')
-.forEach(product=>{
+root
+.querySelectorAll(".product")
+.forEach(product => {
 
 
 if(
-
-filter === 'todos' ||
-
+filter === "todos" ||
 product.dataset.category === filter
-
 ){
 
 product.style.display =
-'block';
+"block";
 
 }else{
 
 product.style.display =
-'none';
+"none";
 
 }
 
 
 });
 
-
 });
 
 });
 
 
 
-/* ============================
-   ERROR MODELOS 3D
-============================ */
+/* ==========================
+   VISOR 3D
+========================== */
 
-root.querySelectorAll(
-'.product .pimg model-viewer'
-)
-.forEach(viewer=>{
-
-
-viewer.addEventListener(
-'error',
-()=>{
+root
+.querySelectorAll(".view-model")
+.forEach(button => {
 
 
-viewer.closest('.pimg').innerHTML =
-
-'<div style="color:#64748b;font-size:12px;text-align:center;">' +
-
-'Modelo 3D no disponible' +
-
-'</div>';
-
-
-});
-
-
-});
-
-
-
-/* ============================
-   BOTONES VER MODELO 3D
-============================ */
-
-root.querySelectorAll('.view-model')
-.forEach(button=>{
-
-
-button.addEventListener('click',()=>{
+button.addEventListener(
+"click",
+() => {
 
 
 const modelo =
@@ -1219,75 +1342,210 @@ const nombre =
 button.dataset.name;
 
 
-/*
-   IMPORTANTE:
-
-   NO descargamos el GLB.
-
-   NO abrimos directamente el GLB.
-
-   Mandamos al usuario a visor.html.
-
-   visor.html recibe el nombre del modelo
-   mediante la URL.
-*/
-
-
 const url =
 
-'https://forov-99.github.io/PAGINA/visor.html' +
+"visor.html" +
 
-'?modelo=' +
+"?modelo=" +
 
 encodeURIComponent(modelo) +
 
-'&nombre=' +
+"&nombre=" +
 
 encodeURIComponent(nombre);
 
 
 /*
-   Navegación normal.
+   IMPORTANTE:
 
-   Esto evita que el navegador trate
-   el archivo GLB como una descarga.
+   No abrimos el GLB directamente.
+
+   Abrimos visor.html.
+
+   visor.html recibe el nombre del
+   archivo mediante la URL.
 */
 
 
-window.location.href = url;
+window.location.href =
+url;
 
 
 });
 
+});
+
+
+
+/* ==========================
+   MODELOS 3D
+========================== */
+
+root
+.querySelectorAll(
+".pimg model-viewer"
+)
+.forEach(viewer => {
+
+
+viewer.addEventListener(
+"error",
+() => {
+
+
+viewer.closest(".pimg")
+.innerHTML =
+
+'<div style="' +
+
+'color:#64748b;' +
+
+'font-size:12px;' +
+
+'text-align:center;' +
+
+'padding:20px;' +
+
+'">' +
+
+'Modelo 3D no disponible' +
+
+'</div>';
+
+
+});
 
 });
 
 
 
-/* ============================
+/* ==========================
+   NAVEGACIÓN
+========================== */
+
+root
+.querySelector("#navInicio")
+.addEventListener(
+"click",
+() => {
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+});
+
+
+root
+.querySelector("#navFiguras")
+.addEventListener(
+"click",
+() => {
+
+const button =
+root.querySelector(
+'.cat[data-filter="personas"]'
+);
+
+button.click();
+
+root.querySelector("#catalogo")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+});
+
+
+root
+.querySelector("#navVegetacion")
+.addEventListener(
+"click",
+() => {
+
+const button =
+root.querySelector(
+'.cat[data-filter="vegetacion"]'
+);
+
+button.click();
+
+root.querySelector("#catalogo")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+});
+
+
+root
+.querySelector("#navMobiliario")
+.addEventListener(
+"click",
+() => {
+
+const button =
+root.querySelector(
+'.cat[data-filter="mobiliario"]'
+);
+
+button.click();
+
+root.querySelector("#catalogo")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+});
+
+
+root
+.querySelector("#navVehiculos")
+.addEventListener(
+"click",
+() => {
+
+const button =
+root.querySelector(
+'.cat[data-filter="vehiculos"]'
+);
+
+button.click();
+
+root.querySelector("#catalogo")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+});
+
+
+
+/* ==========================
    HACER PEDIDO
-============================ */
+========================== */
 
-root.querySelector('#order')
-.addEventListener('click',()=>{
+root
+.querySelector("#order")
+.addEventListener(
+"click",
+() => {
 
 
 if(count === 0){
 
-
 alert(
-'Agrega productos al carrito primero.'
+"Agrega productos al carrito primero."
 );
 
-
 return;
-
 
 }
 
 
 const escala =
-root.querySelector('#scale').value;
+root.querySelector("#scale").value;
 
 
 alert(
@@ -1304,7 +1562,6 @@ En una tienda real, aquí podremos enviarte el pedido por WhatsApp.`
 
 );
 
-
 });
 
 
@@ -1313,4 +1570,6 @@ En una tienda real, aquí podremos enviarte el pedido por WhatsApp.`
 </script>
 
 
-</div>
+</body>
+
+</html>
