@@ -1,1620 +1,1571 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ARQUIESCALA — Tienda de maquetas</title>
-
-<script type="module"
-src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
-</script>
+<div id="arquiescala" class="min-h-full bg-white text-slate-900">
 
 <style>
-
-*{
-box-sizing:border-box;
+#arquiescala{
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
-body{
-margin:0;
-font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-background:white;
-color:#0f172a;
+#arquiescala *{
+  box-sizing:border-box;
 }
 
-.wrap{
-max-width:1100px;
-margin:auto;
-padding:0 24px;
+#arquiescala .wrap{
+  max-width:1100px;
+  margin:auto;
+  padding:0 24px;
 }
 
-.nav{
-height:72px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-border-bottom:1px solid #e5e7eb;
+#arquiescala .nav{
+  height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid #e5e7eb;
 }
 
-.brand{
-font-size:21px;
-font-weight:800;
-letter-spacing:-.6px;
+#arquiescala .brand{
+  font-size:21px;
+  font-weight:800;
+  letter-spacing:-.6px;
 }
 
-.brand span{
-font-weight:400;
-color:#64748b;
+#arquiescala .brand span{
+  font-weight:400;
+  color:#64748b;
 }
 
-.links{
-display:flex;
-gap:24px;
-font-size:14px;
-color:#475569;
+#arquiescala .links{
+  display:flex;
+  gap:24px;
+  font-size:14px;
+  color:#475569;
 }
 
-.links a{
-cursor:pointer;
+#arquiescala .links a{
+  cursor:pointer;
 }
 
-.cart{
-border:1px solid #cbd5e1;
-border-radius:10px;
-padding:9px 13px;
-background:#fff;
-font-weight:650;
-cursor:pointer;
+#arquiescala .cart{
+  border:1px solid #cbd5e1;
+  border-radius:10px;
+  padding:9px 13px;
+  background:#fff;
+  font-weight:650;
+  cursor:pointer;
 }
 
-.hero{
-padding:58px 0 38px;
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:45px;
-align-items:center;
+#arquiescala .hero{
+  padding:58px 0 38px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:45px;
+  align-items:center;
 }
 
-h1{
-font-size:48px;
-line-height:1.03;
-letter-spacing:-2px;
-margin:0 0 18px;
+#arquiescala h1{
+  font-size:48px;
+  line-height:1.03;
+  letter-spacing:-2px;
+  margin:0 0 18px;
 }
 
-.lead{
-font-size:17px;
-line-height:1.6;
-color:#64748b;
-max-width:490px;
+#arquiescala .lead{
+  font-size:17px;
+  line-height:1.6;
+  color:#64748b;
+  max-width:490px;
 }
 
-.muted{
-color:#64748b;
-font-size:14px;
+#arquiescala .cta{
+  display:flex;
+  gap:10px;
+  margin-top:25px;
+  flex-wrap:wrap;
 }
 
-.cta{
-display:flex;
-gap:10px;
-margin-top:25px;
-flex-wrap:wrap;
+#arquiescala button{
+  cursor:pointer;
 }
 
-button{
-cursor:pointer;
+#arquiescala .primary{
+  background:#111827;
+  color:#fff;
+  border:0;
+  border-radius:10px;
+  padding:13px 18px;
+  font-weight:700;
 }
 
-.primary{
-background:#111827;
-color:#fff;
-border:0;
-border-radius:10px;
-padding:13px 18px;
-font-weight:700;
+#arquiescala .secondary{
+  background:#fff;
+  color:#111827;
+  border:1px solid #cbd5e1;
+  border-radius:10px;
+  padding:13px 18px;
+  font-weight:700;
 }
 
-.secondary{
-background:#fff;
-color:#111827;
-border:1px solid #cbd5e1;
-border-radius:10px;
-padding:13px 18px;
-font-weight:700;
+#arquiescala .viewer{
+  height:390px;
+  border:1px solid #e2e8f0;
+  border-radius:18px;
+  background:linear-gradient(145deg,#f8fafc,#fff);
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-/* =========================
-   VISOR GRANDE
-========================= */
-
-.viewer{
-height:390px;
-border:1px solid #e2e8f0;
-border-radius:18px;
-background:linear-gradient(145deg,#f8fafc,#fff);
-position:relative;
-overflow:hidden;
-display:flex;
-align-items:center;
-justify-content:center;
+#arquiescala .viewer model-viewer{
+  width:100%;
+  height:100%;
+  display:block;
 }
 
-.viewer model-viewer{
-width:100%;
-height:100%;
-display:block;
+#arquiescala .viewer small{
+  position:absolute;
+  top:15px;
+  left:17px;
+  color:#64748b;
+  font-size:12px;
+  z-index:5;
 }
 
-.viewer small{
-position:absolute;
-top:15px;
-left:17px;
-color:#64748b;
-font-size:12px;
-z-index:5;
+#arquiescala .hint{
+  position:absolute;
+  bottom:14px;
+  right:16px;
+  color:#64748b;
+  font-size:12px;
+  z-index:5;
 }
 
-.hint{
-position:absolute;
-bottom:14px;
-right:16px;
-color:#64748b;
-font-size:12px;
-z-index:5;
+#arquiescala .features{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:5px 0 55px;
 }
 
-/* =========================
-   FEATURES
-========================= */
-
-.features{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
-margin:5px 0 55px;
+#arquiescala .feature{
+  padding:18px;
+  border:1px solid #e2e8f0;
+  border-radius:12px;
 }
 
-.feature{
-padding:18px;
-border:1px solid #e2e8f0;
-border-radius:12px;
+#arquiescala .feature b{
+  display:block;
+  margin-bottom:5px;
 }
 
-.feature b{
-display:block;
-margin-bottom:5px;
+#arquiescala .feature span{
+  font-size:13px;
+  color:#64748b;
 }
 
-.feature span{
-font-size:13px;
-color:#64748b;
+#arquiescala .section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  margin-bottom:18px;
 }
 
-/* =========================
-   SECCIONES
-========================= */
-
-.section-title{
-display:flex;
-justify-content:space-between;
-align-items:end;
-margin-bottom:18px;
+#arquiescala .section-title h2{
+  font-size:26px;
+  margin:0;
 }
 
-.section-title h2{
-font-size:26px;
-margin:0;
+#arquiescala .muted{
+  color:#64748b;
+  font-size:14px;
 }
 
-.cats{
-display:grid;
-grid-template-columns:repeat(6,1fr);
-gap:10px;
-margin-bottom:48px;
+#arquiescala .cats{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:10px;
+  margin-bottom:48px;
 }
 
-.cat{
-border:1px solid #e2e8f0;
-border-radius:12px;
-padding:16px 10px;
-text-align:center;
-font-size:13px;
-background:#fff;
+#arquiescala .cat{
+  border:1px solid #e2e8f0;
+  border-radius:12px;
+  padding:16px 10px;
+  text-align:center;
+  font-size:13px;
+  background:#fff;
 }
 
-.cat:hover{
-border-color:#94a3b8;
+#arquiescala .cat:hover{
+  border-color:#94a3b8;
 }
 
-/* =========================
-   PRODUCTOS
-========================= */
-
-.products{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:16px;
-padding-bottom:60px;
+#arquiescala .products{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  padding-bottom:60px;
 }
 
-.product{
-border:1px solid #e2e8f0;
-border-radius:14px;
-overflow:hidden;
-background:#fff;
+#arquiescala .product{
+  border:1px solid #e2e8f0;
+  border-radius:14px;
+  overflow:hidden;
+  background:#fff;
 }
 
-.pimg{
-height:190px;
-background:#f8fafc;
-display:flex;
-align-items:center;
-justify-content:center;
-overflow:hidden;
-position:relative;
+#arquiescala .pimg{
+  height:190px;
+  background:#f8fafc;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
 }
 
-/*
-   IMPORTANTE:
-   La vista pequeña ahora utiliza
-   un model-viewer que ocupa TODO
-   el contenedor y NO tiene
-   camera-controls.
-*/
-
-.pimg model-viewer{
-width:100%;
-height:100%;
-display:block;
-pointer-events:none;
-
---poster-color:transparent;
-
+#arquiescala .pimg model-viewer{
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  --poster-color:transparent;
 }
 
-.info{
-padding:14px;
+#arquiescala .info{
+  padding:14px;
 }
 
-.info h3{
-font-size:15px;
-margin:0 0 5px;
+#arquiescala .info h3{
+  font-size:15px;
+  margin:0 0 5px;
 }
 
-.price{
-font-weight:800;
-margin-bottom:10px;
-font-size:17px;
+#arquiescala .price{
+  font-weight:800;
+  margin-bottom:10px;
 }
 
-/* =========================
-   BOTON MODELO 3D
-========================= */
-
-.view3d{
-width:100%;
-padding:10px;
-border:1px solid #cbd5e1;
-border-radius:8px;
-background:#fff;
-font-weight:700;
-margin-bottom:10px;
+#arquiescala .model-btn{
+  width:100%;
+  padding:10px;
+  border:1px solid #cbd5e1;
+  border-radius:8px;
+  background:#fff;
+  font-weight:700;
+  margin-bottom:9px;
 }
 
-.view3d:hover{
-background:#f8fafc;
+#arquiescala .model-btn:hover{
+  background:#f8fafc;
 }
 
-/* =========================
-   ESCALA
-========================= */
-
-.scale-label{
-display:block;
-font-size:12px;
-color:#64748b;
-margin-bottom:5px;
+#arquiescala .scale-label{
+  display:block;
+  color:#64748b;
+  font-size:12px;
+  margin:7px 0 4px;
 }
 
-.scale-select{
-width:100%;
-padding:10px;
-border:1px solid #cbd5e1;
-border-radius:8px;
-background:#fff;
-margin-bottom:10px;
+#arquiescala .scale{
+  width:100%;
+  padding:10px;
+  border:1px solid #cbd5e1;
+  border-radius:8px;
+  background:#fff;
+  margin-bottom:8px;
 }
 
-/* =========================
-   CANTIDAD
-========================= */
-
-.quantity{
-display:grid;
-grid-template-columns:35px 1fr 35px;
-height:36px;
-border:1px solid #cbd5e1;
-border-radius:8px;
-overflow:hidden;
-margin-bottom:10px;
+#arquiescala .stock{
+  font-size:12px;
+  color:#64748b;
+  margin:3px 0 8px;
 }
 
-.quantity button{
-border:0;
-background:#f8fafc;
-font-size:18px;
-font-weight:700;
+#arquiescala .quantity{
+  width:100%;
+  height:38px;
+  display:grid;
+  grid-template-columns:42px 1fr 42px;
+  border:1px solid #cbd5e1;
+  border-radius:8px;
+  overflow:hidden;
+  margin-bottom:9px;
 }
 
-.quantity button:hover{
-background:#e2e8f0;
+#arquiescala .quantity button{
+  border:0;
+  background:#f8fafc;
+  font-size:20px;
+  font-weight:800;
 }
 
-.quantity-value{
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:700;
-background:#fff;
+#arquiescala .quantity button:hover{
+  background:#f1f5f9;
 }
 
-.add{
-width:100%;
-padding:10px;
-border:1px solid #cbd5e1;
-border-radius:8px;
-background:#fff;
-font-weight:700;
+#arquiescala .quantity span{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
 }
 
-.add:hover{
-background:#f8fafc;
+#arquiescala .add{
+  width:100%;
+  padding:10px;
+  border:1px solid #cbd5e1;
+  border-radius:8px;
+  background:#fff;
+  font-weight:700;
 }
 
-/* =========================
-   PEDIDO
-========================= */
-
-.order{
-background:#f1f5f9;
-border-radius:18px;
-padding:28px;
-display:grid;
-grid-template-columns:1.4fr 1fr;
-gap:30px;
-margin-bottom:45px;
+#arquiescala .add:hover{
+  background:#f8fafc;
 }
 
-.order h2{
-margin:0 0 8px;
+#arquiescala .order{
+  background:#f1f5f9;
+  border-radius:18px;
+  padding:28px;
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
+  gap:30px;
+  margin-bottom:45px;
 }
 
-.order p{
-color:#64748b;
-line-height:1.5;
+#arquiescala .order h2{
+  margin:0 0 8px;
 }
 
-.summary-title{
-font-size:12px;
-color:#64748b;
-margin-bottom:8px;
+#arquiescala .order p{
+  color:#64748b;
+  line-height:1.5;
 }
 
-.total{
-font-size:22px;
-font-weight:800;
-margin:8px 0 14px;
+#arquiescala .summary{
+  background:#fff;
+  border:1px solid #e2e8f0;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:18px;
 }
 
-/* =========================
-   TABLA PEDIDO
-========================= */
-
-.order-table-wrapper{
-margin-top:18px;
-border:1px solid #dbe3ec;
-border-radius:10px;
-overflow:hidden;
-background:#fff;
+#arquiescala .summary table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:12px;
 }
 
-.order-table{
-width:100%;
-border-collapse:collapse;
-font-size:12px;
+#arquiescala .summary th{
+  text-align:left;
+  padding:10px;
+  border-bottom:1px solid #e2e8f0;
 }
 
-.order-table th{
-text-align:left;
-padding:12px 10px;
-background:#fff;
-border-bottom:1px solid #dbe3ec;
-font-weight:800;
+#arquiescala .summary td{
+  padding:10px;
+  border-bottom:1px solid #e2e8f0;
 }
 
-.order-table td{
-padding:11px 10px;
-border-bottom:1px solid #dbe3ec;
+#arquiescala .summary tr:last-child td{
+  border-bottom:0;
 }
 
-.order-table tr:last-child td{
-border-bottom:0;
+#arquiescala .summary .number{
+  text-align:right;
 }
 
-.order-table td:last-child{
-font-weight:800;
-text-align:right;
+#arquiescala .total{
+  font-size:22px;
+  font-weight:800;
+  margin:8px 0 14px;
 }
 
-.order-table th:last-child{
-text-align:right;
+#arquiescala footer{
+  border-top:1px solid #e5e7eb;
+  padding:25px 0;
+  color:#64748b;
+  font-size:13px;
+  display:flex;
+  justify-content:space-between;
 }
-
-.empty-order{
-padding:18px;
-color:#64748b;
-font-size:13px;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-border-top:1px solid #e5e7eb;
-padding:25px 0;
-color:#64748b;
-font-size:13px;
-display:flex;
-justify-content:space-between;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media(max-width:760px){
 
-.links{
-display:none;
-}
+  #arquiescala .links{
+    display:none;
+  }
 
-.hero{
-grid-template-columns:1fr;
-padding-top:35px;
-}
+  #arquiescala .hero{
+    grid-template-columns:1fr;
+    padding-top:35px;
+  }
 
-h1{
-font-size:38px;
-}
+  #arquiescala h1{
+    font-size:38px;
+  }
 
-.features{
-grid-template-columns:1fr;
-}
+  #arquiescala .features{
+    grid-template-columns:1fr;
+  }
 
-.cats{
-grid-template-columns:repeat(3,1fr);
-}
+  #arquiescala .cats{
+    grid-template-columns:repeat(3,1fr);
+  }
 
-.products{
-grid-template-columns:repeat(2,1fr);
-}
+  #arquiescala .products{
+    grid-template-columns:repeat(2,1fr);
+  }
 
-.order{
-grid-template-columns:1fr;
-}
-
+  #arquiescala .order{
+    grid-template-columns:1fr;
+  }
 }
 
 @media(max-width:500px){
 
-.products{
-grid-template-columns:1fr;
-}
+  #arquiescala .products{
+    grid-template-columns:1fr;
+  }
 
-.cats{
-grid-template-columns:repeat(2,1fr);
+  #arquiescala .cats{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
-
-}
-
 </style>
-</head>
-
-<body>
-
-<div id="arquiescala">
 
 <div class="wrap">
 
-<!-- =========================
-     NAVEGACIÓN
-========================= -->
-
 <header class="nav">
 
-<div class="brand">
-ARQUIESCALA <span>maquetas</span>
-</div>
+  <div class="brand">
+    ARQUIESCALA <span>maquetas</span>
+  </div>
 
-<nav class="links">
-<a>Inicio</a>
-<a>Figuras</a>
-<a>Vegetación</a>
-<a>Mobiliario</a>
-<a>Vehículos</a>
-</nav>
+  <nav class="links">
+    <a>Inicio</a>
+    <a>Figuras</a>
+    <a>Vegetación</a>
+    <a>Mobiliario</a>
+    <a>Vehículos</a>
+  </nav>
 
-<button class="cart" id="cart">
-Carrito (0)
-</button>
+  <button class="cart" id="cart">
+    Carrito (0)
+  </button>
 
 </header>
 
 
-<!-- =========================
-     HERO
-========================= -->
-
 <section class="hero">
 
-<div>
+  <div>
 
-<div class="muted">
-Elementos para maquetas arquitectónicas
-</div>
+    <div class="muted">
+      Elementos para maquetas arquitectónicas
+    </div>
 
-<h1>
-Da vida a tus proyectos.
-</h1>
+    <h1>
+      Da vida a tus proyectos.
+    </h1>
 
-<p class="lead">
-Personas, vehículos, árboles, mobiliario y luminarias diseñados especialmente para maquetas arquitectónicas. Elige tu escala y recibe tus piezas listas para usar.
-</p>
+    <p class="lead">
+      Personas, vehículos, árboles, mobiliario y luminarias
+      diseñados especialmente para maquetas arquitectónicas.
+      Elige tu escala y recibe tus piezas listas para usar.
+    </p>
 
-<div class="cta">
+    <div class="cta">
 
-<button class="primary" id="catalog">
-Ver catálogo
-</button>
+      <button class="primary" id="catalog">
+        Ver catálogo
+      </button>
 
-<button class="secondary" id="school">
-Entrega en escuela · GRATIS
-</button>
+      <button class="secondary" id="school">
+        Entrega en escuela · GRATIS
+      </button>
 
-</div>
+    </div>
 
-</div>
+  </div>
 
 
-<div class="viewer" id="viewer">
+  <div class="viewer">
 
-<small>
-VISTA PREVIA 3D · ÁRBOL URBANO
-</small>
+    <small>
+      VISTA PREVIA 3D · ÁRBOL URBANO
+    </small>
 
-<model-viewer
-id="real-model"
-src="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/ARBOLITO.glb"
-camera-controls
-touch-action="pan-y"
-interaction-prompt="auto"
-shadow-intensity="0.8"
-exposure="1"
-camera-orbit="0deg 75deg auto"
-field-of-view="45deg"
-loading="eager"
-reveal="auto"
-bounds="tight"
-crossorigin="anonymous"
-alt="Árbol urbano para maqueta arquitectónica">
-</model-viewer>
+    <model-viewer
+      src="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/ARBOLITO.glb"
+      camera-controls
+      touch-action="pan-y"
+      interaction-prompt="auto"
+      shadow-intensity="0.8"
+      exposure="1"
+      camera-orbit="0deg 75deg auto"
+      field-of-view="45deg"
+      loading="eager"
+      reveal="auto"
+      bounds="tight"
+      crossorigin="anonymous"
+      alt="Árbol urbano">
+    </model-viewer>
 
-<div class="hint">
-Arrastra para rotar · rueda para zoom
-</div>
+    <div class="hint">
+      Arrastra para rotar · rueda para zoom
+    </div>
 
-</div>
+  </div>
 
 </section>
 
-
-<!-- =========================
-     FEATURES
-========================= -->
 
 <section class="features">
 
-<div class="feature">
-<b>Escalas arquitectónicas</b>
-<span>
-1:50 · 1:75 · 1:100 · 1:150 · 1:200
-</span>
-</div>
+  <div class="feature">
+    <b>Escalas arquitectónicas</b>
+    <span>1:50 · 1:75 · 1:100 · 1:150 · 1:200</span>
+  </div>
 
-<div class="feature">
-<b>Entrega en tu escuela</b>
-<span>
-Sin costo en puntos de entrega programados.
-</span>
-</div>
+  <div class="feature">
+    <b>Entrega en tu escuela</b>
+    <span>
+      Sin costo en puntos de entrega programados.
+    </span>
+  </div>
 
-<div class="feature">
-<b>Envíos nacionales</b>
-<span>
-Para pedidos fuera de tu zona.
-</span>
-</div>
+  <div class="feature">
+    <b>Envíos nacionales</b>
+    <span>
+      Para pedidos fuera de tu zona.
+    </span>
+  </div>
 
 </section>
 
-
-<!-- =========================
-     CATEGORÍAS
-========================= -->
 
 <section>
 
-<div class="section-title">
+  <div class="section-title">
 
-<h2>
-Categorías
-</h2>
+    <h2>
+      Categorías
+    </h2>
 
-<span class="muted">
-Explora el catálogo
-</span>
+    <span class="muted">
+      Explora el catálogo
+    </span>
 
-</div>
+  </div>
 
-<div class="cats">
+  <div class="cats">
 
-<div class="cat">
-👤<br>
-Personas
-</div>
+    <div class="cat">👤<br>Personas</div>
+    <div class="cat">🚗<br>Vehículos</div>
+    <div class="cat">🌳<br>Vegetación</div>
+    <div class="cat">🪑<br>Mobiliario</div>
+    <div class="cat">💡<br>Luminarias</div>
+    <div class="cat">🏗️<br>Arquitectura</div>
 
-<div class="cat">
-🚗<br>
-Vehículos
-</div>
-
-<div class="cat">
-🌳<br>
-Vegetación
-</div>
-
-<div class="cat">
-🪑<br>
-Mobiliario
-</div>
-
-<div class="cat">
-💡<br>
-Luminarias
-</div>
-
-<div class="cat">
-🏗️<br>
-Arquitectura
-</div>
-
-</div>
+  </div>
 
 </section>
 
-
-<!-- =========================
-     PRODUCTOS
-========================= -->
 
 <section>
 
-<div class="section-title">
+  <div class="section-title">
 
-<h2>
-Más vendidos
-</h2>
+    <h2>
+      Más vendidos
+    </h2>
 
-<span class="muted">
-Diseñados para maqueta
-</span>
+    <span class="muted">
+      Diseñados para maqueta
+    </span>
 
-</div>
+  </div>
 
 
-<div class="products">
+  <div class="products">
 
 
-<!-- =========================
-     PERSONA
-========================= -->
+    <!-- PERSONA -->
 
-<article
-class="product"
-data-product="Persona caminando"
-data-model="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/PERSONA.glb">
+    <article
+      class="product"
+      data-id="persona"
+      data-name="Persona caminando"
+      data-stock="30"
+      data-model="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/PERSONA.glb"
+      data-prices='{"1:50":35,"1:75":32,"1:100":29,"1:150":25,"1:200":22}'
+    >
 
-<div class="pimg">
+      <div class="pimg">
 
-<model-viewer
-src="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/PERSONA.glb"
-camera-orbit="0deg 75deg auto"
-field-of-view="30deg"
-bounds="tight"
-disable-zoom
-interaction-prompt="none"
-loading="eager"
-shadow-intensity="0.7"
-exposure="1"
-alt="Persona caminando">
-</model-viewer>
+        <model-viewer
+          src="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/PERSONA.glb"
+          camera-orbit="0deg 75deg auto"
+          camera-target="auto auto auto"
+          field-of-view="30deg"
+          interaction-prompt="none"
+          disable-zoom
+          disable-pan
+          shadow-intensity="0.7"
+          exposure="1"
+          loading="eager"
+          reveal="auto"
+          bounds="tight"
+          alt="Persona caminando">
+        </model-viewer>
 
-</div>
+      </div>
 
-<div class="info">
+      <div class="info">
 
-<h3>
-Persona caminando
-</h3>
+        <h3>
+          Persona caminando
+        </h3>
 
-<div class="price">
-$35 MXN
-</div>
+        <div class="price">
+          $35 MXN
+        </div>
 
-<button
-class="view3d"
-data-model="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/PERSONA.glb"
-data-name="Persona caminando">
-Ver modelo 3D
-</button>
+        <button
+          class="model-btn"
+          data-model-button="persona">
+          Ver modelo 3D
+        </button>
 
-<label class="scale-label">
-Escala
-</label>
+        <label class="scale-label">
+          Escala
+        </label>
 
-<select class="scale-select">
+        <select class="scale">
 
-<option value="1:50">1:50</option>
-<option value="1:75">1:75</option>
-<option value="1:100">1:100</option>
-<option value="1:150">1:150</option>
-<option value="1:200">1:200</option>
+          <option value="1:50">1:50</option>
+          <option value="1:75">1:75</option>
+          <option value="1:100">1:100</option>
+          <option value="1:150">1:150</option>
+          <option value="1:200">1:200</option>
 
-</select>
+        </select>
 
-<div class="quantity">
+        <div class="stock">
+          30 piezas disponibles
+        </div>
 
-<button class="minus">
-−
-</button>
+        <div class="quantity">
 
-<div class="quantity-value">
-1
-</div>
+          <button class="minus">
+            −
+          </button>
 
-<button class="plus">
-+
-</button>
+          <span>
+            1
+          </span>
 
-</div>
+          <button class="plus">
+            +
+          </button>
 
-<button
-class="add"
-data-name="Persona caminando">
-Agregar
-</button>
+        </div>
 
-</div>
+        <button class="add">
+          Agregar
+        </button>
 
-</article>
+      </div>
 
+    </article>
 
-<!-- =========================
-     ÁRBOL
-========================= -->
 
-<article
-class="product"
-data-product="Árbol urbano"
-data-model="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/ARBOLITO.glb">
+    <!-- ARBOL -->
 
-<div class="pimg">
+    <article
+      class="product"
+      data-id="arbol"
+      data-name="Árbol urbano"
+      data-stock="25"
+      data-model="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/ARBOLITO.glb"
+      data-prices='{"1:50":45,"1:75":42,"1:100":38,"1:150":34,"1:200":30}'
+    >
 
-<model-viewer
-src="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/ARBOLITO.glb"
-camera-orbit="0deg 75deg auto"
-field-of-view="30deg"
-bounds="tight"
-disable-zoom
-interaction-prompt="none"
-loading="eager"
-shadow-intensity="0.7"
-exposure="1"
-alt="Árbol urbano">
-</model-viewer>
+      <div class="pimg">
 
-</div>
+        <model-viewer
+          src="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/ARBOLITO.glb"
+          camera-orbit="0deg 75deg auto"
+          camera-target="auto auto auto"
+          field-of-view="28deg"
+          interaction-prompt="none"
+          disable-zoom
+          disable-pan
+          shadow-intensity="0.7"
+          exposure="1"
+          loading="eager"
+          reveal="auto"
+          bounds="tight"
+          alt="Árbol urbano">
+        </model-viewer>
 
-<div class="info">
+      </div>
 
-<h3>
-Árbol urbano
-</h3>
+      <div class="info">
 
-<div class="price">
-$45 MXN
-</div>
+        <h3>
+          Árbol urbano
+        </h3>
 
-<button
-class="view3d"
-data-model="https://cdn.jsdelivr.net/gh/FOROV-99/PAGINA@main/ARBOLITO.glb"
-data-name="Árbol urbano">
-Ver modelo 3D
-</button>
+        <div class="price">
+          $45 MXN
+        </div>
 
-<label class="scale-label">
-Escala
-</label>
+        <button
+          class="model-btn"
+          data-model-button="arbol">
+          Ver modelo 3D
+        </button>
 
-<select class="scale-select">
+        <label class="scale-label">
+          Escala
+        </label>
 
-<option value="1:50">1:50</option>
-<option value="1:75">1:75</option>
-<option value="1:100">1:100</option>
-<option value="1:150">1:150</option>
-<option value="1:200">1:200</option>
+        <select class="scale">
 
-</select>
+          <option value="1:50">1:50</option>
+          <option value="1:75">1:75</option>
+          <option value="1:100">1:100</option>
+          <option value="1:150">1:150</option>
+          <option value="1:200">1:200</option>
 
-<div class="quantity">
+        </select>
 
-<button class="minus">
-−
-</button>
+        <div class="stock">
+          25 piezas disponibles
+        </div>
 
-<div class="quantity-value">
-1
-</div>
+        <div class="quantity">
 
-<button class="plus">
-+
-</button>
+          <button class="minus">
+            −
+          </button>
 
-</div>
+          <span>
+            1
+          </span>
 
-<button
-class="add"
-data-name="Árbol urbano">
-Agregar
-</button>
+          <button class="plus">
+            +
+          </button>
 
-</div>
+        </div>
 
-</article>
+        <button class="add">
+          Agregar
+        </button>
 
+      </div>
 
-<!-- =========================
-     VEHÍCULO
-========================= -->
+    </article>
 
-<article
-class="product"
-data-product="Vehículo sedán">
 
-<div class="pimg">
+    <!-- VEHICULO -->
 
-<div style="font-size:55px">
-🚗
-</div>
+    <article
+      class="product"
+      data-id="vehiculo"
+      data-name="Vehículo sedán"
+      data-stock="20"
+      data-model=""
+      data-prices='{"1:50":45,"1:75":42,"1:100":38,"1:150":34,"1:200":30}'
+    >
 
-</div>
+      <div class="pimg">
+        🚗
+      </div>
 
-<div class="info">
+      <div class="info">
 
-<h3>
-Vehículo sedán
-</h3>
+        <h3>
+          Vehículo sedán
+        </h3>
 
-<div class="price">
-$45 MXN
-</div>
+        <div class="price">
+          $45 MXN
+        </div>
 
-<button
-class="view3d"
-data-name="Vehículo sedán">
-Ver modelo 3D
-</button>
+        <button
+          class="model-btn"
+          data-model-button="vehiculo">
+          Ver modelo 3D
+        </button>
 
-<label class="scale-label">
-Escala
-</label>
+        <label class="scale-label">
+          Escala
+        </label>
 
-<select class="scale-select">
+        <select class="scale">
 
-<option value="1:50">1:50</option>
-<option value="1:75">1:75</option>
-<option value="1:100">1:100</option>
-<option value="1:150">1:150</option>
-<option value="1:200">1:200</option>
+          <option value="1:50">1:50</option>
+          <option value="1:75">1:75</option>
+          <option value="1:100">1:100</option>
+          <option value="1:150">1:150</option>
+          <option value="1:200">1:200</option>
 
-</select>
+        </select>
 
-<div class="quantity">
+        <div class="stock">
+          20 piezas disponibles
+        </div>
 
-<button class="minus">
-−
-</button>
+        <div class="quantity">
 
-<div class="quantity-value">
-1
-</div>
+          <button class="minus">
+            −
+          </button>
 
-<button class="plus">
-+
-</button>
+          <span>
+            1
+          </span>
 
-</div>
+          <button class="plus">
+            +
+          </button>
 
-<button
-class="add"
-data-name="Vehículo sedán">
-Agregar
-</button>
+        </div>
 
-</div>
+        <button class="add">
+          Agregar
+        </button>
 
-</article>
+      </div>
 
+    </article>
 
-<!-- =========================
-     LUMINARIA
-========================= -->
 
-<article
-class="product"
-data-product="Luminaria peatonal">
+    <!-- LUMINARIA -->
 
-<div class="pimg">
+    <article
+      class="product"
+      data-id="luminaria"
+      data-name="Luminaria peatonal"
+      data-stock="40"
+      data-model=""
+      data-prices='{"1:50":30,"1:75":28,"1:100":25,"1:150":23,"1:200":20}'
+    >
 
-<div style="font-size:55px">
-💡
-</div>
+      <div class="pimg">
+        💡
+      </div>
 
-</div>
+      <div class="info">
 
-<div class="info">
+        <h3>
+          Luminaria peatonal
+        </h3>
 
-<h3>
-Luminaria peatonal
-</h3>
+        <div class="price">
+          $30 MXN
+        </div>
 
-<div class="price">
-$30 MXN
-</div>
+        <button
+          class="model-btn"
+          data-model-button="luminaria">
+          Ver modelo 3D
+        </button>
 
-<button
-class="view3d"
-data-name="Luminaria peatonal">
-Ver modelo 3D
-</button>
+        <label class="scale-label">
+          Escala
+        </label>
 
-<label class="scale-label">
-Escala
-</label>
+        <select class="scale">
 
-<select class="scale-select">
+          <option value="1:50">1:50</option>
+          <option value="1:75">1:75</option>
+          <option value="1:100">1:100</option>
+          <option value="1:150">1:150</option>
+          <option value="1:200">1:200</option>
 
-<option value="1:50">1:50</option>
-<option value="1:75">1:75</option>
-<option value="1:100">1:100</option>
-<option value="1:150">1:150</option>
-<option value="1:200">1:200</option>
+        </select>
 
-</select>
+        <div class="stock">
+          40 piezas disponibles
+        </div>
 
-<div class="quantity">
+        <div class="quantity">
 
-<button class="minus">
-−
-</button>
+          <button class="minus">
+            −
+          </button>
 
-<div class="quantity-value">
-1
-</div>
+          <span>
+            1
+          </span>
 
-<button class="plus">
-+
-</button>
+          <button class="plus">
+            +
+          </button>
 
-</div>
+        </div>
 
-<button
-class="add"
-data-name="Luminaria peatonal">
-Agregar
-</button>
+        <button class="add">
+          Agregar
+        </button>
 
-</div>
+      </div>
 
-</article>
+    </article>
 
-</div>
+
+  </div>
 
 </section>
 
-
-<!-- =========================
-     PEDIDO
-========================= -->
 
 <section class="order">
 
-<div>
+  <div>
 
-<h2>
-Tu pedido
-</h2>
+    <h2>
+      Tu pedido
+    </h2>
 
-<p>
-Selecciona la escala y cantidad de cada producto. Al agregarlo, aparecerá aquí el detalle de tu pedido.
-</p>
+    <p>
+      Selecciona la escala y cantidad de cada producto.
+      Al agregarlo, aparecerá aquí el detalle de tu pedido.
+    </p>
 
+    <div class="summary">
 
-<div class="order-table-wrapper">
+      <table>
 
-<table class="order-table">
+        <thead>
 
-<thead>
+          <tr>
 
-<tr>
+            <th>
+              Artículo
+            </th>
 
-<th>
-Artículo
-</th>
+            <th>
+              Escala
+            </th>
 
-<th>
-Escala
-</th>
+            <th>
+              Cant.
+            </th>
 
-<th>
-Cant.
-</th>
+            <th>
+              Precio unidad
+            </th>
 
-<th>
-Precio unidad
-</th>
+            <th>
+              Total
+            </th>
 
-<th>
-Total
-</th>
+          </tr>
 
-</tr>
+        </thead>
 
-</thead>
+        <tbody id="summaryBody">
 
-<tbody id="order-body">
+        </tbody>
 
-<tr>
+      </table>
 
-<td colspan="5"
-class="empty-order">
+    </div>
 
-No hay productos en el pedido.
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-</div>
+  </div>
 
 
-<div>
+  <div>
 
-<div class="summary-title">
-RESUMEN DEL PEDIDO
-</div>
+    <div class="muted">
+      RESUMEN DEL PEDIDO
+    </div>
 
-<div class="total" id="total">
-Total: $0 MXN
-</div>
+    <div class="total" id="total">
+      Total: $0 MXN
+    </div>
 
-<button
-class="primary"
-style="width:100%"
-id="order">
+    <button
+      class="primary"
+      style="width:100%"
+      id="order">
+      Hacer pedido
+    </button>
 
-Hacer pedido
-
-</button>
-
-</div>
+  </div>
 
 </section>
 
 
-<!-- =========================
-     FOOTER
-========================= -->
-
 <footer>
 
-<span>
-© 2026 ARQUIESCALA
-</span>
+  <span>
+    © 2026 ARQUIESCALA
+  </span>
 
-<span>
-Aviso de privacidad · Términos · Envíos · Contacto
-</span>
+  <span>
+    Aviso de privacidad · Términos · Envíos · Contacto
+  </span>
 
 </footer>
 
 </div>
 
-</div>
+
+<script
+  type="module"
+  src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
+</script>
 
 
 <script>
 
 (() => {
 
-const root = document.getElementById("arquiescala");
+  const root =
+    document.getElementById("arquiescala");
 
-let cartCount = 0;
 
-let cartTotal = 0;
+  /*
+  ============================================================
+  PEDIDO PERSISTENTE
+  ============================================================
+  */
 
-const cart = root.querySelector("#cart");
+  let cartItems =
+    JSON.parse(
+      localStorage.getItem("arquiescala_cart") || "[]"
+    );
 
-const totalEl = root.querySelector("#total");
 
-const orderBody = root.querySelector("#order-body");
+  /*
+  ============================================================
+  ELEMENTOS
+  ============================================================
+  */
 
+  const cartButton =
+    root.querySelector("#cart");
 
-/* =====================================
-   PRECIOS POR PRODUCTO Y ESCALA
-===================================== */
+  const totalElement =
+    root.querySelector("#total");
 
-const prices = {
+  const summaryBody =
+    root.querySelector("#summaryBody");
 
-"Persona caminando": {
 
-"1:50":35,
-"1:75":32,
-"1:100":30,
-"1:150":26,
-"1:200":22
+  /*
+  ============================================================
+  FORMATEAR DINERO
+  ============================================================
+  */
 
-},
+  function money(value){
 
-"Árbol urbano": {
+    return "$" +
+      Number(value).toLocaleString("es-MX") +
+      " MXN";
 
-"1:50":45,
-"1:75":42,
-"1:100":38,
-"1:150":34,
-"1:200":30
+  }
 
-},
 
-"Vehículo sedán": {
+  /*
+  ============================================================
+  GUARDAR PEDIDO
+  ============================================================
+  */
 
-"1:50":45,
-"1:75":40,
-"1:100":35,
-"1:150":30,
-"1:200":25
+  function saveCart(){
 
-},
+    localStorage.setItem(
+      "arquiescala_cart",
+      JSON.stringify(cartItems)
+    );
 
-"Luminaria peatonal": {
+  }
 
-"1:50":30,
-"1:75":28,
-"1:100":25,
-"1:150":22,
-"1:200":20
 
-}
+  /*
+  ============================================================
+  ACTUALIZAR CARRITO
+  ============================================================
+  */
 
-};
+  function renderCart(){
 
+    let total = 0;
 
-/* =====================================
-   CARRITO
-===================================== */
+    let count = 0;
 
-let order = [];
 
+    summaryBody.innerHTML = "";
 
-/* =====================================
-   ACTUALIZAR PRECIO DEL PRODUCTO
-===================================== */
 
-root.querySelectorAll(".product").forEach(product => {
+    cartItems.forEach(item => {
 
-const name = product.dataset.product;
+      const lineTotal =
+        item.price * item.quantity;
 
-const scale = product.querySelector(".scale-select");
 
-const price = product.querySelector(".price");
+      total += lineTotal;
 
-function updatePrice(){
+      count += item.quantity;
 
-const selectedScale = scale.value;
 
-const productPrice = prices[name][selectedScale];
+      const row =
+        document.createElement("tr");
 
-price.textContent =
-"$" + productPrice + " MXN";
 
-}
+      row.innerHTML = `
 
-scale.addEventListener("change",updatePrice);
+        <td>
+          ${item.name}
+        </td>
 
-updatePrice();
+        <td>
+          ${item.scale}
+        </td>
 
-});
+        <td class="number">
+          ${item.quantity}
+        </td>
 
+        <td class="number">
+          ${money(item.price)}
+        </td>
 
-/* =====================================
-   BOTONES + Y -
-===================================== */
+        <td class="number">
+          <strong>
+            ${money(lineTotal)}
+          </strong>
+        </td>
 
-root.querySelectorAll(".product").forEach(product => {
+      `;
 
-const minus =
-product.querySelector(".minus");
 
-const plus =
-product.querySelector(".plus");
+      summaryBody.appendChild(row);
 
-const value =
-product.querySelector(".quantity-value");
+    });
 
 
-minus.addEventListener("click",() => {
+    cartButton.textContent =
+      `Carrito (${count})`;
 
-let quantity =
-Number(value.textContent);
 
-if(quantity > 1){
+    totalElement.textContent =
+      `Total: ${money(total)}`;
 
-quantity--;
+  }
 
-value.textContent = quantity;
 
-}
+  /*
+  ============================================================
+  CAMBIAR PRECIO SEGÚN ESCALA
+  ============================================================
+  */
 
-});
+  root.querySelectorAll(".product")
+    .forEach(product => {
 
+      const scaleSelect =
+        product.querySelector(".scale");
 
-plus.addEventListener("click",() => {
+      const priceElement =
+        product.querySelector(".price");
 
-let quantity =
-Number(value.textContent);
+      const prices =
+        JSON.parse(
+          product.dataset.prices
+        );
 
-quantity++;
 
-value.textContent = quantity;
+      function updatePrice(){
 
-});
+        const scale =
+          scaleSelect.value;
 
-});
+        const price =
+          prices[scale];
 
 
-/* =====================================
-   AGREGAR PRODUCTO
-===================================== */
+        priceElement.textContent =
+          money(price);
 
-root.querySelectorAll(".product").forEach(product => {
+      }
 
-const add =
-product.querySelector(".add");
 
-add.addEventListener("click",() => {
+      scaleSelect.addEventListener(
+        "change",
+        updatePrice
+      );
 
-const name =
-product.dataset.product;
 
-const scale =
-product.querySelector(".scale-select").value;
+      updatePrice();
 
-const quantity =
-Number(
-product.querySelector(".quantity-value").textContent
-);
+    });
 
-const unitPrice =
-prices[name][scale];
 
-const lineTotal =
-unitPrice * quantity;
+  /*
+  ============================================================
+  CANTIDAD + / -
+  ============================================================
+  */
 
+  root.querySelectorAll(".product")
+    .forEach(product => {
 
-/*
-   AQUÍ ESTÁ EL CAMBIO IMPORTANTE:
+      const minus =
+        product.querySelector(".minus");
 
-   Buscamos si ya existe exactamente
-   el mismo artículo Y la misma escala.
-*/
+      const plus =
+        product.querySelector(".plus");
 
-const existing =
-order.find(item =>
-item.name === name &&
-item.scale === scale
-);
+      const quantity =
+        product.querySelector(".quantity span");
 
+      const stock =
+        Number(product.dataset.stock);
 
-/*
-   Si ya existe:
-   SUMAMOS la cantidad.
-*/
 
-if(existing){
+      let value = 1;
 
-existing.quantity += quantity;
 
-existing.total =
-existing.quantity *
-existing.unitPrice;
+      function update(){
 
-}
+        quantity.textContent =
+          value;
 
+      }
 
-/*
-   Si no existe:
-   Creamos un nuevo renglón.
-*/
 
-else{
+      minus.addEventListener(
+        "click",
+        () => {
 
-order.push({
+          if(value > 1){
 
-name:name,
+            value--;
 
-scale:scale,
+            update();
 
-quantity:quantity,
+          }
 
-unitPrice:unitPrice,
+        }
+      );
 
-total:lineTotal
 
-});
+      plus.addEventListener(
+        "click",
+        () => {
 
-}
+          if(value < stock){
 
+            value++;
 
-/*
-   Actualizamos carrito.
-*/
+            update();
 
-cartCount += quantity;
+          }
 
-cartTotal += lineTotal;
+        }
+      );
 
-cart.textContent =
-`Carrito (${cartCount})`;
 
-totalEl.textContent =
-`Total: $${cartTotal} MXN`;
+    });
 
 
-/*
-   Dibujamos nuevamente
-   el resumen.
-*/
+  /*
+  ============================================================
+  AGREGAR AL PEDIDO
+  ============================================================
+  */
 
-renderOrder();
+  root.querySelectorAll(".product")
+    .forEach(product => {
 
+      const addButton =
+        product.querySelector(".add");
 
-/*
-   Regresamos cantidad
-   del producto a 1.
-*/
+      const scaleSelect =
+        product.querySelector(".scale");
 
-product.querySelector(".quantity-value").textContent = "1";
+      const quantity =
+        product.querySelector(".quantity span");
 
-});
 
-});
+      addButton.addEventListener(
+        "click",
+        () => {
 
+          const id =
+            product.dataset.id;
 
-/* =====================================
-   DIBUJAR RESUMEN DEL PEDIDO
-===================================== */
+          const name =
+            product.dataset.name;
 
-function renderOrder(){
+          const scale =
+            scaleSelect.value;
 
-orderBody.innerHTML = "";
+          const prices =
+            JSON.parse(
+              product.dataset.prices
+            );
 
+          const price =
+            prices[scale];
 
-if(order.length === 0){
+          const qty =
+            Number(quantity.textContent);
 
-orderBody.innerHTML = `
 
-<tr>
+          /*
+          BUSCAMOS SI YA EXISTE EL MISMO
+          ARTÍCULO + ESCALA
+          */
 
-<td colspan="5"
-class="empty-order">
+          const existing =
+            cartItems.find(item =>
+              item.id === id &&
+              item.scale === scale
+            );
 
-No hay productos en el pedido.
 
-</td>
+          if(existing){
 
-</tr>
+            existing.quantity += qty;
 
-`;
+          }else{
 
-return;
+            cartItems.push({
 
-}
+              id:id,
 
+              name:name,
 
-order.forEach(item => {
+              scale:scale,
 
-const row =
-document.createElement("tr");
+              price:price,
 
+              quantity:qty
 
-row.innerHTML = `
+            });
 
-<td>
-${item.name}
-</td>
+          }
 
-<td>
-${item.scale}
-</td>
 
-<td>
-${item.quantity}
-</td>
+          saveCart();
 
-<td>
-$${item.unitPrice} MXN
-</td>
+          renderCart();
 
-<td>
-$${item.total} MXN
-</td>
 
-`;
+          /*
+          REINICIAR CANTIDAD
+          */
 
+          quantity.textContent = "1";
 
-orderBody.appendChild(row);
 
-});
+          /*
+          AVISO
+          */
 
-}
+          addButton.textContent =
+            "Agregado ✓";
 
 
-/* =====================================
-   CATÁLOGO
-===================================== */
+          setTimeout(() => {
 
-root.querySelector("#catalog")
-.addEventListener("click",() => {
+            addButton.textContent =
+              "Agregar";
 
-root.querySelector(".products")
-.scrollIntoView({
+          },1200);
 
-behavior:"smooth"
+        }
+      );
 
-});
+    });
 
-});
 
+  /*
+  ============================================================
+  BOTONES VER MODELO 3D
+  ============================================================
+  */
 
-/* =====================================
-   ENTREGA EN ESCUELA
-===================================== */
+  root.querySelectorAll(
+    ".model-btn"
+  ).forEach(button => {
 
-root.querySelector("#school")
-.addEventListener("click",() => {
+    button.addEventListener(
+      "click",
+      () => {
 
-root.querySelector(".order")
-.scrollIntoView({
+        const product =
+          button.closest(".product");
 
-behavior:"smooth"
 
-});
+        const model =
+          product.dataset.model;
 
-});
+        const name =
+          product.dataset.name;
 
 
-/* =====================================
-   VISOR 3D GRANDE
-===================================== */
+        /*
+        Si el modelo existe,
+        abrimos visor.html
+        */
 
-root.querySelectorAll(".view3d")
-.forEach(button => {
+        if(model){
 
-button.addEventListener("click",() => {
+          const params =
+            new URLSearchParams();
 
-const model =
-button.dataset.model;
 
-const name =
-button.dataset.name;
+          params.set(
+            "modelo",
+            model
+          );
 
 
-/*
-   Si el producto tiene modelo 3D,
-   abrimos visor grande.
-*/
+          params.set(
+            "nombre",
+            name
+          );
 
-if(model){
 
-const url =
-`visor.html?modelo=${encodeURIComponent(model)}&nombre=${encodeURIComponent(name)}`;
+          window.location.href =
+            "visor.html?" +
+            params.toString();
 
-window.location.href = url;
 
-}
+        }else{
 
-else{
+          alert(
+            "El modelo 3D de este producto todavía no está disponible."
+          );
 
-alert(
-"El modelo 3D de este producto todavía está en preparación."
-);
+        }
 
-}
+      }
+    );
 
-});
+  });
 
-});
 
+  /*
+  ============================================================
+  CATÁLOGO
+  ============================================================
+  */
 
-/* =====================================
-   BOTÓN HACER PEDIDO
-===================================== */
+  root.querySelector("#catalog")
+    .addEventListener(
+      "click",
+      () => {
 
-root.querySelector("#order")
-.addEventListener("click",() => {
+        root
+          .querySelector(".products")
+          .scrollIntoView({
+            behavior:"smooth"
+          });
 
-if(order.length === 0){
+      }
+    );
 
-alert(
-"Agrega productos al carrito primero."
-);
 
-return;
+  /*
+  ============================================================
+  ENTREGA EN ESCUELA
+  ============================================================
+  */
 
-}
+  root.querySelector("#school")
+    .addEventListener(
+      "click",
+      () => {
 
+        root
+          .querySelector(".order")
+          .scrollIntoView({
+            behavior:"smooth"
+          });
 
-let message =
-"PEDIDO ARQUIESCALA\n\n";
+      }
+    );
 
 
-order.forEach(item => {
+  /*
+  ============================================================
+  BOTÓN HACER PEDIDO
+  ============================================================
+  */
 
-message +=
-`${item.name} | ${item.scale} | ${item.quantity} pieza(s) | $${item.unitPrice} c/u | $${item.total}\n`;
+  root.querySelector("#order")
+    .addEventListener(
+      "click",
+      () => {
 
-});
+        if(!cartItems.length){
 
+          alert(
+            "Agrega productos al carrito primero."
+          );
 
-message +=
-`\nTOTAL: $${cartTotal} MXN`;
+          return;
 
+        }
 
-alert(message);
 
-});
+        let message =
+          "Pedido ARQUIESCALA%0A%0A";
+
+
+        cartItems.forEach(item => {
+
+          message +=
+            `${item.name} | ${item.scale} | ${item.quantity} pieza(s) | ${money(item.price)} c/u | ${money(item.price * item.quantity)}%0A`;
+
+        });
+
+
+        const total =
+          cartItems.reduce(
+            (sum,item) =>
+              sum +
+              item.price *
+              item.quantity,
+            0
+          );
+
+
+        message +=
+          `%0ATotal: ${money(total)}`;
+
+
+        alert(
+          "Pedido preparado correctamente."
+        );
+
+      }
+    );
+
+
+  /*
+  ============================================================
+  CARGAR PEDIDO GUARDADO
+  ============================================================
+  */
+
+  renderCart();
 
 
 })();
 
 </script>
 
-</body>
-</html>
+</div>
