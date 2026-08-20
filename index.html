@@ -351,6 +351,142 @@ display:flex;
 justify-content:space-between;
 }
 
+
+/* =========================
+   CARRITO
+========================= */
+
+#arquiescala .cart-panel{
+position:fixed;
+top:0;
+right:0;
+width:min(420px,92vw);
+height:100vh;
+background:#fff;
+z-index:1000;
+box-shadow:-12px 0 35px rgba(15,23,42,.15);
+transform:translateX(105%);
+transition:transform .25s ease;
+display:flex;
+flex-direction:column;
+}
+
+#arquiescala .cart-panel.open{
+transform:translateX(0);
+}
+
+#arquiescala .cart-head{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:20px;
+border-bottom:1px solid #e5e7eb;
+}
+
+#arquiescala .cart-head h2{
+margin:0;
+font-size:20px;
+}
+
+#arquiescala .cart-close{
+border:1px solid #cbd5e1;
+background:#fff;
+border-radius:8px;
+padding:7px 10px;
+font-size:18px;
+cursor:pointer;
+}
+
+#arquiescala .cart-items{
+flex:1;
+overflow:auto;
+padding:16px 20px;
+}
+
+#arquiescala .cart-empty{
+text-align:center;
+color:#64748b;
+padding:45px 10px;
+}
+
+#arquiescala .cart-item{
+border:1px solid #e2e8f0;
+border-radius:12px;
+padding:13px;
+margin-bottom:10px;
+}
+
+#arquiescala .cart-item-top{
+display:flex;
+justify-content:space-between;
+gap:10px;
+}
+
+#arquiescala .cart-item-name{
+font-weight:700;
+}
+
+#arquiescala .cart-item-price{
+font-weight:700;
+white-space:nowrap;
+}
+
+#arquiescala .cart-controls{
+display:flex;
+align-items:center;
+gap:8px;
+margin-top:10px;
+}
+
+#arquiescala .qty-btn{
+width:30px;
+height:30px;
+border:1px solid #cbd5e1;
+border-radius:7px;
+background:#fff;
+font-weight:800;
+cursor:pointer;
+}
+
+#arquiescala .remove-btn{
+margin-left:auto;
+border:0;
+background:transparent;
+color:#dc2626;
+font-size:12px;
+cursor:pointer;
+}
+
+#arquiescala .cart-footer{
+border-top:1px solid #e5e7eb;
+padding:18px 20px;
+background:#fff;
+}
+
+#arquiescala .cart-subtotal{
+display:flex;
+justify-content:space-between;
+font-size:18px;
+font-weight:800;
+margin-bottom:12px;
+}
+
+#arquiescala .cart-overlay{
+position:fixed;
+inset:0;
+background:rgba(15,23,42,.35);
+z-index:999;
+opacity:0;
+pointer-events:none;
+transition:opacity .25s ease;
+}
+
+#arquiescala .cart-overlay.open{
+opacity:1;
+pointer-events:auto;
+}
+
+
 @media(max-width:760px){
 
 #arquiescala .links{
@@ -400,7 +536,6 @@ grid-template-columns:1fr;
 
 <header class="nav">
 
-
 <div class="brand">
 
 ARQUIESCALA <span>maquetas</span>
@@ -439,16 +574,93 @@ Carrito (0)
 
 </button>
 
-
 </header>
 
 
+<!-- =========================
+     PANEL DEL CARRITO
+========================= -->
+
+<div
+class="cart-overlay"
+id="cart-overlay">
+</div>
+
+
+<aside
+class="cart-panel"
+id="cart-panel">
+
+
+<div class="cart-head">
+
+<h2>
+Tu carrito
+</h2>
+
+<button
+class="cart-close"
+id="cart-close">
+×
+</button>
+
+</div>
+
+
+<div
+class="cart-items"
+id="cart-items">
+
+<div class="cart-empty">
+
+Tu carrito está vacío.
+
+</div>
+
+</div>
+
+
+<div class="cart-footer">
+
+
+<div class="cart-subtotal">
+
+<span>
+Total
+</span>
+
+<span id="cart-total">
+$0 MXN
+</span>
+
+</div>
+
+
+<button
+class="primary"
+style="width:100%"
+id="cart-order">
+
+Continuar con el pedido
+
+</button>
+
+
+</div>
+
+
+</aside>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
 
 <div>
-
 
 <div class="muted">
 
@@ -476,14 +688,18 @@ Elige tu escala y recibe tus piezas listas para usar.
 <div class="cta">
 
 
-<button class="primary" id="catalog">
+<button
+class="primary"
+id="catalog">
 
 Ver catálogo
 
 </button>
 
 
-<button class="secondary" id="school">
+<button
+class="secondary"
+id="school">
 
 Entrega en escuela · GRATIS
 
@@ -491,7 +707,6 @@ Entrega en escuela · GRATIS
 
 
 </div>
-
 
 </div>
 
@@ -520,6 +735,8 @@ interaction-prompt="auto"
 shadow-intensity="0.8"
 
 exposure="1"
+
+environment-image="neutral"
 
 camera-orbit="0deg 75deg auto"
 
@@ -559,6 +776,10 @@ Arrastra para rotar · rueda para zoom
 </section>
 
 
+
+<!-- =========================
+     CARACTERÍSTICAS
+========================= -->
 
 <section class="features">
 
@@ -606,6 +827,10 @@ Para pedidos fuera de tu zona.
 
 
 
+<!-- =========================
+     CATEGORÍAS
+========================= -->
+
 <section id="catalogo">
 
 
@@ -622,61 +847,66 @@ Explora el catálogo
 </div>
 
 
-
 <div class="cats">
 
 
 <button
 class="cat active"
-data-filter="todos"
->
+data-filter="todos">
+
 ◉<br>
 Todos
+
 </button>
 
 
 <button
 class="cat"
-data-filter="personas"
->
+data-filter="personas">
+
 👤<br>
 Personas
+
 </button>
 
 
 <button
 class="cat"
-data-filter="vehiculos"
->
+data-filter="vehiculos">
+
 🚗<br>
 Vehículos
+
 </button>
 
 
 <button
 class="cat"
-data-filter="vegetacion"
->
+data-filter="vegetacion">
+
 🌳<br>
 Vegetación
+
 </button>
 
 
 <button
 class="cat"
-data-filter="mobiliario"
->
+data-filter="mobiliario">
+
 🪑<br>
 Mobiliario
+
 </button>
 
 
 <button
 class="cat"
-data-filter="luminarias"
->
+data-filter="luminarias">
+
 💡<br>
 Luminarias
+
 </button>
 
 
@@ -686,6 +916,10 @@ Luminarias
 </section>
 
 
+
+<!-- =========================
+     PRODUCTOS
+========================= -->
 
 <section>
 
@@ -703,19 +937,15 @@ Diseñados para maqueta
 </div>
 
 
-
 <div class="products">
 
 
 
-<!-- =========================
-     PERSONA
-========================= -->
+<!-- PERSONA -->
 
 <article
 class="product"
-data-category="personas"
->
+data-category="personas">
 
 
 <div class="pimg">
@@ -753,9 +983,7 @@ bounds="tight"
 
 crossorigin="anonymous"
 
-alt="Persona caminando para maqueta"
-
->
+alt="Persona caminando para maqueta">
 
 </model-viewer>
 
@@ -777,28 +1005,22 @@ $35 MXN
 
 
 <button
-
 class="secondary view-model"
-
 data-model="PERSONA.glb"
+data-name="Persona caminando">
 
-data-name="Persona caminando"
-
->
 Ver modelo 3D
+
 </button>
 
 
 <button
-
 class="add"
-
 data-name="Persona caminando"
+data-price="35">
 
-data-price="35"
-
->
 Agregar
+
 </button>
 
 
@@ -809,14 +1031,11 @@ Agregar
 
 
 
-<!-- =========================
-     ARBOL
-========================= -->
+<!-- ÁRBOL -->
 
 <article
 class="product"
-data-category="vegetacion"
->
+data-category="vegetacion">
 
 
 <div class="pimg">
@@ -854,9 +1073,7 @@ bounds="tight"
 
 crossorigin="anonymous"
 
-alt="Árbol urbano para maqueta"
-
->
+alt="Árbol urbano para maqueta">
 
 </model-viewer>
 
@@ -878,28 +1095,22 @@ $45 MXN
 
 
 <button
-
 class="secondary view-model"
-
 data-model="ARBOLITO.glb"
+data-name="Árbol urbano">
 
-data-name="Árbol urbano"
-
->
 Ver modelo 3D
+
 </button>
 
 
 <button
-
 class="add"
-
 data-name="Árbol urbano"
+data-price="45">
 
-data-price="45"
-
->
 Agregar
+
 </button>
 
 
@@ -910,14 +1121,11 @@ Agregar
 
 
 
-<!-- =========================
-     VEHICULO
-========================= -->
+<!-- VEHÍCULO -->
 
 <article
 class="product"
-data-category="vehiculos"
->
+data-category="vehiculos">
 
 
 <div class="pimg">
@@ -943,28 +1151,22 @@ $45 MXN
 
 
 <button
-
 class="secondary view-model"
-
 data-model="VEHICULO.glb"
+data-name="Vehículo sedán">
 
-data-name="Vehículo sedán"
-
->
 Ver modelo 3D
+
 </button>
 
 
 <button
-
 class="add"
-
 data-name="Vehículo sedán"
+data-price="45">
 
-data-price="45"
-
->
 Agregar
+
 </button>
 
 
@@ -975,17 +1177,11 @@ Agregar
 
 
 
-<!-- =========================
-     LUMINARIA
-========================= -->
+<!-- LUMINARIA -->
 
 <article
-
 class="product"
-
-data-category="luminarias"
-
->
+data-category="luminarias">
 
 
 <div class="pimg">
@@ -1011,28 +1207,22 @@ $30 MXN
 
 
 <button
-
 class="secondary view-model"
-
 data-model="LUMINARIA.glb"
+data-name="Luminaria peatonal">
 
-data-name="Luminaria peatonal"
-
->
 Ver modelo 3D
+
 </button>
 
 
 <button
-
 class="add"
-
 data-name="Luminaria peatonal"
+data-price="30">
 
-data-price="30"
-
->
 Agregar
+
 </button>
 
 
@@ -1042,7 +1232,6 @@ Agregar
 </article>
 
 
-
 </div>
 
 
@@ -1050,11 +1239,14 @@ Agregar
 
 
 
+<!-- =========================
+     PEDIDO
+========================= -->
+
 <section class="order">
 
 
 <div>
-
 
 <h2>
 Entrega en tu escuela
@@ -1068,7 +1260,6 @@ Selecciona esta opción al hacer tu pedido y coordinaremos una entrega en un pun
 Para otros destinos puedes solicitar envío nacional.
 
 </p>
-
 
 </div>
 
@@ -1108,22 +1299,20 @@ Escala para tu pedido
 
 <div
 class="total"
-id="total"
->
+id="total">
+
 Total: $0 MXN
+
 </div>
 
 
 <button
-
 class="primary"
-
 style="width:100%"
+id="order">
 
-id="order"
-
->
 Hacer pedido
+
 </button>
 
 
@@ -1170,26 +1359,267 @@ const root =
 document.getElementById("arquiescala");
 
 
-let count = 0;
+/* =========================
+   VARIABLES
+========================= */
 
-let total = 0;
-
-
-const cart =
+const cartButton =
 root.querySelector("#cart");
+
+const cartPanel =
+root.querySelector("#cart-panel");
+
+const cartOverlay =
+root.querySelector("#cart-overlay");
+
+const cartClose =
+root.querySelector("#cart-close");
+
+const cartItems =
+root.querySelector("#cart-items");
+
+const cartTotal =
+root.querySelector("#cart-total");
 
 const totalEl =
 root.querySelector("#total");
 
+const orderButton =
+root.querySelector("#order");
+
+const cartOrder =
+root.querySelector("#cart-order");
 
 
-/* ==========================
-   CARRITO
-========================== */
+let cartData = [];
+
+
+
+/* =========================
+   TOTAL
+========================= */
+
+function getTotal(){
+
+return cartData.reduce(
+(sum,item) =>
+sum + item.price * item.qty,
+0
+);
+
+}
+
+
+
+/* =========================
+   CANTIDAD
+========================= */
+
+function getCount(){
+
+return cartData.reduce(
+(sum,item) =>
+sum + item.qty,
+0
+);
+
+}
+
+
+
+/* =========================
+   ACTUALIZAR CARRITO
+========================= */
+
+function renderCart(){
+
+
+const amount =
+getTotal();
+
+
+const pieces =
+getCount();
+
+
+cartButton.textContent =
+`Carrito (${pieces})`;
+
+
+cartTotal.textContent =
+`$${amount} MXN`;
+
+
+totalEl.textContent =
+`Total: $${amount} MXN`;
+
+
+if(!cartData.length){
+
+cartItems.innerHTML =
+
+`
+
+<div class="cart-empty">
+
+Tu carrito está vacío.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+cartItems.innerHTML =
+
+cartData.map(
+(item,index) =>
+
+`
+
+<div class="cart-item">
+
+
+<div class="cart-item-top">
+
+
+<div class="cart-item-name">
+
+${item.name}
+
+</div>
+
+
+<div class="cart-item-price">
+
+$${item.price * item.qty} MXN
+
+</div>
+
+
+</div>
+
+
+<div class="cart-controls">
+
+
+<button
+
+class="qty-btn"
+
+data-index="${index}"
+
+data-action="minus">
+
+−
+
+</button>
+
+
+<strong>
+
+${item.qty}
+
+</strong>
+
+
+<button
+
+class="qty-btn"
+
+data-index="${index}"
+
+data-action="plus">
+
++
+
+</button>
+
+
+<button
+
+class="remove-btn"
+
+data-index="${index}"
+
+data-action="remove">
+
+Eliminar
+
+</button>
+
+
+</div>
+
+
+</div>
+
+`
+
+).join("");
+
+}
+
+
+
+/* =========================
+   ABRIR
+========================= */
+
+function openCart(){
+
+cartPanel.classList.add("open");
+
+cartOverlay.classList.add("open");
+
+}
+
+
+
+/* =========================
+   CERRAR
+========================= */
+
+function closeCart(){
+
+cartPanel.classList.remove("open");
+
+cartOverlay.classList.remove("open");
+
+}
+
+
+
+cartButton.addEventListener(
+"click",
+openCart
+);
+
+
+cartClose.addEventListener(
+"click",
+closeCart
+);
+
+
+cartOverlay.addEventListener(
+"click",
+closeCart
+);
+
+
+
+/* =========================
+   AGREGAR PRODUCTO
+========================= */
 
 root
 .querySelectorAll(".add")
-.forEach(button => {
+.forEach(
+button => {
 
 
 button.addEventListener(
@@ -1197,18 +1627,45 @@ button.addEventListener(
 () => {
 
 
-count++;
-
-total +=
-Number(button.dataset.price);
+const name =
+button.dataset.name;
 
 
-cart.textContent =
-`Carrito (${count})`;
+const price =
+Number(
+button.dataset.price
+);
 
 
-totalEl.textContent =
-`Total: $${total} MXN`;
+const existing =
+cartData.find(
+item =>
+item.name === name
+);
+
+
+if(existing){
+
+existing.qty++;
+
+}else{
+
+cartData.push({
+
+name:name,
+
+price:price,
+
+qty:1
+
+});
+
+}
+
+
+renderCart();
+
+openCart();
 
 
 });
@@ -1217,9 +1674,80 @@ totalEl.textContent =
 
 
 
-/* ==========================
-   VER CATÁLOGO
-========================== */
+/* =========================
+   + - ELIMINAR
+========================= */
+
+cartItems.addEventListener(
+"click",
+event => {
+
+
+const button =
+event.target.closest(
+"[data-action]"
+);
+
+
+if(!button)return;
+
+
+const index =
+Number(
+button.dataset.index
+);
+
+
+const action =
+button.dataset.action;
+
+
+if(action === "plus"){
+
+cartData[index].qty++;
+
+}
+
+
+if(action === "minus"){
+
+cartData[index].qty--;
+
+
+if(
+cartData[index].qty <= 0
+){
+
+cartData.splice(
+index,
+1
+);
+
+}
+
+}
+
+
+if(action === "remove"){
+
+cartData.splice(
+index,
+1
+);
+
+}
+
+
+renderCart();
+
+
+});
+
+
+
+/* =========================
+   CATÁLOGO
+========================= */
 
 root
 .querySelector("#catalog")
@@ -1229,19 +1757,21 @@ root
 
 
 root
-.querySelector("#catalogo")
+.querySelector(".products")
 .scrollIntoView({
+
 behavior:"smooth"
-});
-
 
 });
 
 
+});
 
-/* ==========================
-   ENTREGA EN ESCUELA
-========================== */
+
+
+/* =========================
+   ENTREGA
+========================= */
 
 root
 .querySelector("#school")
@@ -1253,21 +1783,24 @@ root
 root
 .querySelector(".order")
 .scrollIntoView({
+
 behavior:"smooth"
-});
-
 
 });
 
 
+});
 
-/* ==========================
+
+
+/* =========================
    CATEGORÍAS
-========================== */
+========================= */
 
 root
 .querySelectorAll(".cat")
-.forEach(category => {
+.forEach(
+category => {
 
 
 category.addEventListener(
@@ -1277,14 +1810,19 @@ category.addEventListener(
 
 root
 .querySelectorAll(".cat")
-.forEach(cat => {
+.forEach(
+cat => {
 
-cat.classList.remove("active");
+cat.classList.remove(
+"active"
+);
 
 });
 
 
-category.classList.add("active");
+category.classList.add(
+"active"
+);
 
 
 const filter =
@@ -1293,12 +1831,17 @@ category.dataset.filter;
 
 root
 .querySelectorAll(".product")
-.forEach(product => {
+.forEach(
+product => {
 
 
 if(
+
 filter === "todos" ||
-product.dataset.category === filter
+
+product.dataset.category ===
+filter
+
 ){
 
 product.style.display =
@@ -1320,13 +1863,14 @@ product.style.display =
 
 
 
-/* ==========================
+/* =========================
    VISOR 3D
-========================== */
+========================= */
 
 root
 .querySelectorAll(".view-model")
-.forEach(button => {
+.forEach(
+button => {
 
 
 button.addEventListener(
@@ -1348,23 +1892,15 @@ const url =
 
 "?modelo=" +
 
-encodeURIComponent(modelo) +
+encodeURIComponent(
+modelo
+) +
 
 "&nombre=" +
 
-encodeURIComponent(nombre);
-
-
-/*
-   IMPORTANTE:
-
-   No abrimos el GLB directamente.
-
-   Abrimos visor.html.
-
-   visor.html recibe el nombre del
-   archivo mediante la URL.
-*/
+encodeURIComponent(
+nombre
+);
 
 
 window.location.href =
@@ -1377,15 +1913,16 @@ url;
 
 
 
-/* ==========================
-   MODELOS 3D
-========================== */
+/* =========================
+   ERROR MODELOS
+========================= */
 
 root
 .querySelectorAll(
 ".pimg model-viewer"
 )
-.forEach(viewer => {
+.forEach(
+viewer => {
 
 
 viewer.addEventListener(
@@ -1393,24 +1930,29 @@ viewer.addEventListener(
 () => {
 
 
-viewer.closest(".pimg")
-.innerHTML =
+viewer.closest(
+".pimg"
+).innerHTML =
 
-'<div style="' +
+`
 
-'color:#64748b;' +
+<div style="
 
-'font-size:12px;' +
+color:#64748b;
 
-'text-align:center;' +
+font-size:12px;
 
-'padding:20px;' +
+text-align:center;
 
-'">' +
+padding:20px;
 
-'Modelo 3D no disponible' +
+">
 
-'</div>';
+Modelo 3D no disponible
+
+</div>
+
+`;
 
 
 });
@@ -1419,121 +1961,57 @@ viewer.closest(".pimg")
 
 
 
-/* ==========================
-   NAVEGACIÓN
-========================== */
+/* =========================
+   CONTINUAR PEDIDO
+========================= */
 
-root
-.querySelector("#navInicio")
-.addEventListener(
-"click",
-() => {
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-});
+function goToOrder(){
 
 
-root
-.querySelector("#navFiguras")
-.addEventListener(
-"click",
-() => {
+if(!cartData.length){
 
-const button =
-root.querySelector(
-'.cat[data-filter="personas"]'
+alert(
+"Agrega productos al carrito primero."
 );
 
-button.click();
+return;
 
-root.querySelector("#catalogo")
-.scrollIntoView({
-behavior:"smooth"
-});
+}
 
-});
+
+closeCart();
 
 
 root
-.querySelector("#navVegetacion")
-.addEventListener(
-"click",
-() => {
+.querySelector(".order")
+.scrollIntoView({
 
-const button =
-root.querySelector(
-'.cat[data-filter="vegetacion"]'
+behavior:"smooth"
+
+});
+
+
+}
+
+
+
+cartOrder.addEventListener(
+"click",
+goToOrder
 );
 
-button.click();
-
-root.querySelector("#catalogo")
-.scrollIntoView({
-behavior:"smooth"
-});
-
-});
 
 
-root
-.querySelector("#navMobiliario")
-.addEventListener(
-"click",
-() => {
-
-const button =
-root.querySelector(
-'.cat[data-filter="mobiliario"]'
-);
-
-button.click();
-
-root.querySelector("#catalogo")
-.scrollIntoView({
-behavior:"smooth"
-});
-
-});
-
-
-root
-.querySelector("#navVehiculos")
-.addEventListener(
-"click",
-() => {
-
-const button =
-root.querySelector(
-'.cat[data-filter="vehiculos"]'
-);
-
-button.click();
-
-root.querySelector("#catalogo")
-.scrollIntoView({
-behavior:"smooth"
-});
-
-});
-
-
-
-/* ==========================
+/* =========================
    HACER PEDIDO
-========================== */
+========================= */
 
-root
-.querySelector("#order")
-.addEventListener(
+orderButton.addEventListener(
 "click",
 () => {
 
 
-if(count === 0){
+if(!cartData.length){
 
 alert(
 "Agrega productos al carrito primero."
@@ -1545,24 +2023,179 @@ return;
 
 
 const escala =
-root.querySelector("#scale").value;
+root.querySelector(
+"#scale"
+).value;
+
+
+const amount =
+getTotal();
+
+
+const pieces =
+getCount();
 
 
 alert(
 
 `Pedido preparado:
 
-${count} piezas
+${pieces} piezas
 
 Escala: ${escala}
 
-Total: $${total} MXN
+Total: $${amount} MXN
 
-En una tienda real, aquí podremos enviarte el pedido por WhatsApp.`
+En el siguiente paso conectaremos este botón con WhatsApp.`
 
 );
 
+
 });
+
+
+
+/* =========================
+   NAVEGACIÓN
+========================= */
+
+root
+.querySelector("#navInicio")
+.addEventListener(
+"click",
+() => {
+
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+
+});
+
+
+root
+.querySelector("#navFiguras")
+.addEventListener(
+"click",
+() => {
+
+
+const button =
+root.querySelector(
+'.cat[data-filter="personas"]'
+);
+
+
+button.click();
+
+
+root
+.querySelector("#catalogo")
+.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+
+});
+
+
+root
+.querySelector("#navVegetacion")
+.addEventListener(
+"click",
+() => {
+
+
+const button =
+root.querySelector(
+'.cat[data-filter="vegetacion"]'
+);
+
+
+button.click();
+
+
+root
+.querySelector("#catalogo")
+.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+
+});
+
+
+root
+.querySelector("#navMobiliario")
+.addEventListener(
+"click",
+() => {
+
+
+const button =
+root.querySelector(
+'.cat[data-filter="mobiliario"]'
+);
+
+
+button.click();
+
+
+root
+.querySelector("#catalogo")
+.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+
+});
+
+
+root
+.querySelector("#navVehiculos")
+.addEventListener(
+"click",
+() => {
+
+
+const button =
+root.querySelector(
+'.cat[data-filter="vehiculos"]'
+);
+
+
+button.click();
+
+
+root
+.querySelector("#catalogo")
+.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+
+});
+
+
+
+/* =========================
+   INICIALIZAR
+========================= */
+
+renderCart();
 
 
 })();
