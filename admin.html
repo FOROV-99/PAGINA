@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>ARQUIESCALA — Administración</title>
 
@@ -34,7 +28,9 @@ body{
 }
 
 button,
-input{
+input,
+select,
+textarea{
     font:inherit;
 }
 
@@ -42,7 +38,9 @@ button{
     cursor:pointer;
 }
 
-/* LOGIN */
+/* =========================
+   LOGIN
+========================= */
 
 .login-page{
     min-height:100vh;
@@ -59,8 +57,7 @@ button{
     border:1px solid #e2e8f0;
     border-radius:18px;
     padding:32px;
-    box-shadow:
-        0 15px 40px rgba(15,23,42,.08);
+    box-shadow:0 15px 40px rgba(15,23,42,.08);
 }
 
 .logo{
@@ -122,7 +119,9 @@ button{
     margin-top:10px;
 }
 
-/* ADMIN */
+/* =========================
+   ADMIN
+========================= */
 
 .admin{
     display:none;
@@ -178,12 +177,13 @@ button{
     color:#64748b;
 }
 
-/* CARDS */
+/* =========================
+   CARDS
+========================= */
 
 .cards{
     display:grid;
-    grid-template-columns:
-        repeat(3,1fr);
+    grid-template-columns:repeat(3,1fr);
     gap:15px;
     margin-bottom:30px;
 }
@@ -206,7 +206,9 @@ button{
     font-weight:800;
 }
 
-/* PANEL */
+/* =========================
+   PANEL
+========================= */
 
 .panel{
     background:#fff;
@@ -221,6 +223,7 @@ button{
     display:flex;
     justify-content:space-between;
     align-items:center;
+    gap:15px;
 }
 
 .panel-header h2{
@@ -241,6 +244,71 @@ button{
     background:#1f2937;
 }
 
+/* =========================
+   PRODUCTOS
+========================= */
+
+.products-admin{
+    padding:15px;
+    display:grid;
+    gap:12px;
+}
+
+.product-admin{
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+    padding:16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.product-main{
+    min-width:0;
+}
+
+.product-name{
+    font-size:16px;
+    font-weight:800;
+    margin-bottom:5px;
+}
+
+.product-meta{
+    font-size:13px;
+    color:#64748b;
+}
+
+.product-prices{
+    margin-top:7px;
+    font-size:12px;
+    color:#475569;
+}
+
+.product-actions{
+    display:flex;
+    gap:8px;
+    flex-shrink:0;
+}
+
+.edit-button,
+.delete-button{
+    border-radius:8px;
+    padding:9px 12px;
+    font-weight:700;
+}
+
+.edit-button{
+    border:1px solid #cbd5e1;
+    background:#fff;
+}
+
+.delete-button{
+    border:1px solid #fecaca;
+    background:#fff;
+    color:#dc2626;
+}
+
 .empty{
     padding:45px 20px;
     text-align:center;
@@ -254,9 +322,200 @@ button{
     margin-bottom:6px;
 }
 
-/* RESPONSIVE */
+/* =========================
+   MODAL
+========================= */
 
-@media(max-width:700px){
+.modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.55);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:1000;
+}
+
+.modal{
+    width:100%;
+    max-width:720px;
+    max-height:90vh;
+    overflow:auto;
+    background:#fff;
+    border-radius:18px;
+    box-shadow:0 25px 70px rgba(15,23,42,.25);
+}
+
+.modal-header{
+    padding:20px 22px;
+    border-bottom:1px solid #e2e8f0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.modal-header h2{
+    margin:0;
+    font-size:20px;
+}
+
+.close-button{
+    width:34px;
+    height:34px;
+    border:1px solid #cbd5e1;
+    background:#fff;
+    border-radius:8px;
+    font-size:20px;
+}
+
+.form{
+    padding:22px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group.full{
+    grid-column:1 / -1;
+}
+
+.form-group label{
+    display:block;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:7px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+    border:1px solid #cbd5e1;
+    border-radius:9px;
+    padding:11px 12px;
+    outline:none;
+    background:#fff;
+}
+
+.form-group textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:#64748b;
+}
+
+.scale-title{
+    font-size:14px;
+    font-weight:800;
+    margin:10px 0 12px;
+}
+
+.prices-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:8px;
+}
+
+.price-box label{
+    display:block;
+    font-size:11px;
+    color:#64748b;
+    margin-bottom:5px;
+}
+
+.price-box input{
+    width:100%;
+    padding:9px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+}
+
+.modal-footer{
+    padding:18px 22px;
+    border-top:1px solid #e2e8f0;
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+}
+
+.cancel-button{
+    border:1px solid #cbd5e1;
+    background:#fff;
+    border-radius:8px;
+    padding:10px 15px;
+    font-weight:700;
+}
+
+.save-button{
+    border:0;
+    background:#111827;
+    color:#fff;
+    border-radius:8px;
+    padding:10px 17px;
+    font-weight:700;
+}
+
+.save-button:hover{
+    background:#1f2937;
+}
+
+.form-error{
+    display:none;
+    color:#dc2626;
+    font-size:13px;
+    margin-top:5px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:800px){
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .prices-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .product-admin{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .product-actions{
+        width:100%;
+    }
+
+    .edit-button,
+    .delete-button{
+        flex:1;
+    }
+}
+
+@media(max-width:500px){
 
     .topbar{
         padding:0 15px;
@@ -266,12 +525,21 @@ button{
         padding:25px 12px 40px;
     }
 
-    .cards{
-        grid-template-columns:1fr;
-    }
-
     .header h1{
         font-size:27px;
+    }
+
+    .panel-header{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .add-button{
+        width:100%;
+    }
+
+    .prices-grid{
+        grid-template-columns:1fr 1fr;
     }
 
 }
@@ -280,348 +548,1342 @@ button{
 
 </head>
 
-
 <body>
 
 
-<!-- LOGIN -->
+<!-- =====================================================
+     LOGIN
+===================================================== -->
 
 <div
-class="login-page"
-id="loginPage">
-
-<div class="login-box">
-
-<div class="logo">
-ARQUIESCALA <span>admin</span>
-</div>
-
-<div class="subtitle">
-Panel privado del propietario
-</div>
-
-<label for="password">
-Contraseña
-</label>
-
-<input
-type="password"
-id="password"
-placeholder="Introduce tu contraseña"
-autocomplete="current-password"
+    class="login-page"
+    id="loginPage"
 >
 
-<button
-class="login-button"
-id="loginButton">
+    <div class="login-box">
 
-Ingresar
+        <div class="logo">
+            ARQUIESCALA <span>admin</span>
+        </div>
 
-</button>
+        <div class="subtitle">
+            Panel privado del propietario
+        </div>
+
+        <label for="password">
+            Contraseña
+        </label>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Introduce tu contraseña"
+            autocomplete="current-password"
+        >
+
+        <button
+            class="login-button"
+            id="loginButton"
+        >
+            Ingresar
+        </button>
+
+        <div
+            class="error"
+            id="loginError"
+        >
+            Contraseña incorrecta.
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     ADMIN
+===================================================== -->
 
 <div
-class="error"
-id="loginError">
+    class="admin"
+    id="adminPage"
+>
 
-Contraseña incorrecta.
+    <header class="topbar">
+
+        <div class="topbar-brand">
+            ARQUIESCALA <span>admin</span>
+        </div>
+
+        <button
+            class="logout"
+            id="logout"
+        >
+            Cerrar sesión
+        </button>
+
+    </header>
+
+
+    <main class="container">
+
+        <div class="header">
+
+            <h1>
+                Panel de administración
+            </h1>
+
+            <p>
+                Administra tus productos, precios y existencias.
+            </p>
+
+        </div>
+
+
+        <!-- RESUMEN -->
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="card-title">
+                    Productos
+                </div>
+
+                <div
+                    class="card-number"
+                    id="productCount"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    Existencias totales
+                </div>
+
+                <div
+                    class="card-number"
+                    id="stockCount"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    Estado
+                </div>
+
+                <div
+                    class="card-number"
+                    style="font-size:20px"
+                >
+                    Activo
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCTOS -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <h2>
+                    Productos
+                </h2>
+
+                <button
+                    class="add-button"
+                    id="addProduct"
+                >
+                    + Agregar producto
+                </button>
+
+            </div>
+
+
+            <div
+                class="products-admin"
+                id="productsAdmin"
+            >
+
+            </div>
+
+        </section>
+
+    </main>
 
 </div>
 
-</div>
 
-</div>
-
-
-<!-- ADMIN -->
+<!-- =====================================================
+     MODAL PRODUCTO
+===================================================== -->
 
 <div
-class="admin"
-id="adminPage">
+    class="modal-overlay"
+    id="modalOverlay"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+                Agregar producto
+            </h2>
+
+            <button
+                class="close-button"
+                id="closeModal"
+            >
+                ×
+            </button>
+
+        </div>
 
 
-<header class="topbar">
+        <form
+            class="form"
+            id="productForm"
+        >
 
-<div class="topbar-brand">
-ARQUIESCALA <span>admin</span>
-</div>
-
-<button
-class="logout"
-id="logout">
-
-Cerrar sesión
-
-</button>
-
-</header>
+            <input
+                type="hidden"
+                id="productId"
+            >
 
 
-<main class="container">
+            <div class="form-grid">
 
 
-<div class="header">
+                <!-- NOMBRE -->
 
-<h1>
-Panel de administración
-</h1>
+                <div class="form-group">
 
-<p>
-Administra tus productos, precios y existencias.
-</p>
+                    <label for="productName">
+                        Nombre del producto
+                    </label>
 
-</div>
+                    <input
+                        type="text"
+                        id="productName"
+                        placeholder="Ej. Persona caminando"
+                        required
+                    >
 
-
-<div class="cards">
-
-
-<div class="card">
-
-<div class="card-title">
-Productos
-</div>
-
-<div
-class="card-number"
-id="productCount">
-
-0
-
-</div>
-
-</div>
+                </div>
 
 
-<div class="card">
+                <!-- CATEGORIA -->
 
-<div class="card-title">
-Existencias totales
-</div>
+                <div class="form-group">
 
-<div
-class="card-number"
-id="stockCount">
+                    <label for="productCategory">
+                        Categoría
+                    </label>
 
-0
+                    <select
+                        id="productCategory"
+                        required
+                    >
 
-</div>
+                        <option value="">
+                            Seleccionar categoría
+                        </option>
 
-</div>
+                        <option value="personas">
+                            Personas
+                        </option>
 
+                        <option value="vehiculos">
+                            Vehículos
+                        </option>
 
-<div class="card">
+                        <option value="vegetacion">
+                            Vegetación
+                        </option>
 
-<div class="card-title">
-Estado
-</div>
+                        <option value="mobiliario">
+                            Mobiliario
+                        </option>
 
-<div
-class="card-number"
-style="font-size:20px">
+                        <option value="luminarias">
+                            Luminarias
+                        </option>
 
-Activo
+                        <option value="especiales">
+                            Especiales
+                        </option>
 
-</div>
+                    </select>
 
-</div>
-
-
-</div>
-
-
-<section class="panel">
-
-
-<div class="panel-header">
-
-<h2>
-Productos
-</h2>
-
-<button
-class="add-button"
-id="addProduct">
-
-+ Agregar producto
-
-</button>
-
-</div>
+                </div>
 
 
-<div
-class="empty"
-id="emptyProducts">
+                <!-- MODELO -->
 
-<strong>
-Todavía no hay productos administrados.
-</strong>
+                <div class="form-group full">
 
-Aquí aparecerán tus productos cuando
-conectemos el catálogo con el panel.
+                    <label for="productModel">
+                        Archivo del modelo 3D
+                    </label>
 
-</div>
+                    <input
+                        type="text"
+                        id="productModel"
+                        placeholder="Ej. PERSONA.glb"
+                    >
+
+                </div>
 
 
-</section>
+                <!-- DESCRIPCION -->
+
+                <div class="form-group full">
+
+                    <label for="productDescription">
+                        Descripción
+                    </label>
+
+                    <textarea
+                        id="productDescription"
+                        placeholder="Descripción del producto..."
+                    ></textarea>
+
+                </div>
 
 
-</main>
+                <!-- EXISTENCIAS -->
+
+                <div class="form-group">
+
+                    <label for="productStock">
+                        Existencias
+                    </label>
+
+                    <input
+                        type="number"
+                        id="productStock"
+                        min="0"
+                        value="0"
+                        required
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <!-- PRECIOS -->
+
+            <div class="scale-title">
+                Precios por escala
+            </div>
+
+
+            <div class="prices-grid">
+
+
+                <div class="price-box">
+
+                    <label>
+                        1:50
+                    </label>
+
+                    <input
+                        type="number"
+                        id="price50"
+                        min="0"
+                        step="1"
+                        value="0"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="price-box">
+
+                    <label>
+                        1:75
+                    </label>
+
+                    <input
+                        type="number"
+                        id="price75"
+                        min="0"
+                        step="1"
+                        value="0"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="price-box">
+
+                    <label>
+                        1:100
+                    </label>
+
+                    <input
+                        type="number"
+                        id="price100"
+                        min="0"
+                        step="1"
+                        value="0"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="price-box">
+
+                    <label>
+                        1:150
+                    </label>
+
+                    <input
+                        type="number"
+                        id="price150"
+                        min="0"
+                        step="1"
+                        value="0"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="price-box">
+
+                    <label>
+                        1:200
+                    </label>
+
+                    <input
+                        type="number"
+                        id="price200"
+                        min="0"
+                        step="1"
+                        value="0"
+                        required
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <div
+                class="form-error"
+                id="formError"
+            >
+                Completa correctamente los datos.
+            </div>
+
+
+        </form>
+
+
+        <div class="modal-footer">
+
+            <button
+                class="cancel-button"
+                id="cancelModal"
+                type="button"
+            >
+                Cancelar
+            </button>
+
+            <button
+                class="save-button"
+                id="saveProduct"
+                type="button"
+            >
+                Guardar producto
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
 
 <script>
 
-/*
-====================================================
-ARQUIESCALA — PANEL ADMINISTRATIVO
-====================================================
+/* =====================================================
+   ARQUIESCALA — ADMIN
+===================================================== */
 
-IMPORTANTE:
 
-Esta primera versión solamente crea
-la estructura visual del panel.
-
-NO almacena todavía una contraseña real.
-
-La autenticación segura la agregaremos
-en el siguiente paso mediante un servicio
-de autenticación.
-
-====================================================
-*/
-
+/* -------------------------
+   ELEMENTOS
+------------------------- */
 
 const loginPage =
-document.getElementById(
-    "loginPage"
-);
+    document.getElementById("loginPage");
 
 const adminPage =
-document.getElementById(
-    "adminPage"
-);
+    document.getElementById("adminPage");
 
 const password =
-document.getElementById(
-    "password"
-);
+    document.getElementById("password");
 
 const loginButton =
-document.getElementById(
-    "loginButton"
-);
+    document.getElementById("loginButton");
 
 const loginError =
-document.getElementById(
-    "loginError"
-);
+    document.getElementById("loginError");
 
 const logout =
-document.getElementById(
-    "logout"
-);
+    document.getElementById("logout");
+
+const addProduct =
+    document.getElementById("addProduct");
+
+const modalOverlay =
+    document.getElementById("modalOverlay");
+
+const closeModal =
+    document.getElementById("closeModal");
+
+const cancelModal =
+    document.getElementById("cancelModal");
+
+const saveProduct =
+    document.getElementById("saveProduct");
+
+const productForm =
+    document.getElementById("productForm");
+
+const productsAdmin =
+    document.getElementById("productsAdmin");
+
+const productCount =
+    document.getElementById("productCount");
+
+const stockCount =
+    document.getElementById("stockCount");
 
 
-/*
-----------------------------------------------------
-ACCESO TEMPORAL DE PRUEBA
-----------------------------------------------------
+/* -------------------------
+   DATOS
+------------------------- */
 
-Esto NO será la contraseña definitiva.
+let products =
+    JSON.parse(
+        localStorage.getItem(
+            "arquiescala_products"
+        ) || "[]"
+    );
 
-Solo sirve para comprobar que
-el panel funciona correctamente.
 
-----------------------------------------------------
-*/
+/* -------------------------
+   LOGIN TEMPORAL
+------------------------- */
 
 const TEST_PASSWORD =
-"arquiescala";
+    "arquiescala";
 
 
 function login(){
 
-if(
-password.value ===
-TEST_PASSWORD
-){
+    if(
+        password.value ===
+        TEST_PASSWORD
+    ){
 
-loginPage.style.display =
-"none";
+        loginPage.style.display =
+            "none";
 
-adminPage.style.display =
-"block";
+        adminPage.style.display =
+            "block";
 
-loginError.style.display =
-"none";
+        loginError.style.display =
+            "none";
 
-}else{
+        renderProducts();
 
-loginError.style.display =
-"block";
+    }else{
 
-}
+        loginError.style.display =
+            "block";
+
+    }
 
 }
 
 
 loginButton.addEventListener(
-"click",
-login
+    "click",
+    login
 );
 
 
 password.addEventListener(
-"keydown",
-event => {
+    "keydown",
+    function(event){
 
-if(
-event.key ===
-"Enter"
-){
+        if(
+            event.key ===
+            "Enter"
+        ){
 
-login();
+            login();
 
-}
+        }
 
-}
+    }
 );
 
+
+/* -------------------------
+   LOGOUT
+------------------------- */
 
 logout.addEventListener(
-"click",
-() => {
+    "click",
+    function(){
 
-adminPage.style.display =
-"none";
+        adminPage.style.display =
+            "none";
 
-loginPage.style.display =
-"flex";
+        loginPage.style.display =
+            "flex";
 
-password.value =
-"";
+        password.value =
+            "";
+
+    }
+);
+
+
+/* -------------------------
+   ABRIR MODAL
+------------------------- */
+
+addProduct.addEventListener(
+    "click",
+    function(){
+
+        openNewProduct();
+
+    }
+);
+
+
+/* -------------------------
+   NUEVO PRODUCTO
+------------------------- */
+
+function openNewProduct(){
+
+    productForm.reset();
+
+    document.getElementById(
+        "productId"
+    ).value = "";
+
+    document.getElementById(
+        "productStock"
+    ).value = "0";
+
+    document.getElementById(
+        "price50"
+    ).value = "0";
+
+    document.getElementById(
+        "price75"
+    ).value = "0";
+
+    document.getElementById(
+        "price100"
+    ).value = "0";
+
+    document.getElementById(
+        "price150"
+    ).value = "0";
+
+    document.getElementById(
+        "price200"
+    ).value = "0";
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Agregar producto";
+
+    document.getElementById(
+        "formError"
+    ).style.display =
+        "none";
+
+    modalOverlay.style.display =
+        "flex";
 
 }
-);
 
 
-document
-.getElementById("addProduct")
-.addEventListener(
-"click",
-() => {
+/* -------------------------
+   CERRAR MODAL
+------------------------- */
 
-alert(
-"En el siguiente paso agregaremos el formulario para crear productos."
-);
+function closeProductModal(){
+
+    modalOverlay.style.display =
+        "none";
 
 }
+
+
+closeModal.addEventListener(
+    "click",
+    closeProductModal
 );
+
+
+cancelModal.addEventListener(
+    "click",
+    closeProductModal
+);
+
+
+modalOverlay.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target ===
+            modalOverlay
+        ){
+
+            closeProductModal();
+
+        }
+
+    }
+);
+
+
+/* -------------------------
+   GUARDAR
+------------------------- */
+
+saveProduct.addEventListener(
+    "click",
+    function(){
+
+        const name =
+            document.getElementById(
+                "productName"
+            ).value.trim();
+
+        const category =
+            document.getElementById(
+                "productCategory"
+            ).value;
+
+        const model =
+            document.getElementById(
+                "productModel"
+            ).value.trim();
+
+        const description =
+            document.getElementById(
+                "productDescription"
+            ).value.trim();
+
+        const stock =
+            Number(
+                document.getElementById(
+                    "productStock"
+                ).value
+            );
+
+        const price50 =
+            Number(
+                document.getElementById(
+                    "price50"
+                ).value
+            );
+
+        const price75 =
+            Number(
+                document.getElementById(
+                    "price75"
+                ).value
+            );
+
+        const price100 =
+            Number(
+                document.getElementById(
+                    "price100"
+                ).value
+            );
+
+        const price150 =
+            Number(
+                document.getElementById(
+                    "price150"
+                ).value
+            );
+
+        const price200 =
+            Number(
+                document.getElementById(
+                    "price200"
+                ).value
+            );
+
+
+        if(
+            !name ||
+            !category ||
+            stock < 0 ||
+            price50 < 0 ||
+            price75 < 0 ||
+            price100 < 0 ||
+            price150 < 0 ||
+            price200 < 0
+        ){
+
+            document.getElementById(
+                "formError"
+            ).style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        const id =
+            document.getElementById(
+                "productId"
+            ).value;
+
+
+        const product = {
+
+            id:
+                id ||
+                Date.now().toString(),
+
+            name:
+                name,
+
+            category:
+                category,
+
+            model:
+                model,
+
+            description:
+                description,
+
+            stock:
+                stock,
+
+            prices:{
+
+                "1:50":
+                    price50,
+
+                "1:75":
+                    price75,
+
+                "1:100":
+                    price100,
+
+                "1:150":
+                    price150,
+
+                "1:200":
+                    price200
+
+            }
+
+        };
+
+
+        if(id){
+
+            const index =
+                products.findIndex(
+                    p =>
+                        p.id === id
+                );
+
+            if(index !== -1){
+
+                products[index] =
+                    product;
+
+            }
+
+        }else{
+
+            products.push(
+                product
+            );
+
+        }
+
+
+        saveProducts();
+
+        renderProducts();
+
+        closeProductModal();
+
+    }
+);
+
+
+/* -------------------------
+   GUARDAR LOCAL
+------------------------- */
+
+function saveProducts(){
+
+    localStorage.setItem(
+        "arquiescala_products",
+        JSON.stringify(
+            products
+        )
+    );
+
+}
+
+
+/* -------------------------
+   MOSTRAR PRODUCTOS
+------------------------- */
+
+function renderProducts(){
+
+    productsAdmin.innerHTML =
+        "";
+
+
+    productCount.textContent =
+        products.length;
+
+
+    let totalStock = 0;
+
+
+    products.forEach(
+        product => {
+
+            totalStock +=
+                Number(
+                    product.stock
+                );
+
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+            item.className =
+                "product-admin";
+
+
+            const main =
+                document.createElement(
+                    "div"
+                );
+
+            main.className =
+                "product-main";
+
+
+            const name =
+                document.createElement(
+                    "div"
+                );
+
+            name.className =
+                "product-name";
+
+            name.textContent =
+                product.name;
+
+
+            const meta =
+                document.createElement(
+                    "div"
+                );
+
+            meta.className =
+                "product-meta";
+
+            meta.textContent =
+                "Categoría: " +
+                categoryName(
+                    product.category
+                ) +
+                " · Existencias: " +
+                product.stock;
+
+
+            const prices =
+                document.createElement(
+                    "div"
+                );
+
+            prices.className =
+                "product-prices";
+
+            prices.textContent =
+                "1:50 $" +
+                product.prices["1:50"] +
+                " · 1:75 $" +
+                product.prices["1:75"] +
+                " · 1:100 $" +
+                product.prices["1:100"] +
+                " · 1:150 $" +
+                product.prices["1:150"] +
+                " · 1:200 $" +
+                product.prices["1:200"];
+
+
+            main.appendChild(
+                name
+            );
+
+            main.appendChild(
+                meta
+            );
+
+            main.appendChild(
+                prices
+            );
+
+
+            const actions =
+                document.createElement(
+                    "div"
+                );
+
+            actions.className =
+                "product-actions";
+
+
+            const edit =
+                document.createElement(
+                    "button"
+                );
+
+            edit.className =
+                "edit-button";
+
+            edit.textContent =
+                "Editar";
+
+
+            edit.addEventListener(
+                "click",
+                function(){
+
+                    editProduct(
+                        product.id
+                    );
+
+                }
+            );
+
+
+            const remove =
+                document.createElement(
+                    "button"
+                );
+
+            remove.className =
+                "delete-button";
+
+            remove.textContent =
+                "Eliminar";
+
+
+            remove.addEventListener(
+                "click",
+                function(){
+
+                    deleteProduct(
+                        product.id
+                    );
+
+                }
+            );
+
+
+            actions.appendChild(
+                edit
+            );
+
+            actions.appendChild(
+                remove
+            );
+
+
+            item.appendChild(
+                main
+            );
+
+            item.appendChild(
+                actions
+            );
+
+
+            productsAdmin.appendChild(
+                item
+            );
+
+        }
+    );
+
+
+    stockCount.textContent =
+        totalStock;
+
+
+    if(
+        products.length === 0
+    ){
+
+        productsAdmin.innerHTML = `
+
+            <div class="empty">
+
+                <strong>
+                    Todavía no hay productos.
+                </strong>
+
+                Pulsa
+                "+ Agregar producto"
+                para crear tu primera ficha.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* -------------------------
+   EDITAR
+------------------------- */
+
+function editProduct(id){
+
+    const product =
+        products.find(
+            p =>
+                p.id === id
+        );
+
+
+    if(!product){
+        return;
+    }
+
+
+    document.getElementById(
+        "productId"
+    ).value =
+        product.id;
+
+
+    document.getElementById(
+        "productName"
+    ).value =
+        product.name;
+
+
+    document.getElementById(
+        "productCategory"
+    ).value =
+        product.category;
+
+
+    document.getElementById(
+        "productModel"
+    ).value =
+        product.model || "";
+
+
+    document.getElementById(
+        "productDescription"
+    ).value =
+        product.description || "";
+
+
+    document.getElementById(
+        "productStock"
+    ).value =
+        product.stock;
+
+
+    document.getElementById(
+        "price50"
+    ).value =
+        product.prices["1:50"];
+
+
+    document.getElementById(
+        "price75"
+    ).value =
+        product.prices["1:75"];
+
+
+    document.getElementById(
+        "price100"
+    ).value =
+        product.prices["1:100"];
+
+
+    document.getElementById(
+        "price150"
+    ).value =
+        product.prices["1:150"];
+
+
+    document.getElementById(
+        "price200"
+    ).value =
+        product.prices["1:200"];
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Editar producto";
+
+
+    document.getElementById(
+        "formError"
+    ).style.display =
+        "none";
+
+
+    modalOverlay.style.display =
+        "flex";
+
+}
+
+
+/* -------------------------
+   ELIMINAR
+------------------------- */
+
+function deleteProduct(id){
+
+    const product =
+        products.find(
+            p =>
+                p.id === id
+        );
+
+
+    if(!product){
+        return;
+    }
+
+
+    const confirmed =
+        confirm(
+            "¿Quieres eliminar \"" +
+            product.name +
+            "\"?"
+        );
+
+
+    if(!confirmed){
+        return;
+    }
+
+
+    products =
+        products.filter(
+            p =>
+                p.id !== id
+        );
+
+
+    saveProducts();
+
+    renderProducts();
+
+}
+
+
+/* -------------------------
+   NOMBRE CATEGORIA
+------------------------- */
+
+function categoryName(category){
+
+    const names = {
+
+        personas:
+            "Personas",
+
+        vehiculos:
+            "Vehículos",
+
+        vegetacion:
+            "Vegetación",
+
+        mobiliario:
+            "Mobiliario",
+
+        luminarias:
+            "Luminarias",
+
+        especiales:
+            "Especiales"
+
+    };
+
+
+    return (
+        names[category] ||
+        category
+    );
+
+}
+
+
+/* -------------------------
+   INICIO
+------------------------- */
+
+renderProducts();
 
 </script>
 
 </body>
-
 </html>
