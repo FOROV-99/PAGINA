@@ -2,9 +2,16 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script type="module"
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Visor 3D</title>
+
+    <script
+        type="module"
         src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
     </script>
 
@@ -13,56 +20,110 @@
             box-sizing: border-box;
         }
 
-        html, body {
-            margin: 0;
+        html,
+        body {
             width: 100%;
             height: 100%;
+            margin: 0;
+            padding: 0;
             overflow: hidden;
-            background: #F5F5F5;
             font-family: Arial, sans-serif;
+            background: #f5f5f5;
         }
 
-        model-viewer {
+        #visor {
             width: 100%;
             height: 100%;
-            background: #F5F5F5;
+            display: block;
+            background: #f5f5f5;
         }
 
         .titulo {
             position: absolute;
             top: 20px;
-            left: 20px;
-            padding: 10px 16px;
+            left: 25px;
+
+            padding: 10px 18px;
+
             background: white;
+
             border-radius: 12px;
+
             font-size: 16px;
             font-weight: 600;
-            box-shadow: 0 3px 15px rgba(0,0,0,.10);
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.08);
+
             z-index: 10;
         }
 
-        .ayuda {
+        .instrucciones {
             position: absolute;
+
             bottom: 20px;
             left: 50%;
+
             transform: translateX(-50%);
-            padding: 8px 14px;
-            background: white;
+
+            padding: 9px 16px;
+
+            background: rgba(255, 255, 255, 0.95);
+
             border-radius: 10px;
-            font-size: 12px;
+
+            font-size: 13px;
+
             color: #777;
+
+            pointer-events: none;
+
             z-index: 10;
-            white-space: nowrap;
+        }
+
+        .error {
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            text-align: center;
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 5px 25px rgba(0, 0, 0, 0.1);
+
+            display: none;
+
+            z-index: 20;
+        }
+
+        .error strong {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 18px;
         }
     </style>
 </head>
 
 <body>
 
+    <!-- TÍTULO -->
     <div class="titulo" id="titulo">
-        Vista 3D
+        Visor 3D
     </div>
 
+
+    <!-- VISOR -->
     <model-viewer
         id="visor"
         camera-controls
@@ -70,26 +131,165 @@
         shadow-intensity="1"
         exposure="1"
         environment-image="neutral"
-        interaction-prompt="auto">
+        interaction-prompt="auto"
+        camera-orbit="0deg 75deg auto"
+        field-of-view="30deg"
+        min-camera-orbit="auto auto 0.1m"
+        max-camera-orbit="auto auto 100m"
+    >
     </model-viewer>
 
-    <div class="ayuda">
+
+    <!-- INSTRUCCIONES -->
+    <div class="instrucciones">
         Arrastra para rotar · rueda para zoom
     </div>
 
+
+    <!-- ERROR -->
+    <div class="error" id="error">
+        <strong>No se pudo cargar el modelo</strong>
+        <span id="errorTexto"></span>
+    </div>
+
+
     <script>
-        const parametros = new URLSearchParams(window.location.search);
 
-        const modelo = parametros.get("modelo") || "ARBOLITO.glb";
-        const nombre = parametros.get("nombre") || "Vista 3D";
+        // ==========================================
+        // LEER PARÁMETROS DE LA URL
+        // ==========================================
 
-        const visor = document.getElementById("visor");
-        const titulo = document.getElementById("titulo");
+        const parametros = new URLSearchParams(
+            window.location.search
+        );
 
-        visor.src =
-            "https://forov-99.github.io/PAGINA/" + modelo;
 
-        titulo.textContent = nombre;
+        // Modelo que viene en la URL
+        const modeloParametro =
+            parametros.get("modelo");
+
+
+        // Nombre que viene en la URL
+        const nombreParametro =
+            parametros.get("nombre");
+
+
+        // ==========================================
+        // MODELO POR DEFECTO
+        // ==========================================
+
+        const modelo =
+            modeloParametro || "ARBOLITO.glb";
+
+
+        // ==========================================
+        // NOMBRE DEL PRODUCTO
+        // ==========================================
+
+        let nombre =
+            nombreParametro;
+
+
+        // Si no mandamos nombre,
+        // obtenemos el nombre del archivo.
+
+        if (!nombre) {
+
+            nombre = modelo
+                .replace(".glb", "")
+                .replace(".GLB", "")
+                .replace(/[-_]/g, " ");
+
+        }
+
+
+        // ==========================================
+        // REFERENCIAS
+        // ==========================================
+
+        const visor =
+            document.getElementById("visor");
+
+        const titulo =
+            document.getElementById("titulo");
+
+        const error =
+            document.getElementById("error");
+
+        const errorTexto =
+            document.getElementById("errorTexto");
+
+
+        // ==========================================
+        // MOSTRAR TÍTULO
+        // ==========================================
+
+        titulo.textContent =
+            nombre + " · Vista 3D";
+
+
+        // ==========================================
+        // RUTA DEL MODELO
+        // ==========================================
+
+        const rutaModelo =
+            "./" +
+            encodeURIComponent(modelo);
+
+
+        console.log("Modelo solicitado:");
+        console.log(modelo);
+
+        console.log("Ruta:");
+        console.log(rutaModelo);
+
+
+        // ==========================================
+        // CARGAR MODELO
+        // ==========================================
+
+        visor.src = rutaModelo;
+
+
+        // ==========================================
+        // CUANDO EL MODELO CARGA
+        // ==========================================
+
+        visor.addEventListener(
+            "load",
+            function () {
+
+                console.log(
+                    "Modelo cargado correctamente:",
+                    modelo
+                );
+
+            }
+        );
+
+
+        // ==========================================
+        // SI HAY ERROR
+        // ==========================================
+
+        visor.addEventListener(
+            "error",
+            function () {
+
+                error.style.display =
+                    "block";
+
+                errorTexto.textContent =
+                    "No se encontró: " + modelo;
+
+                console.error(
+                    "No se pudo cargar:",
+                    modelo
+                );
+
+            }
+        );
+
     </script>
 
 </body>
